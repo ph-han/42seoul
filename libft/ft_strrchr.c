@@ -17,7 +17,7 @@ char	*ft_strrchr(const char *string, int c)
 	i = 0;
 	while (*(string + i))
 		i++;
-	while(i >= 0)
+	while (i >= 0)
 	{
 		if (*(string + i) == c)
 			return (string + i);
