@@ -6,17 +6,20 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:55:03 by phan              #+#    #+#             */
-/*   Updated: 2023/03/15 20:35:21 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/18 13:59:29 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strchr(const char *string, int c)
 {
-	while (*string)
+	char	_c;
+
+	_c = (char)c;
+	while (*string != _c)
 	{
-		if (*string == c)
-			return (string);
+		if (*string == '\0')
+			return (0);
 		string++;
 	}
-	return (0);
+	return ((char *)string);
 }

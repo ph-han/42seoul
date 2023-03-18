@@ -6,11 +6,11 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:33:22 by phan              #+#    #+#             */
-/*   Updated: 2023/03/15 20:36:29 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/18 13:10:04 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	strlen(const char *s)
+unsigned int	ft_strlen(const char *s)
 {
 	unsigned int	len;
 
