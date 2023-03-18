@@ -6,11 +6,13 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 19:01:11 by phan              #+#    #+#             */
-/*   Updated: 2023/03/18 19:22:53 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/18 20:14:26 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memchr(const void *s, int c, unsigned int n)
+#include "libft.h"
+
+void	*ft_memchr(const void *s, int c, size_t n)
 {
 	unsigned int	i;
 	unsigned char	*_s;

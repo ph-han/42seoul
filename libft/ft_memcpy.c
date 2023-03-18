@@ -1,27 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 17:55:18 by phan              #+#    #+#             */
-/*   Updated: 2023/03/18 20:13:45 by phan             ###   ########.fr       */
+/*   Created: 2023/03/18 20:06:04 by phan              #+#    #+#             */
+/*   Updated: 2023/03/18 20:06:55 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_bzero(void *s, size_t n)
-{
-	char			*_s;
-	unsigned int	i;
-
-	_s = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		_s[i] = 0;
-		i++;
-	}
-}
+void	*memcpy(void *restrict dst, const void *restrict src, size_t n);

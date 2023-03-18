@@ -6,29 +6,21 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 15:31:06 by phan              #+#    #+#             */
-/*   Updated: 2023/03/18 16:01:23 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/18 20:08:48 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	my_strlen(const char *s)
-{
-	unsigned int	len;
+#include "libft.h"
 
-	len = 0;
-	while (*(s + len))
-		len++;
-	return (len);
-}
-
-unsigned int	ft_strlcat(char *dst, const char *src, unsigned int size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	unsigned int	dst_len;
 	unsigned int	src_len;
 	unsigned int	p_idx;
 	unsigned int	s_idx;
 
-	dst_len = my_strlen(dst);
-	src_len = my_strlen(src);
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
 	s_idx = 0;
 	p_idx = dst_len;
 	if (dst_len >= size)

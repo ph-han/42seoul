@@ -6,11 +6,13 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 15:02:56 by phan              #+#    #+#             */
-/*   Updated: 2023/03/18 15:29:20 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/18 20:16:15 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int size)
+#include "libft.h"
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	unsigned int	src_len;
 	unsigned int	i;
