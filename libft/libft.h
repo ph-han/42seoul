@@ -6,13 +6,15 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:49:28 by phan              #+#    #+#             */
-/*   Updated: 2023/03/18 15:48:50 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/18 17:48:03 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+char			*ft_strnstr(const char *haystack, \
+		const char *needle, unsigned int len);
 char			*ft_strchr(const char *string, int c);
 char			*ft_strrchr(const char *string, int c);
 unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int size);
