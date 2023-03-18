@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:49:28 by phan              #+#    #+#             */
-/*   Updated: 2023/03/18 14:13:52 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/18 15:29:39 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 char			*ft_strchr(const char *string, int c);
 char			*ft_strrchr(const char *string, int c);
+unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int size);
 unsigned int	ft_strlen(const char *s);
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);
