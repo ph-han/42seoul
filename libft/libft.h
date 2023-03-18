@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:49:28 by phan              #+#    #+#             */
-/*   Updated: 2023/03/18 19:12:00 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/18 19:37:21 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int				ft_tolower(int c);
 int				ft_toupper(int c);
 int				ft_atoi(const char *str);
 int				ft_strncmp(const char *s1, const char *s2, unsigned int n);
+int				ft_memcmp(const void *s1, const void *s2, unsigned int n);
 void			ft_bzero(void *s, unsigned int n);
 void			*ft_memset(void *b, int c, unsigned int len);
 void			*ft_memchr(const void *s, int c, unsigned int n);
