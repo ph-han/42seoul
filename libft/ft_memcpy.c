@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 20:06:04 by phan              #+#    #+#             */
-/*   Updated: 2023/03/18 20:49:39 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/19 14:57:46 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 
 	_dst = (unsigned char *)dst;
 	_src = (unsigned char *)src;
-	if (!_dst && !_src)
+	if (!dst && !src)
 		return (0);
 	i = 0;
 	while (i < n)
