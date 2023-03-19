@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:49:28 by phan              #+#    #+#             */
-/*   Updated: 2023/03/19 15:04:39 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/19 16:06:05 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 
 # include <stdlib.h>
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-char	*ft_strchr(const char *string, int c);
-char	*ft_strrchr(const char *string, int c);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*ft_strchr(const char *string, int c);
+char	*ft_strrchr(const char *string, int c);
+char	*ft_strdup(const char *s1);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
