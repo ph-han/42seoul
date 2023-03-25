@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 18:54:02 by phan              #+#    #+#             */
-/*   Updated: 2023/03/25 15:52:35 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/25 21:41:33 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,23 @@ char	*make_str(char const *s, int w_len)
 	return (new_w);
 }
 
-char	**ft_split(char const *s, char c)
+char	**free_all(char **w_list, int w_idx)
 {
-	char	**w_list;
-	int		w_list_len;
-	int		w_len;
-	int		idx;
+	int	i;
 
-	w_list_len = word_count(s, c);
-	w_list = (char **)malloc(sizeof(char *) * (w_list_len + 1));
-	if (!w_list)
-		return (0);
+	i = 0;
+	while (i <= w_idx)
+		free(w_list[i++]);
+	free(w_list);
+	return (0);
+}
+
+char	**insert_word_to_list(char **w_list, char const *s, \
+		char c, int w_list_len)
+{
+	int		idx;
+	int		w_len;
+
 	idx = 0;
 	while (idx < w_list_len)
 	{
@@ -64,10 +70,29 @@ char	**ft_split(char const *s, char c)
 			w_len++;
 		if (w_len)
 		{
-			w_list[idx++] = make_str(s, w_len);
+			w_list[idx] = make_str(s, w_len);
+			if (!w_list[idx])
+			{
+				free_all(w_list, idx);
+				return (0);
+			}
 			s += w_len;
+			idx++;
 		}
 	}
 	w_list[w_list_len] = 0;
+	return (w_list);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**w_list;
+	int		w_list_len;
+
+	w_list_len = word_count(s, c);
+	w_list = (char **)malloc(sizeof(char *) * (w_list_len + 1));
+	if (!w_list)
+		return (0);
+	w_list = insert_word_to_list(w_list, s, c, w_list_len);
 	return (w_list);
 }
