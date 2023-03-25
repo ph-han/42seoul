@@ -14,7 +14,7 @@ ft_bzero.c ft_memset.c ft_memchr.c \
 ft_memcmp.c ft_memcpy.c ft_memmove.c \
 ft_calloc.c ft_strdup.c \
 ft_substr.c ft_strjoin.c ft_strtrim.c \
-ft_split.c ft_itoa.c
+ft_split.c ft_itoa.c ft_strmapi.c
 
 OBJS = $(SRCS:.c=.o)
 
