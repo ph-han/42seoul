@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:49:28 by phan              #+#    #+#             */
-/*   Updated: 2023/03/25 13:54:43 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/25 16:18:19 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *string, int c);
 char	*ft_strrchr(const char *string, int c);
 char	*ft_strdup(const char *s1);
+char	*ft_itoa(int n);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
