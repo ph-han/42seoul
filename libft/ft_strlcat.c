@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 15:31:06 by phan              #+#    #+#             */
-/*   Updated: 2023/03/25 22:39:42 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/25 23:18:30 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	unsigned int	src_len;
 	unsigned int	p_idx;
 	unsigned int	s_idx;
-	
-	if (!size)
+
+	if (!dstsize)
 		return (ft_strlen(src));
 	dst_len = ft_strlen(dst);
 	src_len = ft_strlen(src);
