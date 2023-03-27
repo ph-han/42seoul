@@ -22,9 +22,12 @@ SRCS_BN = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
 		  ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
 		  ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-OBJS = $(SRCS:.c=.o)
+ifdef WITH_BONUS
+	OBJS = $(SRCS:.c=.o) $(SRCS_BN:.c=.o)
+else
+	OBJS = $(SRCS:.c=.o)
+endif
 
-OBJS_BONUS = $(SRCS_BN:.c=.o)
 
 .c.o: $(SRCS)
 	$(CC) $(CFLAG) -c $< -o $@
@@ -42,7 +45,7 @@ fclean: clean
 
 re: fclean all
 
-bonus : $(OBJS) $(OBJS_BONUS)
-	$(AR) $(ARFLAGS) $(NAME) $^
+bonus : $(OBJS)
+	make WITH_BONUS=1 all
 
 .PHONY: all clean fclean re
