@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:18:43 by phan              #+#    #+#             */
-/*   Updated: 2023/03/27 19:32:20 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/27 19:49:01 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new;
 	t_list	*n_lst;
-	t_list	*n_cont;
+	void	*n_cont;
 
 	if (!lst || !f || !del)
 		return (0);
