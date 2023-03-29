@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:14:43 by phan              #+#    #+#             */
-/*   Updated: 2023/03/22 20:48:26 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/29 21:04:40 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	unsigned int	s1_len;
 	unsigned int	s2_len;
 
+	if (!s1 && !s2)
+		return (0);
 	if (!s1)
-		s1_len = 0;
+		return (s2);
 	if (!s2)
-		s2_len = 0;
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
+		return (s1);
+	else
+		s2_len = ft_strlen(s2);
 	result = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (!result)
 		return (0);

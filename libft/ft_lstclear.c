@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 00:43:20 by phan              #+#    #+#             */
-/*   Updated: 2023/03/26 00:54:43 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/29 20:47:18 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*tmp;
 
-	if (!lst)
+	if (!lst || !del)
 		return ;
 	while (*lst)
 	{

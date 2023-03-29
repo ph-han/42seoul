@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 23:51:08 by phan              #+#    #+#             */
-/*   Updated: 2023/03/25 23:54:58 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/29 21:03:14 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
+	if (!new)
+		return ;
 	new->next = *lst;
 	*lst = new;
 }
