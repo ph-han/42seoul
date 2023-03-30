@@ -6,11 +6,31 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:05:31 by phan              #+#    #+#             */
-/*   Updated: 2023/03/30 17:34:57 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/30 20:31:34 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+int	check_over_max(int sign, long result, const char *str)
+{
+	if ((sign * result) == 922337203685477580 && \
+			(*str > '7' || ft_isdigit(*(str + 1))))
+		return (1);
+	if ((sign * result) > 922337203685477580 && ft_isdigit(*str))
+		return (1);
+	return (0);
+}
+
+int	check_under_min(int sign, long result, const char *str)
+{
+	if ((sign * result) == -922337203685477580 && \
+			(*str > '8' || ft_isdigit(*(str + 1))))
+		return (1);
+	if ((sign * result) < -922337203685477580 && ft_isdigit(*str))
+		return (1);
+	return (0);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -31,11 +51,9 @@ int	ft_atoi(const char *str)
 	{
 		result = result * 10 + (*str - '0');
 		str++;
-		if ((sign * result) >= 922337203685477580 && \
-				(*str > '7' || ft_isdigit(*(str + 1))))
+		if (check_over_max(sign, result, str))
 			return (-1);
-		if ((sign * result) <= -922337203685477580 && \
-				(*str > '8' || ft_isdigit(*(str + 1))))
+		if (check_under_min(sign, result, str))
 			return (0);
 	}
 	return ((int)(sign * result));
