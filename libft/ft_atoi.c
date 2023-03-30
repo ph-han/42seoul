@@ -6,14 +6,14 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:05:31 by phan              #+#    #+#             */
-/*   Updated: 2023/03/25 23:17:27 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/30 17:08:10 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_atoi(const char *str)
 {
-	int	sign;
-	int	result;
+	int		sign;
+	long	result;
 
 	sign = 1;
 	result = 0;
@@ -29,6 +29,10 @@ int	ft_atoi(const char *str)
 	{
 		result = result * 10 + (*str - '0');
 		str++;
+		if (result == 922337203685477580 && *str > '7')
+			return (-1);
+		if (result == -922337203685477580 && *str > '8')
+			return (0);
 	}
-	return (sign * result);
+	return ((int)(sign * result));
 }
