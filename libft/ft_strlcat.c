@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 15:31:06 by phan              #+#    #+#             */
-/*   Updated: 2023/03/30 16:46:41 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/30 17:53:14 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strnlen(const char *s, size_t maxlen)
 	size_t	len;
 
 	len = 0;
-	while (s[len] && len < maxlen)
+	while (len < maxlen && s[len])
 		len++;
 	return (len);
 }
