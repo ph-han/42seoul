@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 20:16:25 by phan              #+#    #+#             */
-/*   Updated: 2023/03/29 21:03:00 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/30 16:48:46 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char			*temp;
 	unsigned int	i;
 	unsigned int	temp_len;
-	
+
 	if (!s)
 		return (0);
 	temp_len = ft_strlen(s);

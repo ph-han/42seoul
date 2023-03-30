@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 15:02:56 by phan              #+#    #+#             */
-/*   Updated: 2023/03/18 20:16:15 by phan             ###   ########.fr       */
+/*   Updated: 2023/03/30 16:48:13 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	unsigned int	src_len;
-	unsigned int	i;
+	size_t	src_len;
+	size_t	i;
 
-	src_len = 0;
+	src_len = ft_strlen(src);
 	i = 0;
-	while (src[src_len])
-		src_len++;
 	if (size < 1)
 		return (src_len);
 	while (src[i] && i + 1 < size)
