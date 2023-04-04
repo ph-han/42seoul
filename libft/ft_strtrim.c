@@ -6,13 +6,13 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 20:49:54 by phan              #+#    #+#             */
-/*   Updated: 2023/03/23 18:51:52 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/01 18:50:51 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	is_instr(char c, char const *set)
+static int	is_instr(char c, char const *set)
 {
 	while (*set)
 	{
@@ -25,9 +25,9 @@ int	is_instr(char c, char const *set)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char			*result;
-	unsigned int	rlen;
-	int				idx;
+	char	*result;
+	size_t	rlen;
+	int		idx;
 
 	while (*s1 && is_instr(*s1, set))
 		s1++;

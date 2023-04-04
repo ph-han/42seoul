@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 15:46:43 by phan              #+#    #+#             */
-/*   Updated: 2023/03/19 16:30:32 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/01 14:55:20 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strdup(const char *s1)
 {
-	char			*temp;
-	unsigned int	s_len;
+	char	*temp;
+	size_t	s_len;
 
 	s_len = ft_strlen(s1);
 	temp = (char *)malloc(sizeof(char) * s_len + 1);

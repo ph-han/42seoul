@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:49:41 by phan              #+#    #+#             */
-/*   Updated: 2023/03/18 20:17:23 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/01 14:58:32 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	unsigned int	h_idx;
-	unsigned int	n_idx;
+	size_t	h_idx;
+	size_t	n_idx;
 
 	if (!(*needle))
 		return ((char *)haystack);

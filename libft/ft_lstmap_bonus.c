@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:18:43 by phan              #+#    #+#             */
-/*   Updated: 2023/03/27 19:49:01 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/01 17:51:53 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		new = ft_lstnew(n_cont);
 		if (!new)
 		{
-			free(n_cont);
+			del(n_cont);
 			ft_lstclear(&n_lst, del);
 			return (0);
 		}

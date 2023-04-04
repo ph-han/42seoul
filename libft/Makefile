@@ -3,8 +3,6 @@ NAME = libft.a
 CC = cc
 CFLAG = -Wall -Wextra -Werror
 
-INCOUDE = libft.h 
-
 SRCS = ft_isascii.c ft_strlen.c  ft_toupper.c \
 	   ft_atoi.c ft_isdigit.c  ft_strncmp.c \
 	   ft_isalnum.c ft_isprint.c ft_strrchr.c \
@@ -46,6 +44,7 @@ fclean: clean
 re: fclean all
 
 bonus : $(OBJS)
+	@sleep 1
 	@make WITH_BONUS=1 all
 
 .PHONY: all clean fclean re bonus

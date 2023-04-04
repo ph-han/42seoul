@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 17:55:18 by phan              #+#    #+#             */
-/*   Updated: 2023/03/29 20:42:50 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/01 17:28:13 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned char	*_s;
-	unsigned int	i;
+	unsigned char	*p_s;
+	size_t			i;
 
-	_s = (unsigned char *)s;
+	p_s = (unsigned char *)s;
 	i = 0;
 	while (i < n)
-	{
-		_s[i] = 0;
-		i++;
-	}
+		p_s[i++] = 0;
 }

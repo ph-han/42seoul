@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 16:40:30 by phan              #+#    #+#             */
-/*   Updated: 2023/03/29 20:59:37 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/01 14:55:36 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	unsigned int	idx;
+	size_t	idx;
 
 	if (!s || !f)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 20:14:43 by phan              #+#    #+#             */
-/*   Updated: 2023/03/30 17:49:42 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/01 14:56:01 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char			*result;
-	unsigned int	s1_len;
-	unsigned int	s2_len;
+	char	*result;
+	size_t	s1_len;
+	size_t	s2_len;
 
 	if (!s1 || !s2)
 		return (0);

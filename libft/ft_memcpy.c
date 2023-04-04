@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 20:06:04 by phan              #+#    #+#             */
-/*   Updated: 2023/03/30 13:40:40 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/01 18:02:26 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	unsigned char	*_dst;
-	unsigned char	*_src;
-	unsigned int	i;
+	unsigned char	*p_dst;
+	unsigned char	*p_src;
+	size_t			i;
 
-	_dst = (unsigned char *)dst;
-	_src = (unsigned char *)src;
+	p_dst = (unsigned char *)dst;
+	p_src = (unsigned char *)src;
 	if (n == 0 || dst == src)
 		return (dst);
 	i = 0;
 	while (i < n)
 	{
-		_dst[i] = _src[i];
+		p_dst[i] = p_src[i];
 		i++;
 	}
-	return ((void *)_dst);
+	return (dst);
 }

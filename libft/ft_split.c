@@ -6,13 +6,13 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 18:54:02 by phan              #+#    #+#             */
-/*   Updated: 2023/03/25 21:41:33 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/01 18:25:10 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	word_count(char const *s, char c)
+static int	word_count(char const *s, char c)
 {
 	int	wc;
 
@@ -28,7 +28,7 @@ int	word_count(char const *s, char c)
 	return (wc);
 }
 
-char	*make_str(char const *s, int w_len)
+static char	*make_str(char const *s, int w_len)
 {
 	char	*w;
 	char	*new_w;
@@ -43,7 +43,7 @@ char	*make_str(char const *s, int w_len)
 	return (new_w);
 }
 
-char	**free_all(char **w_list, int w_idx)
+static char	**free_all(char **w_list, int w_idx)
 {
 	int	i;
 
@@ -54,11 +54,11 @@ char	**free_all(char **w_list, int w_idx)
 	return (0);
 }
 
-char	**insert_word_to_list(char **w_list, char const *s, \
+static char	**insert_word_to_list(char **w_list, char const *s, \
 		char c, int w_list_len)
 {
-	int		idx;
-	int		w_len;
+	int	idx;
+	int	w_len;
 
 	idx = 0;
 	while (idx < w_list_len)
@@ -89,6 +89,8 @@ char	**ft_split(char const *s, char c)
 	char	**w_list;
 	int		w_list_len;
 
+	if (!s)
+		return (0);
 	w_list_len = word_count(s, c);
 	w_list = (char **)malloc(sizeof(char *) * (w_list_len + 1));
 	if (!w_list)

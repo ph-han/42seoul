@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 16:32:19 by phan              #+#    #+#             */
-/*   Updated: 2023/03/30 16:51:20 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/01 14:57:45 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*result;
-	unsigned int	idx;
-	unsigned int	s_len;
+	char	*result;
+	size_t	idx;
+	size_t	s_len;
 
 	if (!s || !f)
 		return (0);

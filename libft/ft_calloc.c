@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 15:02:33 by phan              #+#    #+#             */
-/*   Updated: 2023/03/29 20:43:43 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/01 17:38:50 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	char	*temp;
-	size_t	i;
+	void	*temp;
 
-	temp = (char *)malloc(count * size);
+	temp = malloc(count * size);
 	if (!temp)
 		return (0);
-	i = 0;
-	while (i < count * size)
-		temp[i++] = 0;
-	return ((void *)temp);
+	ft_bzero(temp, count * size);
+	return (temp);
 }
