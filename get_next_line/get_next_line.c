@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:40:09 by phan              #+#    #+#             */
-/*   Updated: 2023/04/15 19:31:53 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/18 21:05:58 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,53 @@
 
 char	*get_next_line(int fd)
 {
-	int			read_bytes;
-	int			nl_idx;
-	char		*line;
+	int			rb;
 	char		buff[BUFFER_SIZE + 1];
-	static char	*backup = "";
-	
-	while (find_nl(backup) == -1 && (read_bytes = read(fd, buff, BUFFER_SIZE)) > 0)
+	char		*line;
+	char		*temp;
+	static char	*backup;
+
+	if (BUFFER_SIZE < 0 || fd < 0)
+		return (0);
+	if (!backup)
 	{
-		buff[read_bytes] = '\0';
-		nl_idx = find_nl(buff);
-		if (nl_idx >= 0)
+		while (1)
 		{
-			if (nl_idx == 0)
-				line = (char *)malloc(1 + gnl_strlen(backup) + 1);
-			else
-				line = (char *)malloc(nl_idx + gnl_strlen(backup) + 1);
-			gnl_memcpy(line, backup, gnl_strlen(backup));
-			gnl_memcpy(line, buff, nl_idx);
-			backup = gnl_substr(buff, nl_idx + 1, read_bytes - nl_idx);
-			return (line);
+			rb = read(fd, buff, BUFFER_SIZE);
+			if (rb <= 0)
+				break ;
+			buff[rb] = '\0';
+			if (!backup)
+				backup = gnl_str_join_dup(backup, "");
+			temp = backup;
+			backup = gnl_str_join_dup(temp, buff);
+			free(temp);
+			if (!backup)
+				return (0);
 		}
-		if (gnl_strlen(backup))
-			gnl_memcpy(backup, buff, read_bytes);
-		else
-			backup = gnl_substr(buff, 0, read_bytes);
+		if (rb < 0)
+			return (0);
 	}
-	if (find_nl(backup) >= 0)
+	if (backup && find_nl(backup) != -1)
 	{
-		if (find_nl(backup) == 0)
-			line = (char *)malloc(1 + 1);
-		else
-			line = (char *)malloc(find_nl(backup));
+		line = (char *)malloc(find_nl(backup) + 1 + 1);
+		if (!line)
+			return (0);
 		gnl_memcpy(line, backup, find_nl(backup));
-		gnl_memcpy(backup, backup + find_nl(backup) + 1, \
-		gnl_strlen(backup) - find_nl(backup));
+		line[find_nl(backup) + 1] = '\0';
+		temp = backup;
+		backup = gnl_substr(temp, find_nl(temp) + 1, gnl_strlen(temp));
+		free(temp);
+		temp = NULL;
 		return (line);
 	}
-	return (0);
+	if (!backup)
+		return (0);
+	line = (char *)malloc(gnl_strlen(backup) + 1);
+	if (!line)
+		return (0);
+	gnl_memcpy(line, backup, gnl_strlen(backup));
+	free(backup);
+	backup = NULL;
+	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:29:19 by phan              #+#    #+#             */
-/*   Updated: 2023/04/15 19:11:46 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/18 20:23:51 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,27 @@ int	find_nl(char *buff)
 		if (*(buff + idx++) == '\n')
 			return (idx - 1);
 	return (-1);
+}
+
+char	*gnl_str_join_dup(char *s1, char *s2)
+{
+	char	*temp;
+	int		s1_len;
+	int		s2_len;
+
+	if (!s1)
+		s1 = "";
+	s1_len = gnl_strlen(s1);
+	s2_len = gnl_strlen(s2);
+	temp = (char *)malloc(s1_len + s2_len + 1);
+	if (!temp)
+		return (0);
+	while (*s1)
+		*temp++ = *s1++;
+	while (*s2)
+		*temp++ = *s2++;
+	*temp = '\0';
+	return (temp - s1_len - s2_len);
 }
 
 int	gnl_strlen(char *s)
@@ -40,7 +61,7 @@ char	*gnl_substr(char *s, int start, int len)
 	int		temp_len;
 
 	if (!s)
-		return (0);
+		s = "";
 	temp_len = gnl_strlen(s);
 	if (temp_len < start)
 		len = 0;
@@ -64,18 +85,17 @@ void	*gnl_memcpy(void *dst, const void *src, int n)
 {
 	unsigned char	*p_dst;
 	unsigned char	*p_src;
-	int				i;
 	int				j;
 
 	p_dst = (unsigned char *)dst;
 	p_src = (unsigned char *)src;
-	if (n == 0 || dst == src)
+	if (dst == src)
 		return (dst);
-	i = 0;
-	while (p_dst[i])
-		i++;
 	j = 0;
 	while (j <= n)
-		p_dst[i++] = p_src[j++];
+	{
+		p_dst[j] = p_src[j];
+		j++;
+	}
 	return (dst);
 }
