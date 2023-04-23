@@ -6,13 +6,13 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:40:09 by phan              #+#    #+#             */
-/*   Updated: 2023/04/23 14:19:33 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/23 17:52:37 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*read_until_nl_or_end(int fd, char *backup)
+char	*read_until_nl_or_end(int fd, char *backup)
 {
 	int		rb;
 	char	*tmp;
@@ -21,11 +21,11 @@ static char	*read_until_nl_or_end(int fd, char *backup)
 	while (1)
 	{
 		rb = read(fd, buff, BUFFER_SIZE);
+		if (rb == 0)
+			break ;
 		if (rb < 0)
 			return (0);
 		buff[rb] = '\0';
-		if (rb == 0)
-			break ;
 		if (!backup)
 			backup = gnl_strjoin("", "");
 		tmp = backup;
@@ -52,8 +52,8 @@ char	*get_next_line(int fd)
 	tmp = read_until_nl_or_end(fd, backup);
 	if (!tmp || !*tmp)
 	{
-		free(tmp);
-		tmp = NULL;
+		free(backup);
+		backup = NULL;
 		return (0);
 	}
 	nl_idx = 0;
