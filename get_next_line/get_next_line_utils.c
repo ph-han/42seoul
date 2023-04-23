@@ -6,31 +6,18 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:29:19 by phan              #+#    #+#             */
-/*   Updated: 2023/04/18 20:23:51 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/23 13:45:06 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	find_nl(char *buff)
-{
-	int	idx;
-
-	idx = 0;
-	while (*(buff + idx))
-		if (*(buff + idx++) == '\n')
-			return (idx - 1);
-	return (-1);
-}
-
-char	*gnl_str_join_dup(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	char	*temp;
 	int		s1_len;
 	int		s2_len;
 
-	if (!s1)
-		s1 = "";
 	s1_len = gnl_strlen(s1);
 	s2_len = gnl_strlen(s2);
 	temp = (char *)malloc(s1_len + s2_len + 1);
@@ -81,21 +68,13 @@ char	*gnl_substr(char *s, int start, int len)
 	return (temp);
 }
 
-void	*gnl_memcpy(void *dst, const void *src, int n)
+char	*gnl_strchr(char *s, char c)
 {
-	unsigned char	*p_dst;
-	unsigned char	*p_src;
-	int				j;
-
-	p_dst = (unsigned char *)dst;
-	p_src = (unsigned char *)src;
-	if (dst == src)
-		return (dst);
-	j = 0;
-	while (j <= n)
+	while (*s)
 	{
-		p_dst[j] = p_src[j];
-		j++;
+		if (*s == c)
+			return (s);
+		s++;
 	}
-	return (dst);
+	return (0);
 }
