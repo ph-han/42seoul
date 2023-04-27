@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:40:09 by phan              #+#    #+#             */
-/*   Updated: 2023/04/27 16:13:12 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/27 17:14:14 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@ char	*read_until_find_nl_or_end(int fd, char *backup, int rb)
 		if (rb == 0)
 			break ;
 		if (rb < 0)
-		{
-			free(backup);
-			backup = 0;
-			return (0);
-		}
+			return (gnl_clear(backup, &backup));
 		if (!backup)
 			backup = gnl_strjoin("", "");
 		if (!backup)
@@ -48,7 +44,6 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	char		*tmp;
-	int			nl_idx;
 	static char	*backup;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
@@ -61,20 +56,13 @@ char	*get_next_line(int fd)
 		backup = 0;
 		return (0);
 	}
-	nl_idx = gnl_find(tmp, '\n');
-	line = gnl_substr(tmp, 0, nl_idx + 1);
+	line = gnl_substr(tmp, 0, gnl_find(tmp, '\n') + 1);
 	if (!line)
-	{
-		free(tmp);
-		backup = 0;
-		return (0);
-	}
-	backup = gnl_substr(tmp, nl_idx + 1, gnl_strlen(tmp) - nl_idx);
+		return (gnl_clear(tmp, &backup));
+	backup = gnl_substr(tmp, gnl_find(tmp, '\n') + 1, \
+		gnl_strlen(tmp) - gnl_find(tmp, '\n'));
 	free(tmp);
 	if (!backup)
-	{
-		free(line);
-		return (0);
-	}
+		return (gnl_clear(line, &line));
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:29:19 by phan              #+#    #+#             */
-/*   Updated: 2023/04/27 16:17:09 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/27 17:14:44 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char	*gnl_strjoin(char *s1, char *s2)
 	return (temp - s1_len - s2_len);
 }
 
-
 char	*gnl_substr(char *s, int start, int len)
 {
 	char	*temp;
@@ -81,3 +80,10 @@ char	*gnl_substr(char *s, int start, int len)
 	return (temp);
 }
 
+char	*gnl_clear(char *f_str1, char **back)
+{
+	free(f_str1);
+	f_str1 = 0;
+	*back = 0;
+	return (0);
+}
