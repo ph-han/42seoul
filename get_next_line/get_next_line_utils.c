@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:29:19 by phan              #+#    #+#             */
-/*   Updated: 2023/04/23 13:45:06 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/27 16:17:09 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int	gnl_strlen(char *s)
+{
+	int	len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
+}
+
+int	gnl_find(char *s, char c)
+{
+	int	idx;
+
+	idx = 0;
+	while (s[idx] && s[idx] != c)
+		idx++;
+	return (idx);
+}
 
 char	*gnl_strjoin(char *s1, char *s2)
 {
@@ -18,6 +38,8 @@ char	*gnl_strjoin(char *s1, char *s2)
 	int		s1_len;
 	int		s2_len;
 
+	if (!s1 || !s2)
+		return (0);
 	s1_len = gnl_strlen(s1);
 	s2_len = gnl_strlen(s2);
 	temp = (char *)malloc(s1_len + s2_len + 1);
@@ -31,15 +53,6 @@ char	*gnl_strjoin(char *s1, char *s2)
 	return (temp - s1_len - s2_len);
 }
 
-int	gnl_strlen(char *s)
-{
-	int	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
-}
 
 char	*gnl_substr(char *s, int start, int len)
 {
@@ -48,7 +61,7 @@ char	*gnl_substr(char *s, int start, int len)
 	int		temp_len;
 
 	if (!s)
-		s = "";
+		return (0);
 	temp_len = gnl_strlen(s);
 	if (temp_len < start)
 		len = 0;
@@ -68,13 +81,3 @@ char	*gnl_substr(char *s, int start, int len)
 	return (temp);
 }
 
-char	*gnl_strchr(char *s, char c)
-{
-	while (*s)
-	{
-		if (*s == c)
-			return (s);
-		s++;
-	}
-	return (0);
-}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:28:46 by phan              #+#    #+#             */
-/*   Updated: 2023/04/23 13:44:47 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/27 16:12:29 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <stdlib.h>
 
 char	*get_next_line(int fd);
-int		gnl_strlen(char *s);
 char	*gnl_substr(char *s, int start, int len);
 char	*gnl_strjoin(char *s1, char *s2);
-char	*gnl_strchr(char *s, char c);
+int		gnl_find(char *s, char c);
+int		gnl_strlen(char *s);
 
 #endif
