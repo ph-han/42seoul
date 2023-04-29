@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 14:41:30 by phan              #+#    #+#             */
-/*   Updated: 2023/04/29 14:55:14 by phan             ###   ########.fr       */
+/*   Updated: 2023/04/29 15:09:26 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # endif
 
 # ifndef OPEN_MAX
-#  define OPEN_MAX 10240
+#  define OPEN_MAX 49152
 # endif
 
 char	*get_next_line(int fd);
