@@ -6,13 +6,13 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:40:09 by phan              #+#    #+#             */
-/*   Updated: 2023/04/27 17:14:14 by phan             ###   ########.fr       */
+/*   Updated: 2023/05/15 17:02:10 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*read_until_find_nl_or_end(int fd, char *backup, int rb)
+static char	*read_until_find_nl_or_end(int fd, char *backup, int rb)
 {
 	char	*tmp;
 	char	buff[BUFFER_SIZE + 1];
