@@ -54,3 +54,5 @@ test/
 .vscode/
 push_swap/libft
 push_swap/printf
+checker_Mac
+.DS_Store
