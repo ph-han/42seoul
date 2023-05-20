@@ -51,5 +51,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 test/
+.vscode/
 push_swap/libft
 push_swap/printf
