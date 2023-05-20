@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 13:28:24 by phan              #+#    #+#             */
-/*   Updated: 2023/05/20 13:32:27 by phan             ###   ########.fr       */
+/*   Updated: 2023/05/20 13:55:15 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	rra(t_stack *a)
 	if (!tmp)
 		return ;
 	idx = 0;
-	while (!a->size)
+	while (a->size)
 		tmp[idx++] = pop(a);
 	idx--;
 	while (idx > 0)
