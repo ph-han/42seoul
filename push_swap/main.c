@@ -3,36 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hanpilho <hanpilho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:39:13 by phan              #+#    #+#             */
-/*   Updated: 2023/05/24 20:49:16 by phan             ###   ########.fr       */
+/*   Updated: 2023/05/28 16:55:19 by hanpilho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push_swap(t_stack *a, t_stack *b)
+static void push_swap(t_stack *a, t_stack *b)
 {
-	if (a->size < 2)
-		return ;
-	if (a->top->item > a->top->next->item)
-		sa(a);
-	if (a->top->next->next)
+	t_stack pivot;
+	t_stack curr;
+
+	init(&pivot);
+	if (a->size <= 3)
 	{
-		if (a->top->next->item > a->top->next->next->item)
-			rra(a);
-		if (a->top->item > a->top->next->item)
-			sa(a);
-		if (a->top->next->item > a->top->next->next->item)
-			rra(a);
+		sort_3_under_items(a);
+		return;
 	}
-	while (a->top && b)
+	push(a->top->item, &pivot);
+	curr = *a;
+	while (curr.top)
 	{
-		ft_printf("%d ", a->top->item);
-		a->top = a->top->next;
+		if (pivot.top->item < curr.top->item)
+			ra(a);
+		else
+			pb(a, b);
+		curr.top = curr.top->next;
 	}
-	return ;
+	if (a->size > 3)
+		push_swap(a, b);
+	else
+		sort_3_under_items(a);
+	sort(a, b, &pivot);
+	return;
 }
 
 // static int	is_valid(char *item)
@@ -40,11 +46,11 @@ static void	push_swap(t_stack *a, t_stack *b)
 
 // }
 
-int	main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-	t_stack	a;
-	t_stack	b;
-	int		idx;
+	t_stack a;
+	t_stack b;
+	int idx;
 
 	init(&a);
 	init(&b);
@@ -54,7 +60,7 @@ int	main(int argc, char *argv[])
 	while (idx > 0)
 	{
 		// if (is_valid(argv[idx]) == 0)
-			// return ((ft_printf("Error\n") * 0) + -1);
+		// return ((ft_printf("Error\n") * 0) + -1);
 		push(ft_atoi(argv[idx]), &a);
 		idx--;
 	}
