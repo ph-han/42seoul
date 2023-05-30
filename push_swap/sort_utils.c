@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 12:50:03 by phan              #+#    #+#             */
-/*   Updated: 2023/05/30 13:44:07 by phan             ###   ########.fr       */
+/*   Updated: 2023/05/30 16:05:49 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	sort_3(t_stack *a)
 	}
 }
 
-void	sort_10_under(t_stack *a, t_stack *b)
+void	sort_5(t_stack *a, t_stack *b)
 {
 	int	min;
 	int	mid;

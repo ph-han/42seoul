@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:39:13 by phan              #+#    #+#             */
-/*   Updated: 2023/05/30 16:00:40 by phan             ###   ########.fr       */
+/*   Updated: 2023/05/30 16:05:59 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	push_swap(t_stack *a, t_stack *b)
 	}
 	if (a->size <= 5)
 	{
-		sort_10_under(a, b);
+		sort_5(a, b);
 		return ;
 	}
 	// quick_sort();
