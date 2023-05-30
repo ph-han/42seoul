@@ -6,11 +6,31 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 12:54:09 by phan              #+#    #+#             */
-/*   Updated: 2023/05/30 16:02:04 by phan             ###   ########.fr       */
+/*   Updated: 2023/05/30 16:11:38 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static long	ft_atol(const char *str)
+{
+	int		sign;
+	long	result;
+
+	sign = 1;
+	result = 0;
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+		result = result * 10 + (*str++ - '0');
+	return ((sign * result));
+}
 
 int	ft_max(t_stack st)
 {
@@ -38,26 +58,6 @@ int	ft_min(t_stack st)
 		st.top = st.top->next;
 	}
 	return (min);
-}
-
-long	ft_atol(const char *str)
-{
-	int		sign;
-	long	result;
-
-	sign = 1;
-	result = 0;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-		result = result * 10 + (*str++ - '0');
-	return ((sign * result));
 }
 
 int	ft_find(t_stack st, int item)
