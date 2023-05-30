@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:41:53 by phan              #+#    #+#             */
-/*   Updated: 2023/05/30 15:42:13 by phan             ###   ########.fr       */
+/*   Updated: 2023/05/30 16:07:23 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	rrr(t_stack *a, t_stack *b);
 
 // sort functions
 void	sort_3(t_stack *a);
-void	sort_10_under(t_stack *a, t_stack *b);
+void	sort_5(t_stack *a, t_stack *b);
 
 // utils functions
 int		ft_max(t_stack st);
