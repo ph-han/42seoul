@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:18:46 by phan              #+#    #+#             */
-/*   Updated: 2023/05/20 13:38:23 by phan             ###   ########.fr       */
+/*   Updated: 2023/05/30 13:30:17 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	push(int item, t_stack *stack)
 
 	new = (t_node *)malloc(sizeof(t_node));
 	new->item = item;
+	new->idx = stack->size;
 	new->next = stack->top;
 	stack->top = new;
 	stack->size++;
