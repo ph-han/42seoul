@@ -57,3 +57,5 @@ push_swap/printf
 checker_Mac
 .DS_Store
 push_swap_visualizer/
+push_swap/tester/
+push_swap
