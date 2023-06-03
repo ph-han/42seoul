@@ -7,7 +7,7 @@ FTPRINTF_DIR = ./includes/printf
 CC = cc
 CFLAG = -Wall -Wextra -Werror
 
-SRCS = main.c sort_utils.c push_swap_utils.c \
+SRCS = main.c quick_sort.c sort_utils.c push_swap_utils.c \
 	operations/stack.c \
 	operations/push_swap/push.c \
 	operations/push_swap/reverse_rotate.c \
@@ -25,6 +25,12 @@ $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT_DIR)
 	$(MAKE) -C $(FTPRINTF_DIR)
 	gcc $(OBJS) -L$(LIBFT_DIR) $(LIBFT) -L$(FTPRINTF_DIR) $(FTPRINTF) -o $(NAME)
+
+debug: $(OBJS)
+	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(FTPRINTF_DIR)
+	gcc $(OBJS) -L$(LIBFT_DIR) $(LIBFT) -L$(FTPRINTF_DIR) $(FTPRINTF) -g
+
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean

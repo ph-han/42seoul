@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:41:53 by phan              #+#    #+#             */
-/*   Updated: 2023/05/30 16:07:23 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/03 19:25:23 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,17 @@ void	rrr(t_stack *a, t_stack *b);
 
 // sort functions
 void	sort_3(t_stack *a);
+void	q_sort_3(t_stack *a, t_stack *b);
 void	sort_5(t_stack *a, t_stack *b);
+void	sort_a(t_stack *a, t_stack *b, int chunk_size);
+void	sort_b(t_stack *a, t_stack *b, int chunk_size);
+void	quick_sort(t_stack *a, t_stack *b);
 
 // utils functions
 int		ft_max(t_stack st);
 int		ft_min(t_stack st);
 int		ft_find(t_stack st, int item);
 int		ft_is_valid(t_stack st, char *s);
+void	print_stack(t_stack st, char c);
 
 #endif

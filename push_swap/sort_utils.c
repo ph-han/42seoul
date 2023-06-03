@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 12:50:03 by phan              #+#    #+#             */
-/*   Updated: 2023/05/30 16:05:49 by phan             ###   ########.fr       */
+/*   Updated: 2023/05/31 19:01:50 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,34 @@ void	sort_3(t_stack *a)
 	}
 }
 
+void	q_sort_3(t_stack *a, t_stack *b)
+{
+	int	min;
+	int	ra_cnt;
+
+	min = ft_min(*a);
+	ra_cnt = 0;
+	while (top(a) != min)
+	{
+		ra_cnt++;
+		ra(a);
+	}
+	pb(a, b);
+	while (ra_cnt--)
+		rra(a);
+	if (a->top->item > a->top->next->item)
+		sa(a);
+	pa(a, b);
+}
+
 void	sort_5(t_stack *a, t_stack *b)
 {
 	int	min;
 	int	mid;
 	int	idx;
+	int	pb_cnt;
 
+	pb_cnt = 0;
 	while (a->size > 3)
 	{
 		mid = a->size / 2;
@@ -51,8 +73,9 @@ void	sort_5(t_stack *a, t_stack *b)
 				rra(a);
 		}
 		pb(a, b);
+		pb_cnt++;
 	}
 	sort_3(a);
-	while (b->top)
+	while (pb_cnt--)
 		pa(a, b);
 }

@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:39:13 by phan              #+#    #+#             */
-/*   Updated: 2023/05/30 16:08:54 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/03 20:23:25 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	input_data(t_stack *a, int argc, char *argv[])
 		while (input_num)
 		{
 			if (!ft_is_valid(*a, inputs[--input_num]))
-				return ((ft_printf("Error\n") * 0) + -1);
+				return (-1);
 			push(ft_atoi(inputs[input_num]), a);
 		}
 		idx--;
@@ -70,11 +70,12 @@ int	main(int argc, char *argv[])
 	init(&a);
 	init(&b);
 	if (argc < 2)
-		return ((ft_printf("Error\n") * 0) + -1);
+		return ((write(2, "Error\n", 6) * 0) + -1);
 	if (input_data(&a, argc, argv) == -1)
-		return (-1);
-	print_stack(a, 'a');
+		return ((write(2, "Error\n", 6) * 0) + -1);
+	// print_stack(a, 'a');
 	push_swap(&a, &b);
-	print_stack(a, 'a');
+	// print_stack(a, 'a');
+	// print_stack(b, 'b');
 	return (0);
 }
