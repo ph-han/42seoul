@@ -59,3 +59,5 @@ checker_Mac
 push_swap_visualizer/
 push_swap/tester/42Barcelona-PushSwap-ProChecker/
 push_swap/tester/pro_checker
+push_swap/tester/Push-Swap-Tester/
+push_swap/tester/push_swap_test.sh
