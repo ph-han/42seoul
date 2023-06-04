@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 12:54:09 by phan              #+#    #+#             */
-/*   Updated: 2023/05/30 16:11:38 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/04 14:03:32 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static long	ft_atol(const char *str)
 	return ((sign * result));
 }
 
-int	ft_max(t_stack st)
+int	ft_max(t_stack st, int chunk_size)
 {
 	int	max;
 
 	max = top(&st);
-	while (st.top)
+	while (chunk_size--)
 	{
 		if (max < st.top->item)
 			max = st.top->item;
@@ -46,12 +46,12 @@ int	ft_max(t_stack st)
 	return (max);
 }
 
-int	ft_min(t_stack st)
+int	ft_min(t_stack st, int chunk_size)
 {
 	int	min;
 
 	min = top(&st);
-	while (st.top)
+	while (chunk_size--)
 	{
 		if (min > st.top->item)
 			min = st.top->item;

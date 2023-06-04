@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 12:50:03 by phan              #+#    #+#             */
-/*   Updated: 2023/05/31 19:01:50 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/04 15:10:19 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sort_3(t_stack *a)
 
 	if (a->size < 2)
 		return ;
-	max = ft_max(*a);
+	max = ft_max(*a, a->size);
 	if (top(a) == max)
 		ra(a);
 	if (a->top->next->next)
@@ -30,23 +30,49 @@ void	sort_3(t_stack *a)
 	}
 }
 
-void	q_sort_3(t_stack *a, t_stack *b)
+int	is_sorted(t_stack *st)
 {
-	int	min;
+	t_stack	cur;
+
+	if (st->size <= 1)
+		return (1);
+	cur = *st;
+	while (cur.top->next)
+	{
+		if (cur.top->item > cur.top->next->item)
+			return (0);
+		cur.top = cur.top->next;
+	}
+	return (1);
+}
+
+void	q_sort_3(t_stack *a, t_stack *b, int chunk_size)
+{
+	int	max;
 	int	ra_cnt;
 
-	min = ft_min(*a);
+	if (is_sorted(a))
+		return ;
+	max = ft_max(*a, chunk_size);
 	ra_cnt = 0;
-	while (top(a) != min)
+	while (chunk_size--)
 	{
-		ra_cnt++;
-		ra(a);
+		if (max == a->top->item)
+		{
+			if (chunk_size)
+			{
+				ra(a);
+				ra_cnt++;
+			}
+		}
+		else
+			pb(a, b);
 	}
-	pb(a, b);
+	if (top(b) < b->top->next->item)
+		sb(b);
 	while (ra_cnt--)
 		rra(a);
-	if (a->top->item > a->top->next->item)
-		sa(a);
+	pa(a, b);
 	pa(a, b);
 }
 
@@ -57,11 +83,13 @@ void	sort_5(t_stack *a, t_stack *b)
 	int	idx;
 	int	pb_cnt;
 
+	if (is_sorted(a))
+		return ;
 	pb_cnt = 0;
 	while (a->size > 3)
 	{
 		mid = a->size / 2;
-		min = ft_min(*a);
+		min = ft_min(*a, a->size);
 		idx = ft_find(*a, min);
 		if (idx + 1 == a->size - 1)
 			sa(a);
@@ -78,4 +106,35 @@ void	sort_5(t_stack *a, t_stack *b)
 	sort_3(a);
 	while (pb_cnt--)
 		pa(a, b);
+}
+
+int	find_pivot(t_stack *a, t_stack *b, int st_name, int chunk_size)
+{
+	int 	max;
+	int		min;
+	int		mid;
+	int		res;
+	t_stack cur;
+
+	if (st_name == 0)
+	{
+		max = ft_max(*a, chunk_size);
+		min = ft_min(*a, chunk_size);
+		cur = *a;
+	}
+	else
+	{
+		max = ft_max(*b, chunk_size);
+		min = ft_min(*b, chunk_size);
+		cur = *b;
+	}
+	mid = (max + min) / 2;
+	res = max;
+	while (chunk_size--)
+	{
+		if (mid <= cur.top->item && res > cur.top->item)
+			res = cur.top->item;
+		cur.top = cur.top->next;
+	}
+	return (res);
 }

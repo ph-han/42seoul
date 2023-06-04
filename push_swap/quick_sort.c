@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 16:08:03 by phan              #+#    #+#             */
-/*   Updated: 2023/06/03 21:38:22 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/04 15:11:18 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,22 @@ void	sort_a(t_stack *a, t_stack *b, int chunk_size)
 	int		not_mv;
 
 	// ft_printf("=======(sort_a start, chunk_size : %d)======\n", chunk_size);
-	if (chunk_size <= 1)
+	if (chunk_size == 2)
 	{
-		// print_stack(*a, 'a');
+	 	// print_stack(*a, 'a');
 		// print_stack(*b, 'b');
+		if (top(a) > a->top->next->item)
+			sa(a);
 		return ;
 	}
-	pivot = top(a);
+	if (chunk_size == 3)
+	{
+		q_sort_3(a, b, chunk_size);
+		return ;
+	}
+	if (chunk_size <= 1)
+		return ;
+	pivot = find_pivot(a, b, 0, chunk_size);
 	while (chunk_size--)
 	{
 		if (pivot < a->top->item)
@@ -71,14 +80,14 @@ void	sort_b(t_stack *a, t_stack *b, int chunk_size)
 	// ft_printf("=======(sort_b start, chunk_size : %d)======\n", chunk_size);
 	if (chunk_size == 0)
 		return ;
-	if (chunk_size <= 1)
+	if (chunk_size == 1)
 	{
 		pa(a, b);
 	 	// print_stack(*a, 'a');
 		// print_stack(*b, 'b');
 		return ;
 	}
-	pivot = b->top->next->item;
+	pivot = find_pivot(a, b, 1, chunk_size);
 	while (chunk_size--)
 	{
 		if (pivot > top(b))
