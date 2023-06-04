@@ -20,11 +20,16 @@ done
 sum=0
 max=-1
 min=2147483647
-for i in {1..300}
+for i in {1..1000}
 do
 	args=`seq $n_option | sort -R | xargs`
 	res=`./push_swap $args | wc -l`
-	echo "test $i case (op cnt: $res)"
+	check=`./push_swap $args | ./tester/checker_Mac $args`
+	if [ $check == "OK" ]; then
+		echo -e "\033[32mTEST $i OK (op cnt: $res)\033[0m"
+	else
+		echo -e "\033[31mTEST $i KO\033[0m"
+	fi
 	sum=$((sum+res))
 	if [ $((res + 0)) -gt $max ]; then
 		max=$res
@@ -33,9 +38,8 @@ do
 		min=$res
 	fi
 done
-avg=$((sum/300))
+avg=$((sum/1000))
 
 # Print Result
 echo "Max: $max, Min: $min"
-echo "Total(1~300): $sum"
 echo "Average: $avg"
