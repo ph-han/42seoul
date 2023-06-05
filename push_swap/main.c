@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:39:13 by phan              #+#    #+#             */
-/*   Updated: 2023/06/04 15:12:01 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/05 19:12:17 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,18 @@ static void	push_swap(t_stack *a, t_stack *b)
 		sort_5(a, b);
 		return ;
 	}
+	if (is_sorted(a))
+		return ;
 	quick_sort(a, b);
+}
+
+void	input_data_free_all(char **inputs)
+{
+	int idx;
+
+	idx = 0;
+	while (inputs[idx])
+		free(inputs[idx++]);
 }
 
 static int	input_data(t_stack *a, int argc, char *argv[])
@@ -40,12 +51,23 @@ static int	input_data(t_stack *a, int argc, char *argv[])
 		input_num = 0;
 		while (inputs[input_num])
 			input_num++;
+		if (input_num == 0)
+		{
+			free(inputs);
+			return (-1);
+		}
 		while (input_num)
 		{
 			if (!ft_is_valid(*a, inputs[--input_num]))
+			{
+				input_data_free_all(inputs);
+				free(inputs);
 				return (-1);
+			}
 			push(ft_atoi(inputs[input_num]), a);
 		}
+		input_data_free_all(inputs);
+		free(inputs);
 		idx--;
 	}
 	return (1);
@@ -62,20 +84,43 @@ void	print_stack(t_stack st, char c)
 	ft_printf("\n");
 }
 
+void	free_all(t_stack *st)
+{
+	t_node *tmp;
+
+	while (st->top)
+	{
+		tmp = st->top;
+		st->top = st->top->next;
+		free(tmp);
+	}
+}
+
+void	leak_check(void)
+{
+	system("leaks --list -- push_swap");
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack	a;
 	t_stack	b;
 
 	init(&a);
-	init(&b);
 	if (argc < 2)
 		return ((write(2, "Error\n", 6) * 0) + -1);
 	if (input_data(&a, argc, argv) == -1)
+	{
+		if (a.top)
+			free_all(&a);
 		return ((write(2, "Error\n", 6) * 0) + -1);
+	}
+	init(&b);
 	// print_stack(a, 'a');
 	push_swap(&a, &b);
+	free_all(&a);
 	// print_stack(a, 'a');
 	// print_stack(b, 'b');
+	//atexit(leak_check);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:18:46 by phan              #+#    #+#             */
-/*   Updated: 2023/05/30 13:30:17 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/04 16:59:42 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ void	push(int item, t_stack *stack)
 
 int	pop(t_stack *stack)
 {
-	t_stack	*tmp;
+	t_node	*tmp;
 	int		item;
 
-	tmp = stack;
-	item = tmp->top->item;
-	stack->top = tmp->top->next;
+	tmp = stack->top;
+	item = tmp->item;
+	stack->top = tmp->next;
+	free(tmp);
 	stack->size--;
 	return (item);
 }

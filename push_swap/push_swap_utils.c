@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 12:54:09 by phan              #+#    #+#             */
-/*   Updated: 2023/06/04 14:03:32 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/04 16:46:50 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,12 @@ int	ft_find(t_stack st, int item)
 
 int	ft_is_valid(t_stack st, char *s)
 {
-	int		s2l;
+	long	s2l;
 	char	*tmp;
 
 	tmp = s;
+	if (ft_strlen(s) == 0)
+		return (0);
 	if (ft_strlen(s) == 1 && (*s == '-' || *s == '+'))
 		return (0);
 	if (*s == '-' || *s == '+')

@@ -26,12 +26,6 @@ $(NAME): $(OBJS)
 	$(MAKE) -C $(FTPRINTF_DIR)
 	gcc $(OBJS) -L$(LIBFT_DIR) $(LIBFT) -L$(FTPRINTF_DIR) $(FTPRINTF) -o $(NAME)
 
-debug: $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR)
-	$(MAKE) -C $(FTPRINTF_DIR)
-	gcc $(OBJS) -L$(LIBFT_DIR) $(LIBFT) -L$(FTPRINTF_DIR) $(FTPRINTF) -g
-
-
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(FTPRINTF_DIR) clean

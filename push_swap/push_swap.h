@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:41:53 by phan              #+#    #+#             */
-/*   Updated: 2023/06/04 14:29:52 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/04 15:59:32 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	sort_5(t_stack *a, t_stack *b);
 void	sort_a(t_stack *a, t_stack *b, int chunk_size);
 void	sort_b(t_stack *a, t_stack *b, int chunk_size);
 void	quick_sort(t_stack *a, t_stack *b);
-int    find_pivot(t_stack *a, t_stack *b, int st_name, int chunk_size);
+int		find_pivot(t_stack *a, t_stack *b, int st_name, int chunk_size);
+int 	is_sorted(t_stack *st);
 
 // utils functions
 int		ft_max(t_stack st, int chunk_size);

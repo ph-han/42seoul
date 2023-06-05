@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 16:08:03 by phan              #+#    #+#             */
-/*   Updated: 2023/06/04 15:11:18 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/04 16:02:36 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	sort_a(t_stack *a, t_stack *b, int chunk_size)
 			ra(a);
 	// print_stack(*a, 'a');
 	// print_stack(*b, 'b');
-	sort_a(a, b, ra_cnt);
+	if (is_sorted(a) == 0)
+		sort_a(a, b, ra_cnt);
 	sort_b(a, b, pb_cnt);
 	// ft_printf("=======(sort_a end)======\n");
 }
