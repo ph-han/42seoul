@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 16:08:03 by phan              #+#    #+#             */
-/*   Updated: 2023/06/04 16:02:36 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/05 20:48:03 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,14 @@ void	sort_b(t_stack *a, t_stack *b, int chunk_size)
 	// ft_printf("=======(sort_b start, chunk_size : %d)======\n", chunk_size);
 	if (chunk_size == 0)
 		return ;
+	if (chunk_size == 2)
+	{
+		if (top(b) < b->top->next->item)
+			sb(b);
+		pa(a, b);
+		pa(a, b);
+		return ;
+	}
 	if (chunk_size == 1)
 	{
 		pa(a, b);
@@ -114,12 +122,15 @@ void	sort_b(t_stack *a, t_stack *b, int chunk_size)
 			rb(b);
 	// print_stack(*a, 'a');
 	// print_stack(*b, 'b');
-	sort_a(a, b, pa_cnt);
+	if (is_sorted(a) == 0)
+		sort_a(a, b, pa_cnt);
 	sort_b(a, b, rb_cnt);
 	// ft_printf("=======(sort_b end)=======\n");
 }
 
 void	quick_sort(t_stack *a, t_stack *b)
 {
+	if (is_sorted(a))
+		return ;
 	sort_a(a, b, a->size);
 }
