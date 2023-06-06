@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 12:50:03 by phan              #+#    #+#             */
-/*   Updated: 2023/06/04 15:10:19 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/06 21:01:08 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ void	q_sort_3(t_stack *a, t_stack *b, int chunk_size)
 	if (is_sorted(a))
 		return ;
 	max = ft_max(*a, chunk_size);
+	if (a->top->next->next->item == max)
+	{
+		if (top(a) > a->top->next->item)
+			sa(a);
+		return ;
+	}
 	ra_cnt = 0;
 	while (chunk_size--)
 	{
@@ -128,11 +134,42 @@ int	find_pivot(t_stack *a, t_stack *b, int st_name, int chunk_size)
 		min = ft_min(*b, chunk_size);
 		cur = *b;
 	}
-	mid = (max + min) / 2;
+	mid = min + ((max - min) / 2 - 1);
 	res = max;
 	while (chunk_size--)
 	{
 		if (mid <= cur.top->item && res > cur.top->item)
+			res = cur.top->item;
+		cur.top = cur.top->next;
+	}
+	return (res);
+}
+
+int find_pivot2(t_stack *a, t_stack *b, int st_name, int chunk_size)
+{
+	int max;
+	int min;
+	int mid;
+	int res;
+	t_stack cur;
+
+	if (st_name == 0)
+	{
+		max = ft_max(*a, chunk_size);
+		min = ft_min(*a, chunk_size);
+		cur = *a;
+	}
+	else
+	{
+		max = ft_max(*b, chunk_size);
+		min = ft_min(*b, chunk_size);
+		cur = *b;
+	}
+	mid = min + ((max - min) / 2 + 1);
+	res = min;
+	while (chunk_size--)
+	{
+		if (mid >= cur.top->item && res < cur.top->item)
 			res = cur.top->item;
 		cur.top = cur.top->next;
 	}

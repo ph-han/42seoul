@@ -61,7 +61,7 @@ do
 				echo -e "\033[31mTEST $i KO (Moves: $res) [0/5]\033[0m"
 			fi
 		else  
-			echo -e "\033[31mTEST $i OK (Moves: $res)\033[0m"
+			echo -e "\033[32mTEST $i OK (Moves: $res)\033[0m"
 		fi
 	else
 		echo -e "\033[31mTEST $i KO\033[0m"

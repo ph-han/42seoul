@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:39:13 by phan              #+#    #+#             */
-/*   Updated: 2023/06/05 19:12:17 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/06 17:25:41 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,9 @@ int	main(int argc, char *argv[])
 	init(&b);
 	// print_stack(a, 'a');
 	push_swap(&a, &b);
-	free_all(&a);
 	// print_stack(a, 'a');
 	// print_stack(b, 'b');
+	free_all(&a);
 	//atexit(leak_check);
 	return (0);
 }
