@@ -6,11 +6,16 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 16:08:03 by phan              #+#    #+#             */
-/*   Updated: 2023/06/06 20:59:21 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/07 15:10:53 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	ft_abs(int a, int b)
+{
+	return ((a < b)*-1*(a - b) + (a >= b)*(a - b));
+}
 
 void	sort_a(t_stack *a, t_stack *b, int chunk_size)
 {
@@ -46,7 +51,7 @@ void	sort_a(t_stack *a, t_stack *b, int chunk_size)
 	rb_cnt = 0;
 	while (chunk_size--)
 	{
-		if (pivot2 < top(a))
+		if (pivot2 <= top(a))
 		{
 			ra(a);
 			ra_cnt++;
@@ -56,7 +61,7 @@ void	sort_a(t_stack *a, t_stack *b, int chunk_size)
 			pb(a, b);
 			if (top(b) >= pivot)
 			{
-				if ((b->top->next) && (b->top->next->item < pivot))
+				if (b->top->next && top(b) > b->top->next->item)
 					rb(b);
 				rb_cnt++;
 			}
@@ -84,7 +89,7 @@ void	sort_a(t_stack *a, t_stack *b, int chunk_size)
 	}
 	else
 	{
-		while (ra_cnt_tmp--)
+		while (a_not_mv && ra_cnt_tmp--)
 			rra(a);
 	}
 	if (rb_cnt_tmp == rb_cnt)
@@ -98,12 +103,12 @@ void	sort_a(t_stack *a, t_stack *b, int chunk_size)
 	}
 	else
 	{
-		while (rb_cnt_tmp--)
+		while (b_not_mv && rb_cnt_tmp--)
 			rrb(b);
 	}
 	// print_stack(*a, 'a');
 	// print_stack(*b, 'b');
-	if (is_sorted(a) == 0)
+	if (is_sorted(a, ra_cnt) == 0)
 		sort_a(a, b, ra_cnt);
 	sort_b(a, b, rb_cnt);
 	sort_b(a, b, pb_cnt - rb_cnt);
@@ -132,6 +137,11 @@ void	sort_b(t_stack *a, t_stack *b, int chunk_size)
 			sb(b);
 		pa(a, b);
 		pa(a, b);
+		return ;
+	}
+	if (chunk_size == 3)
+	{
+		q_sort_r_3(a, b, chunk_size);
 		return ;
 	}
 	if (chunk_size == 1)
@@ -170,7 +180,7 @@ void	sort_b(t_stack *a, t_stack *b, int chunk_size)
 	ra_cnt_tmp = ra_cnt;
 	// print_stack(*a, 'a');
 	// print_stack(*b, 'b');
-	if (is_sorted(a) == 0)
+	if (is_sorted(a, pa_cnt - ra_cnt) == 0)
 		sort_a(a, b, pa_cnt - ra_cnt);
 	while (ra_cnt_tmp && rb_cnt_tmp)
 	{
@@ -189,7 +199,7 @@ void	sort_b(t_stack *a, t_stack *b, int chunk_size)
 	}
 	else
 	{
-		while (ra_cnt_tmp--)
+		while (a_not_mv && ra_cnt_tmp--)
 			rra(a);
 	}
 	if (rb_cnt_tmp == rb_cnt)
@@ -203,10 +213,10 @@ void	sort_b(t_stack *a, t_stack *b, int chunk_size)
 	}
 	else
 	{
-		while (rb_cnt_tmp--)
+		while (b_not_mv && rb_cnt_tmp--)
 			rrb(b);
 	}
-	if (is_sorted(a) == 0)
+	if (is_sorted(a, ra_cnt) == 0)
 		sort_a(a, b, ra_cnt);
 	sort_b(a, b, rb_cnt);
 	// ft_printf("=======(sort_b end)=======\n");
@@ -214,7 +224,7 @@ void	sort_b(t_stack *a, t_stack *b, int chunk_size)
 
 void	quick_sort(t_stack *a, t_stack *b)
 {
-	if (is_sorted(a))
+	if (is_sorted(a, a->size))
 		return ;
 	sort_a(a, b, a->size);
 }
