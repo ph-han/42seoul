@@ -6,16 +6,11 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 16:08:03 by phan              #+#    #+#             */
-/*   Updated: 2023/06/07 15:10:53 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/12 18:47:52 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_abs(int a, int b)
-{
-	return ((a < b)*-1*(a - b) + (a >= b)*(a - b));
-}
 
 void	sort_a(t_stack *a, t_stack *b, int chunk_size)
 {
@@ -114,6 +109,48 @@ void	sort_a(t_stack *a, t_stack *b, int chunk_size)
 	sort_b(a, b, pb_cnt - rb_cnt);
 	// ft_printf("=======(sort_a end)======\n");
 }
+
+void	sort_a_s(t_stack *a, t_stack *b, int chunk_size)
+{
+	int	pivot;
+	int	pivot2;
+	int	pb_cnt;
+	int	ra_cnt;
+	int	rb_cnt;
+//
+	// ft_printf("=======(sort_a start, chunk_size : %d)======\n", chunk_size);
+	pivot = find_pivot(a, b, 0, chunk_size);
+	pivot2 = find_pivot2(a, b, 0, chunk_size);
+	// ft_printf("pivot : %d , pivot2 : %d\n", pivot, pivot2);
+	pb_cnt = 0;
+	ra_cnt = 0;
+	rb_cnt = 0;
+	while (chunk_size--)
+	{
+		if (pivot2 <= top(a))
+		{
+			ra(a);
+			ra_cnt++;
+		}
+		else
+		{
+			pb(a, b);
+			if (top(b) >= pivot)
+				rb_cnt++;
+			else
+				rb(b);
+			pb_cnt++;
+		}
+	}
+	// print_stack(*a, 'a');
+	// print_stack(*b, 'b');
+	if (is_sorted(a, ra_cnt) == 0)
+		sort_a(a, b, ra_cnt);
+	sort_b(a, b, rb_cnt);
+	sort_b(a, b, pb_cnt - rb_cnt);
+	// ft_printf("=======(sort_a end)======\n");
+}
+
 
 void	sort_b(t_stack *a, t_stack *b, int chunk_size)
 {
@@ -226,5 +263,5 @@ void	quick_sort(t_stack *a, t_stack *b)
 {
 	if (is_sorted(a, a->size))
 		return ;
-	sort_a(a, b, a->size);
+	sort_a_s(a, b, a->size);
 }
