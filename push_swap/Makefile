@@ -7,7 +7,8 @@ FTPRINTF_DIR = ./includes/printf
 CC = cc
 CFLAG = -Wall -Wextra -Werror
 
-SRCS = main.c quick_sort.c sort_utils.c push_swap_utils.c \
+SRCS = main.c sort.c mini_sort.c \
+	sort_utils1.c sort_utils2.c sort_utils3.c sort_utils4.c sort_utils5.c push_swap_utils.c \
 	operations/stack.c \
 	operations/push_swap/push.c \
 	operations/push_swap/reverse_rotate.c \

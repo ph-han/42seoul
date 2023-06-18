@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 13:12:28 by phan              #+#    #+#             */
-/*   Updated: 2023/05/20 17:59:58 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/18 14:23:15 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,24 @@ static void	rotate(t_stack *stack)
 	tmp = NULL;
 }
 
-void	ra(t_stack *a)
+int	ra(t_stack *a)
 {
 	ft_printf("ra\n");
 	rotate(a);
+	return (1);
 }
 
-void	rb(t_stack *b)
+int	rb(t_stack *b)
 {
 	ft_printf("rb\n");
 	rotate(b);
+	return (1);
 }
 
-void	rr(t_stack *a, t_stack *b)
+int	rr(t_stack *a, t_stack *b)
 {
 	ft_printf("rr\n");
 	rotate(a);
 	rotate(b);
+	return (1);
 }

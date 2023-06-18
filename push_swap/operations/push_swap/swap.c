@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 13:01:10 by phan              #+#    #+#             */
-/*   Updated: 2023/05/20 18:01:40 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/18 14:23:43 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,24 @@ static void	swap(t_stack *a)
 	push(item2, a);
 }
 
-void	sa(t_stack *a)
+int	sa(t_stack *a)
 {
 	ft_printf("sa\n");
 	swap(a);
+	return (1);
 }
 
-void	sb(t_stack *b)
+int	sb(t_stack *b)
 {
 	ft_printf("sb\n");
 	swap(b);
+	return (1);
 }
 
-void	ss(t_stack *a, t_stack *b)
+int	ss(t_stack *a, t_stack *b)
 {
 	ft_printf("ss\n");
 	swap(a);
 	swap(b);
+	return (1);
 }
