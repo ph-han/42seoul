@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:51:14 by phan              #+#    #+#             */
-/*   Updated: 2023/06/18 17:44:48 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/18 20:43:51 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ int	find_pivot(t_stack *a, t_stack *b, char st_name, int chunk_size)
 	else
 		cur = init_value(b, &max, &min, chunk_size);
 	pos = min + ((max - min) / 3);
-	res = max;
+	res = min;
 	while (chunk_size--)
 	{
-		if (pos <= cur.top->item && res > cur.top->item)
+		if (pos >= cur.top->item && res < cur.top->item)
 			res = cur.top->item;
 		cur.top = cur.top->next;
 	}
+	// ft_printf("======Pivot1: %d\n======", res);
 	return (res);
 }
 
@@ -55,12 +56,13 @@ int	find_pivot2(t_stack *a, t_stack *b, char st_name, int chunk_size)
 	else
 		cur = init_value(b, &max, &min, chunk_size);
 	pos = min + ((max - min) / 3 * 2);
-	res = min;
+	res = max;
 	while (chunk_size--)
 	{
-		if (pos >= cur.top->item && res < cur.top->item)
+		if (pos <= cur.top->item && res > cur.top->item)
 			res = cur.top->item;
 		cur.top = cur.top->next;
 	}
+	// ft_printf("=====Pivot2 : %d====\n", res);
 	return (res);
 }
