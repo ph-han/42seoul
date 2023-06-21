@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:51:14 by phan              #+#    #+#             */
-/*   Updated: 2023/06/18 20:43:51 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/21 17:21:18 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	find_pivot(t_stack *a, t_stack *b, char st_name, int chunk_size)
 			res = cur.top->item;
 		cur.top = cur.top->next;
 	}
-	// ft_printf("======Pivot1: %d\n======", res);
 	return (res);
 }
 
@@ -63,6 +62,5 @@ int	find_pivot2(t_stack *a, t_stack *b, char st_name, int chunk_size)
 			res = cur.top->item;
 		cur.top = cur.top->next;
 	}
-	// ft_printf("=====Pivot2 : %d====\n", res);
 	return (res);
 }

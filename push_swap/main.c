@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:39:13 by phan              #+#    #+#             */
-/*   Updated: 2023/06/18 18:04:03 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/21 15:29:02 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	main(int argc, char *argv[])
 
 	init(&a);
 	if (argc < 2)
-		return ((write(2, "Error\n", 6) * 0) + -1);
+		return (-1);
 	if (input_data(&a, argc - 1, argv) == -1)
 	{
 		if (a.top)
