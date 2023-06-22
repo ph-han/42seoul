@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:35:40 by phan              #+#    #+#             */
-/*   Updated: 2023/06/22 11:41:57 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/22 11:51:45 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define PUSH_SWAP_BONUS_H
 
 # include <unistd.h>
-# include "../includes/get_next_line/get_next_line.h"
-# include "../includes/libft/libft.h"
+# include "../lib/get_next_line/get_next_line.h"
+# include "../lib/libft/libft.h"
 
 typedef struct s_node
 {
@@ -50,6 +50,7 @@ int		rra(t_stack *a);
 int		rrb(t_stack *b);
 int		rrr(t_stack *a, t_stack *b);
 
+// utils
 int		check_sorted(t_stack *a, t_stack *b, int chunk_size);
 int		is_valid(t_stack st, char *s);
 int		input_data(t_stack *a, int idx, char *argv[]);

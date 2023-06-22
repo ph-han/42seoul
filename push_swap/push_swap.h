@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:41:53 by phan              #+#    #+#             */
-/*   Updated: 2023/06/18 17:34:42 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/22 11:51:20 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include "./includes/libft/libft.h"
-# include "./includes/printf/ft_printf.h"
+# include "./lib/libft/libft.h"
+# include "./lib/printf/ft_printf.h"
 
 typedef struct s_node
 {

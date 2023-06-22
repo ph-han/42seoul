@@ -1,26 +1,27 @@
 NAME = push_swap
 BONUS_NAME = checker
 LIBFT = -lft
-LIBFT_DIR = ./includes/libft
+LIBFT_DIR = ./lib/libft
 FTPRINTF = -lftprintf
-FTPRINTF_DIR = ./includes/printf
-GNL_DIR = ./includes/get_next_line
+FTPRINTF_DIR = ./lib/printf
+GNL_DIR = ./lib/get_next_line
 
 CC = cc
 CFLAG = -Wall -Wextra -Werror
 
 SRCS = main.c sort.c mini_sort.c \
-	sort_utils1.c sort_utils2.c sort_utils3.c sort_utils4.c sort_utils5.c push_swap_utils.c \
-	operations/stack.c \
-	operations/push_swap/push.c \
-	operations/push_swap/reverse_rotate.c \
-	operations/push_swap/rotate.c \
-	operations/push_swap/swap.c
+	sort_utils1.c sort_utils2.c sort_utils3.c sort_utils4.c sort_utils5.c \
+	push_swap_utils.c \
+	op_stack.c \
+	op_push.c \
+	op_reverse_rotate.c \
+	op_rotate.c \
+	op_swap.c
 
 BONUS_SRCS = ./bonus/main_bonus.c ./bonus/checker_utils.c ./bonus/check_bonus.c \
 	./bonus/op_push_bonus.c ./bonus/op_reverse_rotate_bonus.c \
 	./bonus/op_rotate_bonus.c ./bonus/op_swap_bonus.c ./bonus/stack_bonus.c \
-	./includes/get_next_line/get_next_line.c ./includes/get_next_line/get_next_line_utils.c
+	./lib/get_next_line/get_next_line.c ./lib/get_next_line/get_next_line_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
