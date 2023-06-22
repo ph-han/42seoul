@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:16:03 by phan              #+#    #+#             */
-/*   Updated: 2023/06/21 16:26:06 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/22 11:42:32 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static long	ft_atol(const char *str)
 	return ((sign * result));
 }
 
-int	ft_find(t_stack st, int item)
+static int	ft_find(t_stack st, int item)
 {
 	while (st.top)
 	{
@@ -66,5 +66,44 @@ int	is_valid(t_stack st, char *s)
 		return (0);
 	if (st.size && ft_find(st, s2l) >= 0)
 		return (0);
+	return (1);
+}
+
+static int	input_data_free_all(char **inputs)
+{
+	int	idx;
+
+	idx = 0;
+	while (inputs[idx])
+		free(inputs[idx++]);
+	free(inputs);
+	return (-1);
+}
+
+int	input_data(t_stack *a, int idx, char *argv[])
+{
+	char	**inputs;
+	int		input_num;
+
+	while (idx > 0)
+	{
+		inputs = ft_split(argv[idx], ' ');
+		input_num = 0;
+		while (inputs[input_num])
+			input_num++;
+		if (input_num == 0)
+		{
+			free(inputs);
+			return (-1);
+		}
+		while (input_num)
+		{
+			if (!is_valid(*a, inputs[--input_num]))
+				return (input_data_free_all(inputs));
+			push(ft_atoi(inputs[input_num]), a);
+		}
+		input_data_free_all(inputs);
+		idx--;
+	}
 	return (1);
 }

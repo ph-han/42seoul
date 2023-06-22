@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:35:40 by phan              #+#    #+#             */
-/*   Updated: 2023/06/21 16:29:48 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/22 11:41:57 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int		rrr(t_stack *a, t_stack *b);
 
 int		check_sorted(t_stack *a, t_stack *b, int chunk_size);
 int		is_valid(t_stack st, char *s);
+int		input_data(t_stack *a, int idx, char *argv[]);
 
 #endif

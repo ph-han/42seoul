@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:34:06 by phan              #+#    #+#             */
-/*   Updated: 2023/06/21 17:20:52 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/22 11:40:48 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,45 +22,6 @@ static void	free_all(t_stack *st)
 		st->top = st->top->next;
 		free(tmp);
 	}
-}
-
-static int	input_data_free_all(char **inputs)
-{
-	int	idx;
-
-	idx = 0;
-	while (inputs[idx])
-		free(inputs[idx++]);
-	free(inputs);
-	return (-1);
-}
-
-static int	input_data(t_stack *a, int idx, char *argv[])
-{
-	char	**inputs;
-	int		input_num;
-
-	while (idx > 0)
-	{
-		inputs = ft_split(argv[idx], ' ');
-		input_num = 0;
-		while (inputs[input_num])
-			input_num++;
-		if (input_num == 0)
-		{
-			free(inputs);
-			return (-1);
-		}
-		while (input_num)
-		{
-			if (!is_valid(*a, inputs[--input_num]))
-				return (input_data_free_all(inputs));
-			push(ft_atoi(inputs[input_num]), a);
-		}
-		input_data_free_all(inputs);
-		idx--;
-	}
-	return (1);
 }
 
 static int	run_command(char *cmd, t_stack *a, t_stack *b)
@@ -92,11 +53,31 @@ static int	run_command(char *cmd, t_stack *a, t_stack *b)
 	return (1);
 }
 
+static int	read_command(t_stack *a, t_stack *b)
+{
+	char	*line;
+
+	line = get_next_line(0);
+	while (line)
+	{
+		if (run_command(line, a, b) == 0)
+		{
+			free(line);
+			free_all(a);
+			free_all(b);
+			return ((write(2, "Error\n", 6) * 0) + -1);
+		}
+		free(line);
+		line = get_next_line(0);
+	}
+	free(line);
+	return (1);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack	a;
 	t_stack	b;
-	char	*line;
 
 	init(&a);
 	if (argc < 2)
@@ -108,20 +89,8 @@ int	main(int argc, char *argv[])
 		return ((write(2, "Error\n", 6) * 0) + -1);
 	}
 	init(&b);
-	line = get_next_line(0);
-	while (line)
-	{
-		if (run_command(line, &a, &b) == 0)
-		{
-			free(line);
-			free_all(&a);
-			free_all(&b);
-			return ((write(2, "Error\n", 6) * 0) + -1);
-		}
-		free(line);
-		line = get_next_line(0);
-	}
-	free(line);
+	if (read_command(&a, &b) < 0)
+		return (-1);
 	if (check_sorted(&a, &b, a.size))
 		write(1, "OK\n", 3);
 	else
