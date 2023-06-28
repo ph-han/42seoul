@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:18:13 by phan              #+#    #+#             */
-/*   Updated: 2023/06/27 21:09:54 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/28 19:31:56 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include "./libft/libft.h"
 # include <stdio.h>
 
+# define HEIGHT 900
+# define WIDTH 1600
+
 typedef struct s_img
 {
 	void	*img;
@@ -32,9 +35,9 @@ typedef struct s_img
 
 typedef struct s_point
 {
-	int	x;
-	int	y;
-	int	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_point;
 
 typedef struct s_map
@@ -44,15 +47,20 @@ typedef struct s_map
 	t_point	*r_map;
 }	t_map;
 
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+
 // parse utils
 void	free_split(char **split_line);
 int		get_map_width(char *line);
 int		ft_isnum(char *data);
 
 // parse
-void parse_map(t_map *map, char *filename);
+void	parse_map(t_map *map, char *filename);
 
 // projection
-void to_isometric(t_map *map);
+void	to_isometric(t_map *map);
+
+// line algo
+void	dda(t_img *data, t_map *map, t_point point1, t_point point2);
 
 #endif
