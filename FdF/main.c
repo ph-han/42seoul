@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:39:54 by phan              #+#    #+#             */
-/*   Updated: 2023/06/28 21:07:20 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/28 21:14:13 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,13 @@ int	main(int ac, char *av[])
 	win = mlx_new_window(mlx, WIDTH, HEIGHT, "TEST");
 	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-
 	for (int j = 0; j < map.height; j++)
 	{
 		for (int i = 0; i < map.width; i++)
 		{
-			map.r_map[i + map.width * j].x *= WIDTH / map.width * 1 / 10;
-			map.r_map[i + map.width * j].y *= WIDTH / map.width * 1 / 10;
-			map.r_map[i + map.width * j].z *= WIDTH / map.width * 1 / 10;
+			map.r_map[i + map.width * j].x *= WIDTH / map.width * 4 / 10;
+			map.r_map[i + map.width * j].y *= WIDTH / map.width * 4 / 10;
+			map.r_map[i + map.width * j].z *= WIDTH / map.width * 4 / 10;
 		}
 	}
 	for (int j = 0; j < map.height; j++)
@@ -60,7 +59,7 @@ int	main(int ac, char *av[])
 	for (int j = 0; j < map.width; j++)
 		for (int i = 0; i < map.height - 1; i++)
 			dda(&img, &map, map.r_map[j + map.width * i], map.r_map[j + map.width * (i + 1)]);
-	mlx_put_image_to_window(mlx, win, img.img, 20, 20);
+	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
 	mlx_loop(mlx);
 	return (0);
 }

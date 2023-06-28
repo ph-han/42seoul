@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:49:12 by phan              #+#    #+#             */
-/*   Updated: 2023/06/28 21:03:01 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/28 21:14:52 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	dda(t_img *data, t_map *map, t_point point1, t_point point2)
 	double	yinc;
 	int	i;
 
+(void)map;
 	dx = point2.x - point1.x;
 	dy = point2.y - point1.y;
 	if (fabs(dx) > fabs(dy))
@@ -46,7 +47,7 @@ void	dda(t_img *data, t_map *map, t_point point1, t_point point2)
 	point1.y = point1.y;
 	while (i <= step)
 	{
-		my_mlx_pixel_put(data, point1.x + get_width_center(map), point1.y + get_height_center(map), 0x00FFFFFF);
+		my_mlx_pixel_put(data, point1.x + 500, point1.y + 500, 0x00FFFFFF);
 		point1.x = point1.x + xinc;
 		point1.y = point1.y + yinc;
 		i++;
