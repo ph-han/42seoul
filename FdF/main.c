@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:39:54 by phan              #+#    #+#             */
-/*   Updated: 2023/06/28 21:14:13 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/29 13:07:07 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	main(int ac, char *av[])
 	{
 		for (int i = 0; i < map.width; i++)
 		{
-			map.r_map[i + map.width * j].x *= WIDTH / map.width * 4 / 10;
-			map.r_map[i + map.width * j].y *= WIDTH / map.width * 4 / 10;
-			map.r_map[i + map.width * j].z *= WIDTH / map.width * 4 / 10;
+			map.r_map[i + map.width * j].x *= HEIGHT / map.height * 5 / 10;
+			map.r_map[i + map.width * j].y *= HEIGHT / map.height * 5 / 10;
+			map.r_map[i + map.width * j].z *= HEIGHT / map.height * 5 / 10;
 		}
 	}
 	for (int j = 0; j < map.height; j++)

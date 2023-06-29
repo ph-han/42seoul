@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:18:13 by phan              #+#    #+#             */
-/*   Updated: 2023/06/28 19:31:56 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/29 11:47:35 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@ typedef struct s_map
 	int		height;
 	t_point	*r_map;
 }	t_map;
+
+typedef struct s_line
+{
+	double	dx;
+	double	dy;
+	double	step;
+	double	xinc;
+	double	yinc;
+}	t_line;
+
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
