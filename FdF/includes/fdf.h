@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:18:13 by phan              #+#    #+#             */
-/*   Updated: 2023/06/29 11:47:35 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/29 20:55:47 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_point
 	double	x;
 	double	y;
 	double	z;
+	int		color;
 }	t_point;
 
 typedef struct s_map

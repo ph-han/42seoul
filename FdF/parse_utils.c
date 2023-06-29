@@ -6,11 +6,11 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:12:45 by phan              #+#    #+#             */
-/*   Updated: 2023/06/27 14:14:16 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/29 16:22:47 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "./includes/fdf.h"
 
 void	free_split(char **split_line)
 {
