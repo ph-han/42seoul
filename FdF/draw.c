@@ -6,11 +6,19 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:39:10 by phan              #+#    #+#             */
-/*   Updated: 2023/06/30 19:54:02 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/30 21:21:28 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
+
+void put_pixel(t_img *data, int x, int y, int color)
+{
+	char *dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
 
 void	draw_map_column(t_img *img, t_map *map)
 {

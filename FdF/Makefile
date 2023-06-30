@@ -38,9 +38,9 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(MAKE) -C $(MLX_DIR)
+	@$(MAKE) -C $(MLX_DIR)
 	$(MAKE) -C $(LIBFT_DIR)
-	gcc $(OBJS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME)
+	gcc $(OBJS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME) -g
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 	@echo $(YELLOW)"                        FDF DONE"$(EOC)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)

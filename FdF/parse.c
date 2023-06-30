@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:21:01 by phan              #+#    #+#             */
-/*   Updated: 2023/06/29 20:56:56 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/30 23:04:40 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ int	is_valid_data(char *data)
 	data_split = ft_split(data, ',');
 	wc = 0;
 	while (data_split[wc++]);
-	wc -= 1;
+	wc--;
 	if (wc > 2 || wc == 0) // invalid data error
 	{
 		free_split(data_split);
 		return (0);
 	}
+	free_split(data_split);
 	return (wc);
 }
 
@@ -43,6 +44,16 @@ int ft_find(char *hex, char c)
 	return (-1);
 }
 
+int	fdf_strlen(char *s)
+{
+	int	len;
+
+	len = 0;
+	while (*(s + len) && *(s + len) != '\n')
+		len++;
+	return (len);
+}
+
 int	check_color(char *color)
 {
 	char	*hex;
@@ -54,13 +65,16 @@ int	check_color(char *color)
 	result = 0;
 	if (*color == '0')
 		color++;
+	else
+		return (-1);
 	if (*color == 'x' || *color == 'X')
 		color++;
-	if (ft_strlen(color) > 8 || ft_strlen(color) % 2 == 1)
-		return (1);
+	else
+		return (-1);
+	if (fdf_strlen(color) > 8 || fdf_strlen(color) % 2 == 1)
+		return (-1);
 	while (*color && *color != '\n')
 	{
-		// printf("idx : %d %s\n", ft_find(hex, ft_tolower(*color)), color);
 		if (ft_find(hex, ft_tolower(*color)) == -1)
 			return (-1);
 		result = 16 * result + ft_find(hex, ft_tolower(*color));
@@ -88,19 +102,20 @@ static void	get_map_coordinate_info(int fd, t_map *map, int x, int y)
 		{
 			data_split = ft_split(line_split[x], ',');
 			data_wc = is_valid_data(line_split[x]);
-			if (!ft_isnum(data_split[0])) // check valid map info
-				exit(0);
-			// printf("data_wc : %d %s\n", data_wc, data_split[1]);
-			if (data_wc == 2 && check_color(data_split[1]) == -1)
-				exit(0);
-			// printf("color set ok\n");
+			if (!ft_isnum(data_split[0]))
+				ft_perror("Invalid map data!");
 			if (data_wc == 2)
+			{
 				point.color = check_color(data_split[1]);
+				if (point.color == -1)
+					ft_perror("Invalid color!");
+			}
 			else
 				point.color = 0x00FFFFFF;
 			point.x = x;
 			point.z = ft_atoi(data_split[0]);
 			map->r_map[x++ + map->width * y] = point;
+			free_split(data_split);
 		}
 		free_split(line_split);
 		line = get_next_line(fd);
@@ -118,19 +133,19 @@ static void	get_map_info(int fd, t_map *map, int c_width)
 	line = get_next_line(fd);
 	map->width = get_map_width(line);
 	map->height = 0;
-	c_width = 0;
 	while (line)
 	{
 		line_split = ft_split(line, ' ');
 		free(line);
 		if (!line_split || !*line_split) // Error
-			exit(0);
+			ft_perror("Invalid map info!");
+		c_width = 0;
 		while (line_split[c_width])
 			if (!is_valid_data(line_split[c_width++])) // Error;
-				exit(0);
+				ft_perror("Invalid map data!");
 		free_split(line_split);
-		if (c_width != map->width) // Error
-			exit(0);
+		if (c_width != (int)(map->width)) // Error
+			ft_perror("Map size error!");
 		map->height++;
 		line = get_next_line(fd);
 	}
@@ -141,12 +156,14 @@ static void	get_map_info(int fd, t_map *map, int c_width)
 void	parse_map(t_map *map, char *filename)
 {
 	int	fd;
-	
+
 	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		exit(1);
 	get_map_info(fd, map, 0);
 	map->r_map = (t_point *)malloc(sizeof(t_point) * map->width * map->height);
 	if (!(map->r_map)) // malloc error
-		exit(0);
+		ft_perror("map malloc error!");
 	fd = open(filename, O_RDONLY);
 	get_map_coordinate_info(fd, map, 0, 0);
 }

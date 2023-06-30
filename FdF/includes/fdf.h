@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:18:13 by phan              #+#    #+#             */
-/*   Updated: 2023/06/30 20:01:26 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/30 22:26:44 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@
 
 # define HEIGHT 900
 # define WIDTH 1600
+
+typedef struct	s_vars {
+	void	*mlx;
+	void	*win;
+}	t_vars;
 
 typedef struct s_img
 {
@@ -59,8 +64,10 @@ typedef struct s_line
 
 
 void	put_pixel(t_img *data, int x, int y, int color);
+void	ft_perror(char *e_msg);
 
 // parse utils funcs
+int		is_valid_filename(char *filename);
 void	free_split(char **split_line);
 int		get_map_width(char *line);
 int		ft_isnum(char *data);
