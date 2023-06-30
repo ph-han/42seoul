@@ -20,11 +20,12 @@ LIBFT_DIR = ./includes/libft
 GNL_DIR = ./includes/get_next_line
 
 MLX = -Lmlx -lmlx -framework OpenGL -framework Appkit
+MLX_DIR = ./mlx
 
 CC = gcc
 CFLAG = -Wall -Wextra -Werror
 
-SRCS = main.c line_algo.c \
+SRCS = main.c rotate_metrix.c scaling.c draw.c line_algo.c \
 	parse.c parse_utils.c \
 	projection.c \
 	./includes/get_next_line/get_next_line.c ./includes/get_next_line/get_next_line_utils.c
@@ -32,19 +33,21 @@ SRCS = main.c line_algo.c \
 OBJS = $(SRCS:.c=.o)
 
 %.o: %.c
-	$(CC) $(CFLAG) -Imlx -c $< -o $@
+	$(CC) $(CFLAG) $(INCLUDE)/libft -Imlx -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	$(MAKE) -C $(MLX_DIR)
 	$(MAKE) -C $(LIBFT_DIR)
-	gcc $(OBJS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) $(INCLUDE) -o $(NAME)
+	gcc $(OBJS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 	@echo $(YELLOW)"                        FDF DONE"$(EOC)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(MLX_DIR) clean
 	rm -f $(OBJS) $(SRCS_BN:.c=.o)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 	@echo $(YELLOW)"                       FDF CLEAN DONE"$(EOC)

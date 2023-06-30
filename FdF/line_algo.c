@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_algo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:49:12 by phan              #+#    #+#             */
-/*   Updated: 2023/06/29 20:36:33 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/30 19:48:33 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	dda(t_img *data, t_map *map, t_point point1, t_point point2)
 	i = 0;
 	point1.x = point1.x;
 	point1.y = point1.y;
-	// printf("move %d %d\n", get_width_center(map), get_height_center(map));
 	while (i <= line_info.step)
 	{
 		if (point1.x + get_width_center(map) > WIDTH || point1.x + get_width_center(map) < 0)
@@ -63,7 +62,7 @@ void	dda(t_img *data, t_map *map, t_point point1, t_point point2)
 			i++;
 			continue ;
 		}
-		my_mlx_pixel_put(data, point1.x + get_width_center(map), point1.y + get_height_center(map), point1.color);
+		put_pixel(data, point1.x + get_width_center(map), point1.y + get_height_center(map), point1.color);
 		point1.x = point1.x + line_info.xinc;
 		point1.y = point1.y + line_info.yinc;
 		i++;

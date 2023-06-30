@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:18:13 by phan              #+#    #+#             */
-/*   Updated: 2023/06/30 18:17:37 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/30 20:01:26 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "./get_next_line/get_next_line.h"
-# include "./libft/libft.h"
+# include "libft.h"
 # include <stdio.h>
 
 # define HEIGHT 900
@@ -58,20 +58,32 @@ typedef struct s_line
 }	t_line;
 
 
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void	put_pixel(t_img *data, int x, int y, int color);
 
-// parse utils
+// parse utils funcs
 void	free_split(char **split_line);
 int		get_map_width(char *line);
 int		ft_isnum(char *data);
 
-// parse
+// parse funcs
 void	parse_map(t_map *map, char *filename);
 
-// projection
+// projection funcs
 void	to_isometric(t_map *map);
 
-// line algo
+// rotate matrix funcs
+void	rotate_x(double *x, double *y, double *z);
+void	rotate_y(double *x, double *y, double *z);
+void	rotate_z(double *x, double *y, double *z);
+
+// line algo funcs
 void	dda(t_img *data, t_map *map, t_point point1, t_point point2);
+
+// map scaling funcs
+void	scaling(t_map *map, double ratio);
+
+// draw map funcs
+void	draw_map_column(t_img *img, t_map *map);
+void	draw_map_row(t_img *img, t_map *map);
 
 #endif
