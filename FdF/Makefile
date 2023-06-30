@@ -1,4 +1,4 @@
-#-------------------------------------------
+#-----------------------------------------
 
 BLACK       =   "\033[0;30m"
 GRAY        =   "\033[1;30m"
@@ -19,9 +19,9 @@ LIBFT = -lft
 LIBFT_DIR = ./includes/libft
 GNL_DIR = ./includes/get_next_line
 
-MLX = -L./includes/mlx -lmlx -framework OpenGL -framework AppKit
+MLX = -Lmlx -lmlx -framework OpenGL -framework Appkit
 
-CC = cc
+CC = gcc
 CFLAG = -Wall -Wextra -Werror
 
 SRCS = main.c line_algo.c \
@@ -32,7 +32,7 @@ SRCS = main.c line_algo.c \
 OBJS = $(SRCS:.c=.o)
 
 %.o: %.c
-	$(CC) $(CFLAG) -c $< -o $@
+	$(CC) $(CFLAG) -Imlx -c $< -o $@
 
 all: $(NAME)
 
