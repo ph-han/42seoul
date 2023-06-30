@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:13:02 by phan              #+#    #+#             */
-/*   Updated: 2023/06/29 16:22:26 by phan             ###   ########.fr       */
+/*   Updated: 2023/06/30 12:16:21 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 void	rotate_x(double *x, double *y, double *z)
 {
 	double	theta;
-	double	prev_x;
 	double	prev_y;
 	double	prev_z;
-
-	prev_x = *x;
+	
+	(void)x;
 	prev_y = *y;
 	prev_z = *z;
 	theta = M_PI / 3;
-	*x = prev_x;
 	*y = prev_y * cos(theta) - prev_z * sin(theta);
 	*z = prev_y * sin(theta) + prev_z * cos(theta);
 }
@@ -32,15 +30,13 @@ void	rotate_y(double *x, double *y, double *z)
 {
 	double	theta;
 	double	prev_x;
-	double	prev_y;
 	double	prev_z;
 
+	(void)y;
 	prev_x = *x;
-	prev_y = *y;
 	prev_z = *z;
 	theta = M_PI / 4;
 	*x = prev_x * cos(theta) + prev_z * sin(theta);
-	*y = prev_y;
 	*z = -1 * prev_x * sin(theta) + prev_z * cos(theta);
 }
 
@@ -49,11 +45,10 @@ void	rotate_z(double *x, double *y, double *z)
 	double	theta;
 	double	prev_x;
 	double	prev_y;
-	double	prev_z;
 
+	(void)z;
 	prev_x = *x;
 	prev_y = *y;
-	prev_z = *z;
 	theta = M_PI / 4 * -1;
 	*x = prev_x * cos(theta) - prev_y * sin(theta);
 	*y = prev_x * sin(theta) + prev_y * cos(theta);
