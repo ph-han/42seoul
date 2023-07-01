@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:39:10 by phan              #+#    #+#             */
-/*   Updated: 2023/06/30 21:21:28 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/01 17:18:31 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,12 @@ void	draw_map_column(t_img *img, t_map *map)
 	t_point	p1;
 	t_point	p2;
 
-	printf("draw map colum\n");
 	j = 0;
 	while (j < map->width)
 	{
 		i = 0;
 		while (i < map->height - 1)
 		{
-			printf("%f %f\n", p1.x, p1.y);
 			p1 = map->r_map[j + map->width * i];
 			p2 = map->r_map[j + map->width * (i + 1)];
 			dda(img, map, p1, p2);

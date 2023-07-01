@@ -40,7 +40,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(MLX_DIR)
 	$(MAKE) -C $(LIBFT_DIR)
-	gcc $(OBJS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME) -g
+	gcc $(OBJS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME) -fsanitize=address -g
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 	@echo $(YELLOW)"                        FDF DONE"$(EOC)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)

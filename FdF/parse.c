@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:21:01 by phan              #+#    #+#             */
-/*   Updated: 2023/06/30 23:04:40 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/01 18:24:46 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static void	get_map_coordinate_info(int fd, t_map *map, int x, int y)
 			data_split = ft_split(line_split[x], ',');
 			data_wc = is_valid_data(line_split[x]);
 			if (!ft_isnum(data_split[0]))
-				ft_perror("Invalid map data!");
+				ft_perror("Invalid map data ft_isnum!");
 			if (data_wc == 2)
 			{
 				point.color = check_color(data_split[1]);
@@ -144,6 +144,7 @@ static void	get_map_info(int fd, t_map *map, int c_width)
 			if (!is_valid_data(line_split[c_width++])) // Error;
 				ft_perror("Invalid map data!");
 		free_split(line_split);
+		printf("c_width: %d map width : %d\n", c_width, (int)map->width);
 		if (c_width != (int)(map->width)) // Error
 			ft_perror("Map size error!");
 		map->height++;
@@ -159,7 +160,7 @@ void	parse_map(t_map *map, char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		exit(1);
+		ft_perror("file is not exist!");
 	get_map_info(fd, map, 0);
 	map->r_map = (t_point *)malloc(sizeof(t_point) * map->width * map->height);
 	if (!(map->r_map)) // malloc error

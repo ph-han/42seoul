@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:12:45 by phan              #+#    #+#             */
-/*   Updated: 2023/06/30 23:04:06 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/01 18:34:57 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	ft_isnum(char *data)
 {
 	if (*data == '-' || *data == '+')
 		data++;
-	if (!*data || *data == '\n')
+	printf("data : %d\n", *data);
+	if (!*data)
 		return (0);
 	while (*data && *data != '\n')
 	{
@@ -60,8 +61,11 @@ int	is_valid_filename(char *filename)
 	while (filename_split[wc++]);
 	if (wc <= 2)
 		return (0);
-	if (ft_strncmp(filename_split[wc - 2], "fdf", 3) != 0)
+	if (ft_strncmp(filename_split[wc - 2], "fdf\0", 4) != 0)
+	{
+		free_split(filename_split);
 		return (0);
+	}
 	free_split(filename_split);
 	return (1);
 }

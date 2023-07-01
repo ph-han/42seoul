@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:18:13 by phan              #+#    #+#             */
-/*   Updated: 2023/06/30 22:26:44 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/01 20:09:27 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@
 
 # define HEIGHT 900
 # define WIDTH 1600
-
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-}	t_vars;
 
 typedef struct s_img
 {
@@ -52,6 +47,14 @@ typedef struct s_map
 	int		height;
 	t_point	*r_map;
 }	t_map;
+
+typedef struct s_fdf
+{
+	void *mlx;
+	void *win;
+	t_img *img;
+	t_map *map;
+} t_fdf;
 
 typedef struct s_line
 {
@@ -79,12 +82,13 @@ void	parse_map(t_map *map, char *filename);
 void	to_isometric(t_map *map);
 
 // rotate matrix funcs
-void	rotate_x(double *x, double *y, double *z);
-void	rotate_y(double *x, double *y, double *z);
-void	rotate_z(double *x, double *y, double *z);
+void	rotate_x(double *x, double *y, double *z, double r);
+void	rotate_y(double *x, double *y, double *z, double r);
+void	rotate_z(double *x, double *y, double *z, double r);
+void rotate_all(double *x, double *y, double *z, double r);
 
 // line algo funcs
-void	dda(t_img *data, t_map *map, t_point point1, t_point point2);
+void dda(t_img *data, t_map *map, t_point point1, t_point point2);
 
 // map scaling funcs
 void	scaling(t_map *map, double ratio);
