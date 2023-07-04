@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:21:01 by phan              #+#    #+#             */
-/*   Updated: 2023/07/04 13:01:56 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/04 13:36:13 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	is_valid_data(char *data)
 
 	data_split = ft_split(data, ',');
 	wc = 0;
-	while (data_split[wc++]);
-	wc--;
+	while (data_split[wc])
+		wc++;
 	if (wc > 2 || wc == 0)
 	{
 		free_split(data_split);
@@ -74,7 +74,7 @@ static void	get_map_coordinate_info(int fd, t_map *map, int x, int y)
 		line_split = ft_split(line, ' ');
 		free(line);
 		x = 0;
-		while(line_split[x])
+		while (line_split[x])
 		{
 			data_split = ft_split(line_split[x], ',');
 			data_wc = is_valid_data(line_split[x]);
@@ -113,14 +113,14 @@ static void	get_map_info(int fd, t_map *map, int c_width)
 	{
 		line_split = ft_split(line, ' ');
 		free(line);
-		if (!line_split || !*line_split) // Error
+		if (!line_split || !*line_split)
 			ft_perror("Invalid map info!");
 		c_width = 0;
-		while (line_split[c_width])
-			if (!is_valid_data(line_split[c_width++])) // Error;
+		while (line_split[c_width] && *line_split[c_width] != '\n')
+			if (!is_valid_data(line_split[c_width++]))
 				ft_perror("Invalid map data!");
 		free_split(line_split);
-		if (c_width != (int)(map->width)) // Error
+		if (c_width != (int)(map->width))
 			ft_perror("Map size error!");
 		map->height++;
 		line = get_next_line(fd);
@@ -139,7 +139,7 @@ void	parse_map(t_map *map, char *filename)
 	get_map_info(fd, map, 0);
 	map->r_map = (t_point *)malloc(sizeof(t_point) * map->width * map->height);
 	map->o_map = (t_point *)malloc(sizeof(t_point) * map->width * map->height);
-	if (!(map->r_map) || !(map->o_map)) // malloc error
+	if (!(map->r_map) || !(map->o_map))
 		ft_perror("map malloc error!");
 	fd = open(filename, O_RDONLY);
 	get_map_coordinate_info(fd, map, 0, 0);

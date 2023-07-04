@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:12:45 by phan              #+#    #+#             */
-/*   Updated: 2023/07/04 13:10:40 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/04 13:34:24 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	get_map_width(char *line)
 
 	width = 0;
 	line_split = ft_split(line, ' ');
-	while (line_split[width])
+	while (line_split[width] && *line_split[width] != '\n')
 		width++;
 	free_split(line_split);
 	return (width);
@@ -64,9 +64,9 @@ int	ft_find(char *hex, char c)
 	return (-1);
 }
 
-int fdf_strlen(char *s)
+int	fdf_strlen(char *s)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (*(s + len) && *(s + len) != '\n')

@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 15:05:18 by phan              #+#    #+#             */
-/*   Updated: 2023/07/04 13:26:47 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/04 13:33:38 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	rotate_map_x(t_fdf *fdf, double r)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	fdf->angle->alpha = -1 * r;
@@ -32,7 +32,7 @@ void	rotate_map_x(t_fdf *fdf, double r)
 
 void	rotate_map_y(t_fdf *fdf, double r)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	fdf->angle->alpha = r;
@@ -50,7 +50,7 @@ void	rotate_map_y(t_fdf *fdf, double r)
 
 void	rotate_map_z(t_fdf *fdf, double r)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	fdf->angle->beta = r;

@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:39:54 by phan              #+#    #+#             */
-/*   Updated: 2023/07/04 13:12:47 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/04 13:37:25 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	m_hooks(int key_code, int x, int y, t_fdf *fdf)
 	return (0);
 }
 
-int main(int ac, char *av[])
+int	main(int ac, char *av[])
 {
 	t_fdf	fdf;
 
