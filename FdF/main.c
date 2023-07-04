@@ -6,11 +6,21 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:39:54 by phan              #+#    #+#             */
-/*   Updated: 2023/07/04 13:37:25 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/04 13:44:22 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/**
+ * To-Do list (7.4 ~ 7.5)
+ * 1. norm 맞추기 (hooks, parse)
+ * 2. 다른 projection 방식 적용
+ * 3. 그라데이션 or 높이 변경 적용
+ * 4. input program 테스트
+ * 5. 코드정리
+ * 
+*/
 
 int	restore(t_fdf *fdf)
 {
