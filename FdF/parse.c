@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:21:01 by phan              #+#    #+#             */
-/*   Updated: 2023/07/01 18:24:46 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/04 13:01:56 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/fdf.h"
+#include "fdf.h"
 
 int	is_valid_data(char *data)
 {
@@ -21,37 +21,13 @@ int	is_valid_data(char *data)
 	wc = 0;
 	while (data_split[wc++]);
 	wc--;
-	if (wc > 2 || wc == 0) // invalid data error
+	if (wc > 2 || wc == 0)
 	{
 		free_split(data_split);
 		return (0);
 	}
 	free_split(data_split);
 	return (wc);
-}
-
-int ft_find(char *hex, char c)
-{
-	int	idx;
-
-	idx = 0;
-	while (hex[idx])
-	{
-		if (hex[idx] == c)
-			return (idx);
-		idx++;
-	}
-	return (-1);
-}
-
-int	fdf_strlen(char *s)
-{
-	int	len;
-
-	len = 0;
-	while (*(s + len) && *(s + len) != '\n')
-		len++;
-	return (len);
 }
 
 int	check_color(char *color)
@@ -144,7 +120,6 @@ static void	get_map_info(int fd, t_map *map, int c_width)
 			if (!is_valid_data(line_split[c_width++])) // Error;
 				ft_perror("Invalid map data!");
 		free_split(line_split);
-		printf("c_width: %d map width : %d\n", c_width, (int)map->width);
 		if (c_width != (int)(map->width)) // Error
 			ft_perror("Map size error!");
 		map->height++;
@@ -163,8 +138,10 @@ void	parse_map(t_map *map, char *filename)
 		ft_perror("file is not exist!");
 	get_map_info(fd, map, 0);
 	map->r_map = (t_point *)malloc(sizeof(t_point) * map->width * map->height);
-	if (!(map->r_map)) // malloc error
+	map->o_map = (t_point *)malloc(sizeof(t_point) * map->width * map->height);
+	if (!(map->r_map) || !(map->o_map)) // malloc error
 		ft_perror("map malloc error!");
 	fd = open(filename, O_RDONLY);
 	get_map_coordinate_info(fd, map, 0, 0);
+	ft_mapdup(map->r_map, map->o_map, map->width * map->height);
 }

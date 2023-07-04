@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   projection.c                                       :+:      :+:    :+:   */
+/*   zoom.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 14:13:02 by phan              #+#    #+#             */
-/*   Updated: 2023/07/04 13:06:20 by phan             ###   ########.fr       */
+/*   Created: 2023/07/04 12:54:07 by phan              #+#    #+#             */
+/*   Updated: 2023/07/04 12:58:24 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	to_isometric(t_map *map, t_angle *angle)
+void	zoom_in(t_fdf *fdf)
 {
-	int	i;
+	fdf->map->ratio = 1.05;
+	scaling(fdf->map);
+	mlx_destroy_image(fdf->mlx, fdf->img->img);
+	draw_map(fdf);
+}
 
-	i = 0;
-	
-	init_angle(angle);
-	while (i < (map->height) * (map->width))
-	{
-		rotate_z(map->r_map + i, angle);
-		rotate_x(map->r_map + i, angle);
-		i++;
-	}
-	init_map(map);
+void	zoom_out(t_fdf *fdf)
+{
+	fdf->map->ratio = 0.95;
+	scaling(fdf->map);
+	mlx_destroy_image(fdf->mlx, fdf->img->img);
+	draw_map(fdf);
 }

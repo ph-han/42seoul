@@ -3,60 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_metrix.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:23:11 by hanpilho          #+#    #+#             */
-/*   Updated: 2023/07/01 20:13:12 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/02 15:08:31 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/fdf.h"
+#include "fdf.h"
 
-void	rotate_x(double *x, double *y, double *z, double r)
+void	rotate_x(t_point *point, t_angle *angle)
 {
-	double	theta;
 	double	prev_y;
 	double	prev_z;
 
-	(void)x;
-	prev_y = *y;
-	prev_z = *z;
-	theta = M_PI / 6 + r;
-	*y = prev_y * cos(theta) - prev_z * sin(theta);
-	*z = prev_y * sin(theta) + prev_z * cos(theta);
+	prev_y = point->y;
+	prev_z = point->z;
+	(point->y) = prev_y * cos(angle->alpha) - prev_z * sin(angle->alpha);
+	(point->z) = prev_y * sin(angle->alpha) + prev_z * cos(angle->alpha);
 }
 
-void	rotate_y(double *x, double *y, double *z, double r)
+void	rotate_y(t_point *point, t_angle *angle)
 {
-	double	theta;
 	double	prev_x;
 	double	prev_z;
 
-	(void)y;
-	prev_x = *x;
-	prev_z = *z;
-	theta = M_PI / 6 + r;
-	*x = prev_x * cos(theta) + prev_z * sin(theta);
-	*z = -1 * prev_x * sin(theta) + prev_z * cos(theta);
+	prev_x = point->x;
+	prev_z = point->z;
+	point->x = prev_x * cos(angle->beta) + prev_z * sin(angle->beta);
+	point->z = -1 * prev_x * sin(angle->beta) + prev_z * cos(angle->beta);
 }
 
-void	rotate_z(double *x, double *y, double *z, double r)
+void	rotate_z(t_point *point, t_angle *angle)
 {
-	double	theta;
 	double	prev_x;
 	double	prev_y;
 
-	(void)z;
-	prev_x = *x;
-	prev_y = *y;
-	theta = M_PI / 4 * -1 + r;
-	*x = prev_x * cos(theta) - prev_y * sin(theta);
-	*y = prev_x * sin(theta) + prev_y * cos(theta);
-}
-
-void	rotate_all(double *x, double *y, double *z, double r)
-{
-	rotate_z(x, y, z, 0);
-	rotate_y(x, y, z, r);
-	rotate_x(x, y, z, 0);
+	prev_x = point->x;
+	prev_y = point->y;
+	point->x = prev_x * cos(angle->gamma) - prev_y * sin(angle->gamma);
+	point->y = prev_x * sin(angle->gamma) + prev_y * cos(angle->gamma);
 }

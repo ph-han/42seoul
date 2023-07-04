@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:39:10 by phan              #+#    #+#             */
-/*   Updated: 2023/07/01 17:18:31 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/04 12:47:24 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/fdf.h"
+#include "fdf.h"
 
 void put_pixel(t_img *data, int x, int y, int color)
 {
@@ -62,4 +62,12 @@ void	draw_map_row(t_img *img, t_map *map)
 		}
 		j++;
 	}
+}
+
+void	draw_map(t_fdf *fdf)
+{
+	init_img(fdf);
+	draw_map_column(fdf->img, fdf->map);
+	draw_map_row(fdf->img, fdf->map);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img->img, 0, 0);
 }

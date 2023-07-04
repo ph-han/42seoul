@@ -26,6 +26,7 @@ CC = gcc
 CFLAG = -Wall -Wextra -Werror
 
 SRCS = main.c rotate_metrix.c scaling.c draw.c line_algo.c \
+	rotate_map.c init.c move.c utils.c zoom.c\
 	parse.c parse_utils.c \
 	projection.c \
 	./includes/get_next_line/get_next_line.c ./includes/get_next_line/get_next_line_utils.c
@@ -33,7 +34,7 @@ SRCS = main.c rotate_metrix.c scaling.c draw.c line_algo.c \
 OBJS = $(SRCS:.c=.o)
 
 %.o: %.c
-	$(CC) $(CFLAG) $(INCLUDE)/libft -Imlx -c $< -o $@
+	$(CC) $(CFLAG) $(INCLUDE)/libft -Imlx $(INCLUDE) -c $< -o $@
 
 all: $(NAME)
 
