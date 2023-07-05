@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:18:13 by phan              #+#    #+#             */
-/*   Updated: 2023/07/05 13:58:14 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/05 20:20:12 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_map
 	double	ratio;
 	int		move_x;
 	int		move_y;
-	t_point *o_map;
+	t_point	*o_map;
 	t_point	*r_map;
 }	t_map;
 
@@ -68,7 +68,7 @@ typedef struct s_fdf
 	t_img	*img;
 	t_map	*map;
 	t_angle	*angle;
-} t_fdf;
+}	t_fdf;
 
 typedef struct s_line
 {
