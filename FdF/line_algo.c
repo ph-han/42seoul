@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:49:12 by phan              #+#    #+#             */
-/*   Updated: 2023/07/04 13:38:53 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/05 14:01:37 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	get_width_center(t_map *map)
 
 	mid_i = map->width / 2;
 	mid_j = map->width * (map->height / 2);
-	return ((WIDTH / 2) - (map->r_map[mid_i + mid_j].x) + 100);
+	return ((WIDTH / 2) - (map->r_map[mid_i + mid_j].x));
 }
 
 int	get_height_center(t_map *map)
@@ -33,7 +33,7 @@ int	get_height_center(t_map *map)
 	mid_j = map->width * (map->height / 2);
 	i = -1;
 	min_y = map->r_map[0].y;
-	return ((HEIGHT / 2) - (map->r_map[mid_i + mid_j].y) + 100);
+	return ((HEIGHT / 2) - (map->r_map[mid_i + mid_j].y));
 }
 
 int	is_over_window(t_map *map, t_point point1)
@@ -62,10 +62,9 @@ void	dda(t_img *data, t_map *map, t_point point1, t_point point2)
 	i = -1;
 	while (++i <= line_info.step)
 	{
-		if (is_over_window(map, point1))
-			continue ;
-		put_pixel(data, point1.x + get_width_center(map) + map->move_x, \
-			point1.y + get_height_center(map) + map->move_y, point1.color);
+		if (!is_over_window(map, point1))
+			put_pixel(data, point1.x + get_width_center(map) + map->move_x, \
+				point1.y + get_height_center(map) + map->move_y, point1.color);
 		point1.x = point1.x + line_info.xinc;
 		point1.y = point1.y + line_info.yinc;
 	}

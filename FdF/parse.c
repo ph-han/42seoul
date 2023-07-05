@@ -6,93 +6,51 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:21:01 by phan              #+#    #+#             */
-/*   Updated: 2023/07/04 13:36:13 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/05 14:01:16 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	is_valid_data(char *data)
-{
-	char	**data_split;
-	int		wc;
-
-	data_split = ft_split(data, ',');
-	wc = 0;
-	while (data_split[wc])
-		wc++;
-	if (wc > 2 || wc == 0)
-	{
-		free_split(data_split);
-		return (0);
-	}
-	free_split(data_split);
-	return (wc);
-}
-
-int	check_color(char *color)
-{
-	char	*hex;
-	int		result;
-
-	if (!color)
-		return (-1);
-	hex = "0123456789abcdef";
-	result = 0;
-	if (*color == '0')
-		color++;
-	else
-		return (-1);
-	if (*color == 'x' || *color == 'X')
-		color++;
-	else
-		return (-1);
-	if (fdf_strlen(color) > 8 || fdf_strlen(color) % 2 == 1)
-		return (-1);
-	while (*color && *color != '\n')
-	{
-		if (ft_find(hex, ft_tolower(*color)) == -1)
-			return (-1);
-		result = 16 * result + ft_find(hex, ft_tolower(*color));
-		color++;
-	}
-	return (result);
-}
-
-static void	get_map_coordinate_info(int fd, t_map *map, int x, int y)
+static void	set_coordinate(t_map *map, char **line_split, int x, int y)
 {
 	t_point	point;
-	char	*line;
-	char	**line_split;
 	char	**data_split;
 	int		data_wc;
+
+	while (line_split[x])
+	{
+		data_split = ft_split(line_split[x], ',');
+		data_wc = is_valid_data(line_split[x]);
+		if (!is_vaild_num(data_split[0]))
+			ft_perror("Invalid map data!");
+		if (data_wc == 2)
+		{
+			point.color = check_and_set_color(data_split[1]);
+			if (point.color == -1)
+				ft_perror("Invalid color code!");
+		}
+		else
+			point.color = 0x00FFFFFF;
+		point.x = x;
+		point.y = y;
+		point.z = ft_atoi(data_split[0]);
+		map->r_map[x++ + map->width * y] = point;
+		free_split(data_split);
+	}
+}
+
+static void	set_map_coordinate_info(int fd, t_map *map, int y)
+{
+	char	*line;
+	char	**line_split;
 
 	line = get_next_line(fd);
 	while (line)
 	{
-		point.y = y;
 		line_split = ft_split(line, ' ');
 		free(line);
-		x = 0;
-		while (line_split[x])
-		{
-			data_split = ft_split(line_split[x], ',');
-			data_wc = is_valid_data(line_split[x]);
-			if (!ft_isnum(data_split[0]))
-				ft_perror("Invalid map data ft_isnum!");
-			if (data_wc == 2)
-			{
-				point.color = check_color(data_split[1]);
-				if (point.color == -1)
-					ft_perror("Invalid color!");
-			}
-			else
-				point.color = 0x00FFFFFF;
-			point.x = x;
-			point.z = ft_atoi(data_split[0]);
-			map->r_map[x++ + map->width * y] = point;
-			free_split(data_split);
-		}
+		set_coordinate(map, line_split, 0, y);
 		free_split(line_split);
 		line = get_next_line(fd);
 		y++;
@@ -101,7 +59,7 @@ static void	get_map_coordinate_info(int fd, t_map *map, int x, int y)
 	close(fd);
 }
 
-static void	get_map_info(int fd, t_map *map, int c_width)
+static void	set_map_info(int fd, t_map *map, int c_width)
 {
 	char	*line;
 	char	**line_split;
@@ -136,12 +94,12 @@ void	parse_map(t_map *map, char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		ft_perror("file is not exist!");
-	get_map_info(fd, map, 0);
+	set_map_info(fd, map, 0);
 	map->r_map = (t_point *)malloc(sizeof(t_point) * map->width * map->height);
 	map->o_map = (t_point *)malloc(sizeof(t_point) * map->width * map->height);
 	if (!(map->r_map) || !(map->o_map))
 		ft_perror("map malloc error!");
 	fd = open(filename, O_RDONLY);
-	get_map_coordinate_info(fd, map, 0, 0);
-	ft_mapdup(map->r_map, map->o_map, map->width * map->height);
+	set_map_coordinate_info(fd, map, 0);
+	ft_mapcpy(map->r_map, map->o_map, map->width * map->height);
 }

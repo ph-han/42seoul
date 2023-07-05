@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:18:13 by phan              #+#    #+#             */
-/*   Updated: 2023/07/04 13:13:30 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/05 13:58:14 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,18 @@ void	init_img(t_fdf *fdf);
 
 // utils
 void	ft_perror(char *e_msg);
-void	ft_mapdup(t_point *r_map, t_point *o_map, int map_size);
-int		is_valid_filename(char *filename);
+void	ft_mapcpy(t_point *r_map, t_point *o_map, int map_size);
 void	close_win(t_fdf *fdf);
+
+// check funcs
+int		is_valid_filename(char *filename);
+int		is_vaild_num(char *data);
+int		is_valid_data(char *data);
+int		check_and_set_color(char *color);
 
 // parse utils funcs
 void	free_split(char **split_line);
 int		get_map_width(char *line);
-int		ft_isnum(char *data);
 int		fdf_strlen(char *s);
 int		ft_find(char *hex, char c);
 

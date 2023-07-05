@@ -6,21 +6,11 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:12:45 by phan              #+#    #+#             */
-/*   Updated: 2023/07/04 13:34:24 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/05 13:44:36 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	free_split(char **split_line)
-{
-	int	idx;
-
-	idx = 0;
-	while (split_line[idx])
-		free(split_line[idx++]);
-	free(split_line);
-}
 
 int	get_map_width(char *line)
 {
@@ -33,21 +23,6 @@ int	get_map_width(char *line)
 		width++;
 	free_split(line_split);
 	return (width);
-}
-
-int	ft_isnum(char *data)
-{
-	if (*data == '-' || *data == '+')
-		data++;
-	if (!*data)
-		return (0);
-	while (*data && *data != '\n')
-	{
-		if (!ft_isdigit(*data))
-			return (0);
-		data++;
-	}
-	return (1);
 }
 
 int	ft_find(char *hex, char c)
