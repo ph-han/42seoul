@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 13:40:11 by phan              #+#    #+#             */
-/*   Updated: 2023/07/05 14:00:18 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/06 15:51:10 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ int	is_valid_data(char *data)
 	return (wc);
 }
 
-int	check_and_set_color(char *color)
+long	check_and_set_color(char *color)
 {
-	char	*hex;
-	int		result;
+	char			*hex;
+	unsigned int	result;
 
 	if (!color)
 		return (-1);

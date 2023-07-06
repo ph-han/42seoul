@@ -27,7 +27,7 @@ CFLAG = -Wall -Wextra -Werror
 
 SRCS = main.c rotate_metrix.c scaling.c draw.c line_algo.c \
 	rotate_map.c init.c move.c utils.c zoom.c check.c\
-	parse.c parse_utils.c \
+	parse.c parse_utils.c color.c\
 	projection.c \
 	./includes/get_next_line/get_next_line.c ./includes/get_next_line/get_next_line_utils.c
 

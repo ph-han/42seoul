@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:49:12 by phan              #+#    #+#             */
-/*   Updated: 2023/07/05 14:01:37 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/06 20:22:22 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	get_height_center(t_map *map)
 	return ((HEIGHT / 2) - (map->r_map[mid_i + mid_j].y));
 }
 
-int	is_over_window(t_map *map, t_point point1)
+int	is_over_window(t_map *map, double x, double y)
 {
-	return (point1.x + get_width_center(map) + map->move_x > WIDTH \
-		|| point1.x + get_width_center(map) + map->move_x < 0 \
-		|| point1.y + get_height_center(map) + map->move_y > HEIGHT \
-		|| point1.y + get_height_center(map) + map->move_y < 0);
+	return (x + get_width_center(map) + map->move_x > WIDTH \
+		|| x + get_width_center(map) + map->move_x < 0 \
+		|| y + get_height_center(map) + map->move_y > HEIGHT \
+		|| y + get_height_center(map) + map->move_y < 0);
 }
 
 void	dda(t_img *data, t_map *map, t_point point1, t_point point2)
@@ -55,17 +55,20 @@ void	dda(t_img *data, t_map *map, t_point point1, t_point point2)
 		line_info.step = fabs(line_info.dx);
 	else
 		line_info.step = fabs(line_info.dy);
-	if (!line_info.step)
-		return ;
 	line_info.xinc = line_info.dx / line_info.step;
 	line_info.yinc = line_info.dy / line_info.step;
 	i = -1;
 	while (++i <= line_info.step)
 	{
-		if (!is_over_window(map, point1))
+		if (fabs(line_info.dx) > fabs(line_info.dy))
+			line_info.cinc = fabs(point2.x - point1.x) / line_info.step;
+		else
+			line_info.cinc = fabs(point2.y - point1.y) / line_info.step;
+		if (!is_over_window(map, point1.x, point1.y))
 			put_pixel(data, point1.x + get_width_center(map) + map->move_x, \
-				point1.y + get_height_center(map) + map->move_y, point1.color);
-		point1.x = point1.x + line_info.xinc;
-		point1.y = point1.y + line_info.yinc;
+				point1.y + get_height_center(map) + map->move_y, \
+				gradation(point1.color, point2.color, line_info.cinc));
+		point1.x += line_info.xinc;
+		point1.y += line_info.yinc;
 	}
 }

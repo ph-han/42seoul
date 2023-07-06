@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:39:54 by phan              #+#    #+#             */
-/*   Updated: 2023/07/05 20:15:41 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/06 19:54:56 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ static int	k_hooks(int key_code, t_fdf *fdf)
 	else if (key_code == 123 || key_code == 124 || \
 		key_code == 125 || key_code == 126)
 		move(key_code, fdf);
-	else if (key_code == 15)
+	else if (key_code == 15 || key_code == 34)
 		restore(fdf);
+	else if (key_code == 35)
+		to_plan(fdf);
 	return (0);
 }
 
