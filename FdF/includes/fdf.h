@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:18:13 by phan              #+#    #+#             */
-/*   Updated: 2023/07/07 12:22:30 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/07 20:26:26 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <math.h>
 # include "./get_next_line/get_next_line.h"
 # include "libft.h"
-# include <stdio.h>
 
 # define HEIGHT 1000
 # define WIDTH 1600
@@ -90,6 +89,7 @@ void	init_img(t_fdf *fdf);
 void	ft_perror(char *e_msg);
 void	ft_mapcpy(t_point *r_map, t_point *o_map, int map_size);
 int		close_win(t_fdf *fdf);
+int		fdf_atoi(const char *str);
 
 // check funcs
 int		is_valid_filename(char *filename);

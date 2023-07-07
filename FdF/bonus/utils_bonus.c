@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 13:00:00 by phan              #+#    #+#             */
-/*   Updated: 2023/07/07 12:26:05 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/07 20:34:48 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,31 @@ void	ft_perror(char *e_msg)
 {
 	ft_putendl_fd(e_msg, 2);
 	exit(0);
+}
+
+int	fdf_atoi(const char *str)
+{
+	int		sign;
+	long	result;
+
+	sign = 1;
+	result = 0;
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + (*str - '0');
+		str++;
+	}
+	if ((sign * result) > 2147483647 || (sign * result) < -2147483648)
+		ft_perror("Data is over int range");
+	return ((int)(sign * result));
 }
 
 void	ft_mapcpy(t_point *r_map, t_point *o_map, int map_size)

@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:39:54 by phan              #+#    #+#             */
-/*   Updated: 2023/07/07 12:24:00 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/07 20:35:44 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,16 @@ static int	k_hooks(int key_code, t_fdf *fdf)
 	return (0);
 }
 
+void check_leaks(void)
+{
+	system("leaks fdf");
+}
+
 int	main(int ac, char *av[])
 {
 	t_fdf	fdf;
 
+	atexit(check_leaks);
 	if (ac != 2)
 		return (0);
 	if (!is_valid_filename(av[1]))
