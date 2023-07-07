@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_algo.c                                        :+:      :+:    :+:   */
+/*   line_algo_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:49:12 by phan              #+#    #+#             */
-/*   Updated: 2023/07/07 12:15:57 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/07 12:25:26 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 int	get_width_center(t_map *map)
 {
@@ -67,7 +67,7 @@ void	dda(t_img *data, t_map *map, t_point point1, t_point point2)
 		if (!is_over_window(map, point1.x, point1.y))
 			put_pixel(data, point1.x + get_width_center(map) + map->move_x, \
 				point1.y + get_height_center(map) + map->move_y, \
-				point1.color);
+				gradation(point1.color, point2.color, line_info.cinc));
 		point1.x += line_info.xinc;
 		point1.y += line_info.yinc;
 	}

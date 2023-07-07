@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zoom.c                                             :+:      :+:    :+:   */
+/*   scaling_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 12:54:07 by phan              #+#    #+#             */
-/*   Updated: 2023/07/04 12:58:24 by phan             ###   ########.fr       */
+/*   Created: 2023/06/30 19:32:37 by phan              #+#    #+#             */
+/*   Updated: 2023/07/07 12:26:01 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
-void	zoom_in(t_fdf *fdf)
+void	scaling(t_map *map)
 {
-	fdf->map->ratio = 1.05;
-	scaling(fdf->map);
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
-	draw_map(fdf);
-}
+	int		i;
+	int		j;
 
-void	zoom_out(t_fdf *fdf)
-{
-	fdf->map->ratio = 0.95;
-	scaling(fdf->map);
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
-	draw_map(fdf);
+	j = 0;
+	while (j < map->height)
+	{
+		i = 0;
+		while (i < map->width)
+		{
+			map->r_map[i + map->width * j].x *= map->ratio;
+			map->r_map[i + map->width * j].y *= map->ratio;
+			map->r_map[i + map->width * j].z *= map->ratio;
+			i++;
+		}
+		j++;
+	}
 }

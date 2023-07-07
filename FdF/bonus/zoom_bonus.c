@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move.c                                             :+:      :+:    :+:   */
+/*   zoom_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 12:51:29 by phan              #+#    #+#             */
-/*   Updated: 2023/07/04 13:36:59 by phan             ###   ########.fr       */
+/*   Created: 2023/07/04 12:54:07 by phan              #+#    #+#             */
+/*   Updated: 2023/07/07 12:26:15 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
-void	move_left(t_fdf *fdf)
+void	zoom_in(t_fdf *fdf)
 {
-	fdf->map->move_x += -10;
+	fdf->map->ratio = 1.05;
+	scaling(fdf->map);
 	mlx_destroy_image(fdf->mlx, fdf->img->img);
 	draw_map(fdf);
 }
 
-void	move_right(t_fdf *fdf)
+void	zoom_out(t_fdf *fdf)
 {
-	fdf->map->move_x += 10;
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
-	draw_map(fdf);
-}
-
-void	move_up(t_fdf *fdf)
-{
-	fdf->map->move_y += -10;
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
-	draw_map(fdf);
-}
-
-void	move_down(t_fdf *fdf)
-{
-	fdf->map->move_y += 10;
+	fdf->map->ratio = 0.95;
+	scaling(fdf->map);
 	mlx_destroy_image(fdf->mlx, fdf->img->img);
 	draw_map(fdf);
 }

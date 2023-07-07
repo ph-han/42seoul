@@ -14,6 +14,7 @@ LINE_CLEAR  =   "\x1b[1A\x1b[M"
 #-------------------------------------------
 
 NAME = fdf
+NAME_BONUS = fdf_bonus
 INCLUDE = -Iincludes
 LIBFT = -lft
 LIBFT_DIR = ./includes/libft
@@ -26,9 +27,17 @@ CC = gcc
 CFLAG = -Wall -Wextra -Werror
 
 SRCS = main.c rotate_metrix.c scaling.c draw.c line_algo.c \
-	rotate_map.c init.c move.c utils.c zoom.c check.c\
-	parse.c parse_utils.c color.c\
+	init.c utils.c check.c\
+	parse.c parse_utils.c\
 	projection.c \
+	./includes/get_next_line/get_next_line.c ./includes/get_next_line/get_next_line_utils.c
+
+SRCS_BONUS = ./bonus/main_bonus.c ./bonus/rotate_metrix_bonus.c ./bonus/scaling_bonus.c \
+	./bonus/draw_bonus.c ./bonus/line_algo_bonus.c \
+	./bonus/init_bonus.c ./bonus/utils_bonus.c ./bonus/check_bonus.c \
+	./bonus/rotate_map_bonus.c ./bonus/color_bonus.c\
+	./bonus/parse_bonus.c ./bonus/parse_utils_bonus.c \
+	./bonus/projection_bonus.c ./bonus/zoom_bonus.c ./bonus/move_bonus.c \
 	./includes/get_next_line/get_next_line.c ./includes/get_next_line/get_next_line_utils.c
 
 OBJS = $(SRCS:.c=.o)
@@ -36,20 +45,33 @@ OBJS = $(SRCS:.c=.o)
 %.o: %.c
 	$(CC) $(CFLAG) $(INCLUDE)/libft -Imlx $(INCLUDE) -c $< -o $@
 
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(MLX_DIR)
-	$(MAKE) -C $(LIBFT_DIR)
-	gcc $(OBJS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME) -fsanitize=address -g
+	@$(MAKE) -C $(LIBFT_DIR)
+	gcc $(OBJS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 	@echo $(YELLOW)"                        FDF DONE"$(EOC)
+	@echo $(GREEN)"\n==========================================================\n"$(EOC)
+
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(OBJS_BONUS)
+	@rm -f $(NAME)
+	@$(MAKE) -C $(MLX_DIR)
+	@$(MAKE) -C $(LIBFT_DIR)
+	gcc $(OBJS_BONUS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME)
+	@echo $(GREEN)"\n==========================================================\n"$(EOC)
+	@echo $(YELLOW)"                      FDF BONUS DONE"$(EOC)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(MLX_DIR) clean
-	rm -f $(OBJS) $(SRCS_BN:.c=.o)
+	rm -f $(OBJS) $(OBJS_BONUS) $(SRCS_BN:.c=.o)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 	@echo $(YELLOW)"                       FDF CLEAN DONE"$(EOC)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
@@ -63,4 +85,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
