@@ -42,17 +42,17 @@ SRCS_BONUS = ./bonus/main_bonus.c ./bonus/rotate_metrix_bonus.c ./bonus/scaling_
 
 OBJS = $(SRCS:.c=.o)
 
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
+
 %.o: %.c
 	$(CC) $(CFLAG) $(INCLUDE)/libft -Imlx $(INCLUDE) -c $< -o $@
-
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(MLX_DIR)
 	@$(MAKE) -C $(LIBFT_DIR)
-	gcc $(OBJS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME)
+	$(CC) $(CFLAG) $(OBJS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 	@echo $(YELLOW)"                        FDF DONE"$(EOC)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
@@ -63,7 +63,7 @@ $(NAME_BONUS): $(OBJS_BONUS)
 	@rm -f $(NAME)
 	@$(MAKE) -C $(MLX_DIR)
 	@$(MAKE) -C $(LIBFT_DIR)
-	gcc $(OBJS_BONUS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME)
+	$(CC) $(CFLAG) $(OBJS_BONUS) -L$(LIBFT_DIR) $(LIBFT) $(MLX) -o $(NAME)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 	@echo $(YELLOW)"                      FDF BONUS DONE"$(EOC)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)

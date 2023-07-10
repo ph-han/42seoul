@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 13:00:00 by phan              #+#    #+#             */
-/*   Updated: 2023/07/07 20:34:48 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/10 13:09:06 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_perror(char *e_msg)
 	exit(0);
 }
 
-int	fdf_atoi(const char *str)
+int	fdf_atoi(char *str)
 {
 	int		sign;
 	long	result;
@@ -36,10 +36,10 @@ int	fdf_atoi(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		result = result * 10 + (*str - '0');
+		if ((sign * result) > 10000000 || (sign * result) < -10000000)
+			ft_perror("Data is over 10000000 or -10000000");
 		str++;
 	}
-	if ((sign * result) > 2147483647 || (sign * result) < -2147483648)
-		ft_perror("Data is over int range");
 	return ((int)(sign * result));
 }
 

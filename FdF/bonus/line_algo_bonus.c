@@ -6,13 +6,13 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:49:12 by phan              #+#    #+#             */
-/*   Updated: 2023/07/07 12:25:26 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/08 13:15:20 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
-int	get_width_center(t_map *map)
+static int	get_width_center(t_map *map)
 {
 	int	mid_i;
 	int	mid_j;
@@ -22,21 +22,17 @@ int	get_width_center(t_map *map)
 	return ((WIDTH / 2) - (map->r_map[mid_i + mid_j].x));
 }
 
-int	get_height_center(t_map *map)
+static int	get_height_center(t_map *map)
 {
 	int		mid_i;
 	int		mid_j;
-	double	min_y;
-	int		i;
 
 	mid_i = map->width / 2;
 	mid_j = map->width * (map->height / 2);
-	i = -1;
-	min_y = map->r_map[0].y;
 	return ((HEIGHT / 2) - (map->r_map[mid_i + mid_j].y));
 }
 
-int	is_over_window(t_map *map, double x, double y)
+static int	is_over_window(t_map *map, double x, double y)
 {
 	return (x + get_width_center(map) + map->move_x > WIDTH \
 		|| x + get_width_center(map) + map->move_x < 0 \

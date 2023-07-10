@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:21:01 by phan              #+#    #+#             */
-/*   Updated: 2023/07/07 12:25:44 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/10 12:22:09 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	set_coordinate(t_map *map, char **line_split, int x, int y)
 			point.color = 0x00FFFFFF;
 		point.x = x;
 		point.y = y;
-		point.z = ft_atoi(data_split[0]);
+		point.z = fdf_atoi(data_split[0]);
 		map->r_map[x++ + map->width * y] = point;
 		free_split(data_split);
 	}

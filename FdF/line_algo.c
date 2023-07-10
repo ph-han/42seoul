@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:49:12 by phan              #+#    #+#             */
-/*   Updated: 2023/07/07 12:15:57 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/08 13:13:11 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,9 @@ int	get_height_center(t_map *map)
 {
 	int		mid_i;
 	int		mid_j;
-	double	min_y;
-	int		i;
 
 	mid_i = map->width / 2;
 	mid_j = map->width * (map->height / 2);
-	i = -1;
-	min_y = map->r_map[0].y;
 	return ((HEIGHT / 2) - (map->r_map[mid_i + mid_j].y));
 }
 

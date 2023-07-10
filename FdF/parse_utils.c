@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:12:45 by phan              #+#    #+#             */
-/*   Updated: 2023/07/07 20:32:47 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/08 13:41:31 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	get_map_width(char *line)
 	char	**line_split;
 	int		width;
 
-	if (!line)
+	if (!line || *line == '\n')
 		ft_perror("Empty File");
 	width = 0;
 	line_split = ft_split(line, ' ');
