@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 20:43:26 by phan              #+#    #+#             */
-/*   Updated: 2023/07/11 21:10:34 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/12 00:07:21 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 
 void	handler(int sig)
 {
+	static char	c;
+	static int	bits;
+
 	if (sig == SIGUSR1)
+		c = c | 1 << bits;
+	bits++;
+	if (bits == 8)
 	{
-		printf("sig1\n");
-	}
-	else if (sig == SIGUSR2)
-	{
-		printf("sig2\n");
+		write(1, &c, 1);
+		bits = 0;
+		c = 0;
 	}
 }
 
@@ -29,7 +33,7 @@ int	main(int ac, char *av[])
 {
 	pid_t				pid;
 	// struct sigaction	sa;
-	
+
 	(void)av;
 	if (ac != 1)
 	{
