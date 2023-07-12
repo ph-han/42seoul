@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 20:43:46 by phan              #+#    #+#             */
-/*   Updated: 2023/07/12 16:14:48 by phan             ###   ########.fr       */
+/*   Created: 2023/07/12 15:59:41 by phan              #+#    #+#             */
+/*   Updated: 2023/07/12 21:21:54 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
+#include <stdio.h>
 
 int ft_atoi(const char *str)
 {
@@ -32,9 +33,9 @@ int ft_atoi(const char *str)
 	return ((int)(sign * result));
 }
 
-void	send_bits(int pid, char c)
+void send_bits(int pid, char c)
 {
-	int		bit;
+	int bit;
 
 	bit = -1;
 	while (++bit < 8)
@@ -47,16 +48,24 @@ void	send_bits(int pid, char c)
 	}
 }
 
-void	send_msg(int pid, char *str)
+void send_msg(int pid, char *str)
 {
 	while (*str)
 		send_bits(pid, *str++);
 	send_bits(pid, *str);
 }
 
-int	main(int ac, char *av[])
+void	handler(int sig)
 {
-	pid_t	pid;
+	printf("sig: %d\n", sig);
+	if (sig == SIGUSR1)
+		write(1, "msg send ok\n", 13);
+	exit(0);
+}
+
+int main(int ac, char *av[])
+{
+	pid_t pid;
 
 	if (ac != 3)
 	{
@@ -66,5 +75,9 @@ int	main(int ac, char *av[])
 	pid = ft_atoi(av[1]);
 	if (pid < 0 || pid > 99998)
 		return (0);
+	printf("client: %d\n", getpid());
+	//send_msg(pid, av[2]);
+	signal(SIGUSR1, handler);
 	send_msg(pid, av[2]);
+	while (1);
 }
