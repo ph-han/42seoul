@@ -6,31 +6,22 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:59:41 by phan              #+#    #+#             */
-/*   Updated: 2023/07/12 21:21:54 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/13 17:50:11 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
-#include <stdio.h>
+
+int	check_bit;
 
 int ft_atoi(const char *str)
 {
-	int sign;
 	long result;
 
-	sign = 1;
 	result = 0;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
 	while (*str >= '0' && *str <= '9')
 		result = result * 10 + (*str++ - '0');
-	return ((int)(sign * result));
+	return ((int)(result));
 }
 
 void send_bits(int pid, char c)
@@ -40,11 +31,19 @@ void send_bits(int pid, char c)
 	bit = -1;
 	while (++bit < 8)
 	{
+		check_bit = 0;
 		if (c & 1 << bit)
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1) == -1)
+				exit(1);
+		}
 		else
-			kill(pid, SIGUSR2);
-		usleep(125);
+		{
+			if (kill(pid, SIGUSR2) == -1)
+				exit(1);
+		}
+		while (!check_bit) ;
+		usleep(100);
 	}
 }
 
@@ -57,10 +56,12 @@ void send_msg(int pid, char *str)
 
 void	handler(int sig)
 {
-	printf("sig: %d\n", sig);
+	check_bit = 1;
 	if (sig == SIGUSR1)
-		write(1, "msg send ok\n", 13);
-	exit(0);
+	{
+		write(1, "message send ok\n", 16);
+		exit(0);
+	}
 }
 
 int main(int ac, char *av[])
@@ -73,11 +74,9 @@ int main(int ac, char *av[])
 		return (0);
 	}
 	pid = ft_atoi(av[1]);
-	if (pid < 0 || pid > 99998)
+	if (pid < 100 || pid > 99998)
 		return (0);
-	printf("client: %d\n", getpid());
-	//send_msg(pid, av[2]);
 	signal(SIGUSR1, handler);
+	signal(SIGUSR2, handler);
 	send_msg(pid, av[2]);
-	while (1);
 }

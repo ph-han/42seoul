@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 16:01:03 by phan              #+#    #+#             */
-/*   Updated: 2023/07/12 20:38:25 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/13 12:09:53 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 #endif
