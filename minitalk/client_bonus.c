@@ -6,17 +6,17 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:59:41 by phan              #+#    #+#             */
-/*   Updated: 2023/07/13 17:50:11 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/13 18:00:26 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-int	check_bit;
+int	g_check_bit;
 
-int ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	long result;
+	long	result;
 
 	result = 0;
 	while (*str >= '0' && *str <= '9')
@@ -24,14 +24,14 @@ int ft_atoi(const char *str)
 	return ((int)(result));
 }
 
-void send_bits(int pid, char c)
+void	send_bits(int pid, char c)
 {
-	int bit;
+	int	bit;
 
 	bit = -1;
 	while (++bit < 8)
 	{
-		check_bit = 0;
+		g_check_bit = 0;
 		if (c & 1 << bit)
 		{
 			if (kill(pid, SIGUSR1) == -1)
@@ -42,12 +42,13 @@ void send_bits(int pid, char c)
 			if (kill(pid, SIGUSR2) == -1)
 				exit(1);
 		}
-		while (!check_bit) ;
+		while (!g_check_bit)
+			;
 		usleep(100);
 	}
 }
 
-void send_msg(int pid, char *str)
+void	send_msg(int pid, char *str)
 {
 	while (*str)
 		send_bits(pid, *str++);
@@ -56,7 +57,7 @@ void send_msg(int pid, char *str)
 
 void	handler(int sig)
 {
-	check_bit = 1;
+	g_check_bit = 1;
 	if (sig == SIGUSR1)
 	{
 		write(1, "message send ok\n", 16);
@@ -64,9 +65,9 @@ void	handler(int sig)
 	}
 }
 
-int main(int ac, char *av[])
+int	main(int ac, char *av[])
 {
-	pid_t pid;
+	pid_t	pid;
 
 	if (ac != 3)
 	{

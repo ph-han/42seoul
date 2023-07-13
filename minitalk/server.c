@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 20:43:26 by phan              #+#    #+#             */
-/*   Updated: 2023/07/12 15:38:51 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/13 18:00:43 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int	main(int ac, char *av[])
 	write(1, "\n", 1);
 	signal(SIGUSR1, handler);
 	signal(SIGUSR2, handler);
-	while (1);
+	while (1)
+		;
 }
