@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 20:43:46 by phan              #+#    #+#             */
-/*   Updated: 2023/07/14 12:13:55 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/15 14:39:21 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int ac, char *av[])
 		return (0);
 	}
 	pid = ft_atoi(av[1]);
-	if (pid < 1)
+	if (pid < 100 || pid > 99999)
 		return (0);
 	send_msg(pid, av[2]);
 }
