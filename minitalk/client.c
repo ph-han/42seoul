@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 20:43:46 by phan              #+#    #+#             */
-/*   Updated: 2023/07/15 14:49:01 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/15 16:13:07 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	ft_atoi(const char *str)
 	result = 0;
 	while (*str >= '0' && *str <= '9')
 		result = result * 10 + (*str++ - '0');
+	if (*str != '\0')
+		return (0);
 	return ((int)(result));
 }
 
@@ -55,6 +57,9 @@ int	main(int ac, char *av[])
 	}
 	pid = ft_atoi(av[1]);
 	if (pid < 100 || pid > 99999)
+	{
+		write(1, "PID ERROR\n", 10);
 		return (0);
+	}
 	send_msg(pid, av[2]);
 }
