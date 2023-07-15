@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:59:44 by phan              #+#    #+#             */
-/*   Updated: 2023/07/13 17:59:03 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/15 14:13:06 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,21 @@ void	handler(int sig, siginfo_t *info, void *tmp)
 {
 	static char	c;
 	static int	bits;
+	static int	cl_pid;
 
 	(void)tmp;
+	if (info->si_pid != 0 && info->si_pid != cl_pid)
+		cl_pid = info->si_pid;
 	if (sig == SIGUSR1)
 		c = c | 1 << bits;
 	bits++;
-	kill(info->si_pid, SIGUSR2);
+	kill(cl_pid, SIGUSR2);
 	if (bits == 8)
 	{
 		if (c == 0)
 		{
 			write(1, "\n", 1);
-			kill(info->si_pid, SIGUSR1);
+			kill(cl_pid, SIGUSR1);
 		}
 		else
 			write(1, &c, 1);
@@ -61,6 +64,9 @@ int	main(int ac, char *av[])
 	write(1, "\n", 1);
 	action.sa_flags = SA_SIGINFO;
 	action.sa_sigaction = handler;
+	sigemptyset(&action.sa_mask);
+	sigaddset(&action.sa_mask, SIGUSR1);
+	sigaddset(&action.sa_mask, SIGUSR2);
 	sigaction(SIGUSR1, &action, NULL);
 	sigaction(SIGUSR2, &action, NULL);
 	while (1)

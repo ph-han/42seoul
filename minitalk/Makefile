@@ -1,7 +1,7 @@
 SERVER = server
 CLIENT = client
-B_SERVER = bserver
-B_CLIENT = bclient
+B_SERVER = .bserver
+B_CLIENT = .bclient
 
 CC = cc
 CFLAG = -Wall -Wextra -Werror
@@ -26,15 +26,17 @@ bonus: $(B_SERVER) $(B_CLIENT)
 
 $(B_SERVER): server_bonus.o
 	$(CC) server_bonus.o -o server
+	@touch $(B_SERVER)
 $(B_CLIENT): client_bonus.o
 	$(CC) client_bonus.o -o client
+	@touch $(B_CLIENT)
 
 clean:
 	rm -f $(OBJS)
 	rm -f $(BOBJS)
 
 fclean: clean
-	rm -f $(SERVER) $(CLIENT)
+	rm -f $(SERVER) $(CLIENT) $(B_SERVER) $(B_CLIENT)
 
 re: fclean all
 
