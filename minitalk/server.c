@@ -6,12 +6,11 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 20:43:26 by phan              #+#    #+#             */
-/*   Updated: 2023/07/15 14:49:14 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/15 16:03:01 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-#include <stdio.h>
 
 static void	ft_putpid(pid_t pid)
 {
