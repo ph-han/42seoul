@@ -6,14 +6,14 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 20:43:26 by phan              #+#    #+#             */
-/*   Updated: 2023/07/13 18:00:43 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/15 14:49:14 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 #include <stdio.h>
 
-void	ft_putpid(pid_t pid)
+static void	ft_putpid(pid_t pid)
 {
 	if (pid == 0)
 		return ;
@@ -21,7 +21,7 @@ void	ft_putpid(pid_t pid)
 	write(1, &"0123456789"[pid % 10], 1);
 }
 
-void	handler(int sig)
+static void	handler(int sig)
 {
 	static char	c;
 	static int	bits;

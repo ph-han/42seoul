@@ -6,13 +6,13 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:59:44 by phan              #+#    #+#             */
-/*   Updated: 2023/07/15 14:13:06 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/15 14:48:19 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-void	ft_putpid(pid_t pid)
+static void	ft_putpid(pid_t pid)
 {
 	if (pid == 0)
 		return ;
@@ -20,7 +20,7 @@ void	ft_putpid(pid_t pid)
 	write(1, &"0123456789"[pid % 10], 1);
 }
 
-void	handler(int sig, siginfo_t *info, void *tmp)
+static void	handler(int sig, siginfo_t *info, void *tmp)
 {
 	static char	c;
 	static int	bits;

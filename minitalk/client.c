@@ -6,13 +6,13 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 20:43:46 by phan              #+#    #+#             */
-/*   Updated: 2023/07/15 14:39:21 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/15 14:49:01 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int	ft_atoi(const char *str)
+static int	ft_atoi(const char *str)
 {
 	long	result;
 
@@ -22,7 +22,7 @@ int	ft_atoi(const char *str)
 	return ((int)(result));
 }
 
-void	send_bits(int pid, char c)
+static void	send_bits(int pid, char c)
 {
 	int		bit;
 
@@ -37,7 +37,7 @@ void	send_bits(int pid, char c)
 	}
 }
 
-void	send_msg(int pid, char *str)
+static void	send_msg(int pid, char *str)
 {
 	while (*str)
 		send_bits(pid, *str++);

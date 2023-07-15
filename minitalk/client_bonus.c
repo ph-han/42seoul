@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:59:41 by phan              #+#    #+#             */
-/*   Updated: 2023/07/15 14:38:46 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/15 14:48:46 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_check_bit;
 
-int	ft_atoi(const char *str)
+static int	ft_atoi(const char *str)
 {
 	long	result;
 
@@ -24,7 +24,7 @@ int	ft_atoi(const char *str)
 	return ((int)(result));
 }
 
-void	send_bits(int pid, char c)
+static void	send_bits(int pid, char c)
 {
 	int	bit;
 
@@ -48,14 +48,14 @@ void	send_bits(int pid, char c)
 	}
 }
 
-void	send_msg(int pid, char *str)
+static void	send_msg(int pid, char *str)
 {
 	while (*str)
 		send_bits(pid, *str++);
 	send_bits(pid, *str);
 }
 
-void	handler(int sig)
+static void	handler(int sig)
 {
 	g_check_bit = 1;
 	if (sig == SIGUSR1)
