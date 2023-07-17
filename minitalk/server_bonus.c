@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:59:44 by phan              #+#    #+#             */
-/*   Updated: 2023/07/15 14:48:19 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/17 12:45:52 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ int	main(int ac, char *av[])
 	sigaction(SIGUSR2, &action, NULL);
 	while (1)
 		;
+	return (0);
 }

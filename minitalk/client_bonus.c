@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:59:41 by phan              #+#    #+#             */
-/*   Updated: 2023/07/15 16:12:53 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/17 12:46:06 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,5 @@ int	main(int ac, char *av[])
 	signal(SIGUSR1, handler);
 	signal(SIGUSR2, handler);
 	send_msg(pid, av[2]);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 20:43:46 by phan              #+#    #+#             */
-/*   Updated: 2023/07/15 16:13:07 by phan             ###   ########.fr       */
+/*   Updated: 2023/07/17 13:02:08 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ static void	send_bits(int pid, char c)
 static void	send_msg(int pid, char *str)
 {
 	while (*str)
+	{
 		send_bits(pid, *str++);
+		usleep(50);
+	}
 	send_bits(pid, *str);
 }
 
@@ -62,4 +65,5 @@ int	main(int ac, char *av[])
 		return (0);
 	}
 	send_msg(pid, av[2]);
+	return (0);
 }
