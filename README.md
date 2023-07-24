@@ -28,3 +28,11 @@
 ## Push_Swap <a href="https://github.com/JaeSeoKim/badge42"><img src="https://badge42.vercel.app/api/v2/cliqv8r62006008mkb0go2q1q/project/3091936" alt="phan's 42 push_swap Score" /></a>
 > 섞여 있는 스택 a를 a와 다른 스택 b를 이용해 주어진 명령어를 최소한으로 사용하여 정렬하는 과제 <br>
 > 다양한 정렬알고리즘, 자료구조를 직접 구현하고 최적화를 하기 위해서 방법(알고리즘)을 생각해 볼 수 있는 과제이다.
+
+## FdF <a href="https://github.com/JaeSeoKim/badge42"><img src="https://badge42.vercel.app/api/v2/cliqv8r62006008mkb0go2q1q/project/3130417" alt="phan's 42 FdF Score" /></a>
+> 3차원 좌표 정보를 2차원(화면)에 등축투영하여 화면에 그리는 첫 그래픽 과제이다. <br>
+> MLX(42 그래픽 라이브러리), 등축투영법(isometric projection), 회전행렬을 공부 해 볼 수 있는 과제이다.
+
+## minitalk <a href="https://github.com/JaeSeoKim/badge42"><img src="https://badge42.vercel.app/api/v2/cliqv8r62006008mkb0go2q1q/project/3159364" alt="phan's 42 minitalk Score" /></a>
+> 프로세스간 시그널 통신에 대한 과제 <br>
+> 다양한 시그널, 헨들링하는 방법등을 생각해 볼 수있는 과제이다.
