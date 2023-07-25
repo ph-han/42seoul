@@ -64,9 +64,13 @@ void	get_sub(t_list *iter, char *tmp, int *i)
 		}
 		else
 			exp = getenv(parsed_env);
-		if (!exp)
-			exp = ft_strdup("");
+		if (!exp && env_size)
+			exp = "";
+		else if (!exp && !env_size)
+			exp = "$";
 		new = substitute_env(env_size, exp, new);
+		if (exp[0] == '$' && !env_size)
+			break ;
 		free(parsed_env);
 		*i += env_size;
 	}
@@ -76,9 +80,10 @@ void	get_sub(t_list *iter, char *tmp, int *i)
 
 void	expand_env(t_list **token_list)
 {
-	t_list		*iter;
-	t_exp_vars	vars;
-	int			i;
+	t_list	*iter;
+	char	*tmp;
+	int		flag;
+	int		i;
 
 	iter = *token_list;
 	while (iter)
@@ -109,66 +114,19 @@ void	expand_env(t_list **token_list)
 						if (tmp[i] == '$')
 						{
 							i++;
-							new = ft_strdup(tmp);
-							while (ft_strchr(new, '$') != 0)
-							{
-								env_size = 0;
-								while (ft_strchr("|<> \"\'$", tmp[i + env_size]) == 0)
-									env_size++;
-								parsed_env = ft_substr(tmp, i, env_size) ;
-								if (tmp[i + env_size] == '$')
-								{
-									exp = getenv(parsed_env);
-									i++;
-								}
-								else
-									exp = getenv(parsed_env);
-								if (!exp)
-									exp = ft_strdup("");
-								new = substitute_env(env_size, exp, new);
-								free(parsed_env);
-								i += env_size;
-							}
-							free(iter->content);
-							iter->content = new;
+							get_sub(iter, tmp, &i);
 						}
 						if (tmp[i] == flag)
 						{
-							flag = 0;
 							i++;
+							flag = 0;
 						}
 					}
 				}
 				else
 				{
-					if (tmp[i] == '$')
-					{
-						i++;
-						new = ft_strdup(tmp);
-						while (ft_strchr(new, '$') != 0)
-						{
-							env_size = 0;
-							while (ft_strchr("|<> \"\'$", tmp[i + env_size]) == 0)
-								env_size++;
-							parsed_env = ft_substr(tmp, i, env_size);
-							if (tmp[i + env_size] == '$')
-							{
-								exp = getenv(parsed_env);
-								i++;
-							}
-							else
-								exp = getenv(parsed_env);
-							if (!exp)
-								exp = ft_strdup("");
-							new = substitute_env(env_size, exp, new);
-							free(parsed_env);
-							i += env_size;
-						}
-						free(iter->content);
-						iter->content = new;
-					}
-					else
-						i++;
+					if (tmp[i++] == '$')
+						get_sub(iter, tmp, &i);
 				}
 			}
 		}

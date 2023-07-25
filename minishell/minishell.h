@@ -8,11 +8,10 @@
 
 typedef struct s_exp_vars
 {
-	char	*tmp;
+
 	char	*exp;
 	char	*new;
 	char	*parsed_env;
-	int		flag;
 	int		env_size;
 }	t_exp_vars;
 /**
