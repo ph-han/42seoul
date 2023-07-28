@@ -16,7 +16,7 @@ typedef struct s_exp_vars
 }	t_exp_vars;
 /**
  * env tonkenizer test cases
- * 
+ *
  * "'"'$USER'"'"
  * '$USER'
  * "'$USER'"
@@ -28,6 +28,13 @@ typedef struct s_exp_vars
  * "'"$USER"'" 1
  * "'"'$USER'"'" 0
  */
+
+int		is_delim_in_dquote(char c);
+void	tokenizer(char *input, t_list **token_list);
+void	list_print(void *content);
+void	make_token(char *input, t_list **token_list, int token_size);
+void	expansion(t_list *node, char *content, int *idx);
+char	*ft_lst_strjoin(t_list **lst);
 #endif
 
 

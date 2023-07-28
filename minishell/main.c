@@ -12,79 +12,52 @@ void make_token(char *input, t_list **token_list, int token_size)
 	ft_lstadd_back(token_list, new_token);
 }
 
-char *substitute_env(int before_len, char *after, char *content)
+char	*substitute_env(int before_len, char *after, char *content)
 {
-	char *env_subs;
-	int	i;
-	int j;
+	char	*env_subs;
+	int		i;
+	int		j;
 
-	env_subs = (char *)malloc(sizeof(char) * (ft_strlen(content) + ft_strlen(after) - before_len));
+	env_subs = (char *)malloc(sizeof(char) * \
+		(ft_strlen(content) + ft_strlen(after) - before_len));
 	if (!env_subs)
 		exit(1);
 	i = 0;
-	while (content[i] && content[i] != '$')
+	while (content[i] && !ft_strchr(" |<>\'$", content[i]))
 	{
 		env_subs[i] = content[i];
 		i++;
 	}
+	printf("i1: %d\n", i);
 	j = 0;
 	while (after[j])
 	{
 		env_subs[i + j] = after[j];
 		j++;
 	}
+	printf("j: %d\n", j);
 	while (content[i + before_len + 1])
 	{
 		env_subs[i + j] = content[i + before_len + 1];
 		i++;
 	}
+	printf("i2: %d\n", i);
 	env_subs[i + j] = '\0';
 	free(content);
 	return (env_subs);
 }
 
-void	get_sub(t_list *iter, char *tmp, int *i)
-{
-	char	*new;
-	char	*exp;
-	char	*parsed_env;
-	int		env_size;
-
-	new = ft_strdup(tmp);
-	while (ft_strchr(new, '$') != 0)
-	{
-		env_size = 0;
-		while (ft_strchr("|<> \"\'$", tmp[*i + env_size]) == 0)
-			env_size++;
-		parsed_env = ft_substr(tmp, *i, env_size);
-		if (tmp[*i + env_size] == '$')
-		{
-			exp = getenv(parsed_env);
-			*i += 1;
-		}
-		else
-			exp = getenv(parsed_env);
-		if (!exp && env_size)
-			exp = "";
-		else if (!exp && !env_size)
-			exp = "$";
-		new = substitute_env(env_size, exp, new);
-		if (exp[0] == '$' && !env_size)
-			break ;
-		free(parsed_env);
-		*i += env_size;
-	}
-	free(iter->content);
-	iter->content = new;
-}
-
 void	expand_env(t_list **token_list)
 {
 	t_list	*iter;
+	t_list	*tmp_list;
 	char	*tmp;
 	int		flag;
 	int		i;
+	int		exp_flag;
 
+	exp_flag = 0;
+	tmp_list = NULL;
 	iter = *token_list;
 	while (iter)
 	{
@@ -113,92 +86,46 @@ void	expand_env(t_list **token_list)
 							i++;
 						if (tmp[i] == '$')
 						{
-							i++;
-							get_sub(iter, tmp, &i);
-						}
-						if (tmp[i] == flag)
-						{
-							i++;
+							exp_flag = 1;
+							expansion(iter, iter->content, &i);
+							tokenizer(iter->content, &tmp_list);
+							ft_lstadd_mid(iter, &tmp_list);
+							ft_lstclear(&tmp_list, free);
 							flag = 0;
+							break;
 						}
 					}
+					if (!ft_strchr(tmp + i, '$') && flag == 0)
+						break ;
 				}
 				else
 				{
-					if (tmp[i++] == '$')
-						get_sub(iter, tmp, &i);
+					if (tmp[i] == '$')
+					{
+						exp_flag = 1;
+						expansion(iter, iter->content, &i);
+						tokenizer(iter->content, &tmp_list);
+						ft_lstadd_mid(iter, &tmp_list);
+						ft_lstclear(&tmp_list, free);
+						tmp_list = NULL;
+						break ;
+					}
+					i++;
 				}
 			}
 		}
 		iter = iter->next;
-	}
-}
-
-void	tokenized(char *input, t_list **token_list)
-{
-	int		token_size;
-	int		flag;
-
-	while (*input)
-	{
-		token_size = 0;
-		flag = 0;
-		while (*input == ' ')
-			input++;
-		while (*input && *input != ' ')
+		printf("exp_flag: %d\n", exp_flag);
+		if (exp_flag)
 		{
-			if (*input == '|')
-			{
-				if (token_size)
-				{
-					make_token(input - token_size, token_list, token_size);
-					token_size = 0;
-				}
-				make_token(input++, token_list, 1);
-			}
-			else if (*input == '<' || *input == '>')
-			{
-				if (token_size)
-				{
-					make_token(input - token_size, token_list, token_size);
-					token_size = 0;
-				}
-				if (*(input + 1) == *input)
-				{
-					make_token(input, token_list, 2);
-					input += 2;
-				}
-				else
-					make_token(input++, token_list, 1);
-			}
-			else if (*input == '\"' || *input == '\'')
-			{
-				flag = *input;
-				while (flag && *input)
-				{
-					token_size++;
-					input++;
-					if (*input == flag)
-					{
-						token_size++;
-						input++;
-						flag = 0;
-					}
-				}
-				if (flag)
-					return;
-			}
-			else
-			{
-				token_size++;
-				input++;
-			}
+			ft_lstdel_mid(token_list, iter->prev);
+			iter = iter->next;
+			exp_flag = 0;
 		}
-		// printf("token size: %d\n", tok!en_size);
-		if (token_size)
-			make_token(input - token_size, token_list, token_size);
 	}
 }
+
+
 
 void	list_print(void *content)
 {
@@ -215,9 +142,7 @@ int	main(void)
 	{
 		input = readline("$ ");
 		add_history(input);
-		// printf("user input: %s\n", input);
-		tokenized(input, &token_list);
-		// ft_lstiter(token_list, list_print);
+		tokenizer(input, &token_list);
 		expand_env(&token_list);
 		free(input);
 		ft_lstiter(token_list, list_print);

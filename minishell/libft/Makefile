@@ -18,7 +18,8 @@ SRCS = ft_isascii.c ft_strlen.c  ft_toupper.c \
 
 SRCS_BN = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 		  ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
-		  ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
+		  ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c \
+		  ft_lstadd_mid.c ft_lstdel_mid.c
 
 ifdef WITH_BONUS
 	OBJS = $(SRCS:.c=.o) $(SRCS_BN:.c=.o)
