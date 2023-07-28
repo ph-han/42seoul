@@ -17,7 +17,6 @@ void	expansion(t_list *node, char *content, int *idx)
 	(void)node;
 	i = 0;
 	q_flag = 0;
-	// printf("content[i]: %c", content[i]);
 	while (content[i])
 	{
 		key_size = 0;
@@ -26,7 +25,7 @@ void	expansion(t_list *node, char *content, int *idx)
 			i++;
 			while (content[i + key_size] && !is_delim(content[i + key_size]))
 			{
-				if (q_flag == '\"' && content[i + key_size] == ' ')
+				if (q_flag == '\"' && (content[i + key_size] == ' ' || content[i + key_size] == '$'))
 					break ;
 				key_size++;
 			}
@@ -37,7 +36,6 @@ void	expansion(t_list *node, char *content, int *idx)
 				env = "";
 			else if (env == NULL && key_size == 0)
 				env = "$";
-			// printf("env : %s keysiSERze: %d\n", env, key_size);
 			env = ft_strdup(env);
 			ft_lstadd_back(&lst, ft_lstnew(env));
 			i += key_size;
@@ -65,20 +63,20 @@ void	expansion(t_list *node, char *content, int *idx)
 			while (content[i + key_size]
 				&& !ft_strchr("\'\"", content[i + key_size]))
 				{
+					// if (q_flag != '\'' && (content[i + key_size] == ' ' || content[i + key_size] == '$'))
 					if (q_flag != '\'' && content[i + key_size] == '$')
 						break ;
 					key_size++;
 				}
 			str = ft_substr(content, i, key_size);
-			// printf("str: %s q_flag: %c\n", str, q_flag);
 			ft_lstadd_back(&lst, ft_lstnew(str));
 			i += key_size;
 		}
 	}
-	*idx += i;
-	// ft_lstiter(lst, list_print);
+	*idx = i;
 	free(node->content);
 	node->content = ft_lst_strjoin(&lst);
+	printf("idx: %d i: %d, strlen: %d\n", *idx, i ,(int)ft_strlen(node->content));
 	ft_lstclear(&lst, free);
 }
 
@@ -90,6 +88,7 @@ char	*ft_lst_strjoin(t_list **lst)
 
 	res = ft_strdup((char *)(*lst)->content);
 	iter = (*lst)->next;
+	tmp = 0;
 	while (iter)
 	{
 		tmp = res;

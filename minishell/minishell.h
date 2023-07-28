@@ -29,6 +29,18 @@ typedef struct s_exp_vars
  * "'"'$USER'"'" 0
  */
 
+/**
+ *
+ * token 여러개 생성
+ * aaa"phan              $               phan"aaa
+ *
+ */
+
+/**
+ *	$AA"$$BB"
+	$AA$$BB
+*/
+
 int		is_delim_in_dquote(char c);
 void	tokenizer(char *input, t_list **token_list);
 void	list_print(void *content);

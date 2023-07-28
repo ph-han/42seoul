@@ -28,20 +28,17 @@ char	*substitute_env(int before_len, char *after, char *content)
 		env_subs[i] = content[i];
 		i++;
 	}
-	printf("i1: %d\n", i);
 	j = 0;
 	while (after[j])
 	{
 		env_subs[i + j] = after[j];
 		j++;
 	}
-	printf("j: %d\n", j);
 	while (content[i + before_len + 1])
 	{
 		env_subs[i + j] = content[i + before_len + 1];
 		i++;
 	}
-	printf("i2: %d\n", i);
 	env_subs[i + j] = '\0';
 	free(content);
 	return (env_subs);
@@ -50,6 +47,7 @@ char	*substitute_env(int before_len, char *after, char *content)
 void	expand_env(t_list **token_list)
 {
 	t_list	*iter;
+	t_list	*iter_next;
 	t_list	*tmp_list;
 	char	*tmp;
 	int		flag;
@@ -62,9 +60,10 @@ void	expand_env(t_list **token_list)
 	while (iter)
 	{
 		tmp = (char *)iter->content;
+		iter_next = iter->next;
 		i = 0;
 		if (ft_strchr(tmp, '$'))
-		{
+		{ 
 			while (tmp[i])
 			{
 				flag = 0;
@@ -86,6 +85,8 @@ void	expand_env(t_list **token_list)
 							i++;
 						if (tmp[i] == '$')
 						{
+							// if (!ft_strchr(tmp + i + 1, '$'))
+							// 	break;
 							exp_flag = 1;
 							expansion(iter, iter->content, &i);
 							tokenizer(iter->content, &tmp_list);
@@ -95,7 +96,8 @@ void	expand_env(t_list **token_list)
 							break;
 						}
 					}
-					if (!ft_strchr(tmp + i, '$') && flag == 0)
+					// printf("i: %d c: %d\n", i, tmp[i]);
+					if (exp_flag)
 						break ;
 				}
 				else
@@ -107,7 +109,6 @@ void	expand_env(t_list **token_list)
 						tokenizer(iter->content, &tmp_list);
 						ft_lstadd_mid(iter, &tmp_list);
 						ft_lstclear(&tmp_list, free);
-						tmp_list = NULL;
 						break ;
 					}
 					i++;
@@ -115,19 +116,18 @@ void	expand_env(t_list **token_list)
 			}
 		}
 		iter = iter->next;
-		printf("exp_flag: %d\n", exp_flag);
-		if (exp_flag)
+		if (exp_flag && iter != NULL)
 		{
 			ft_lstdel_mid(token_list, iter->prev);
-			iter = iter->next;
+			iter = iter_next;
 			exp_flag = 0;
 		}
 	}
 }
 
 
-
-void	list_print(void *content)
+	void
+	list_print(void *content)
 {
 	printf("token: %s\n", content);
 }
@@ -149,3 +149,5 @@ int	main(void)
 		ft_lstclear(&token_list, free);
 	}
 }
+
+// aaa"$USER                   $                 $USER"aaa
