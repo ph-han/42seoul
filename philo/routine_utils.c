@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 12:34:18 by phan              #+#    #+#             */
-/*   Updated: 2023/08/26 15:40:53 by phan             ###   ########.fr       */
+/*   Updated: 2023/08/27 15:40:45 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	print_msg(t_philo *philo, char *msg)
 {
 	long	time_diff;
 
-	time_diff = get_msec() - philo->master->start_time;
 	pthread_mutex_lock(&philo->master->dead_mutex);
+	time_diff = get_msec() - philo->master->start_time;
 	if (philo->dead_id == -1 && !philo->master->is_end)
 		printf("%ld %d %s\n", time_diff, philo->id, msg);
 	pthread_mutex_unlock(&philo->master->dead_mutex);

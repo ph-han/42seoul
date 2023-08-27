@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 17:01:27 by phan              #+#    #+#             */
-/*   Updated: 2023/08/26 18:18:43 by phan             ###   ########.fr       */
+/*   Updated: 2023/08/27 15:41:09 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	picking(t_master *master, t_philo *philo)
 {
 	pthread_mutex_lock(&master->mutex_arr[philo->near_fork[LEFT]]);
 	print_msg(philo, "has taken a fork");
-	if (is_over(master, philo) || master->arg.num_of_philos == 1)
+	if (is_over(master, philo))
 	{
 		philo->dead_id = philo->id;
 		pthread_mutex_unlock(&master->mutex_arr[philo->near_fork[LEFT]]);
