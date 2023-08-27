@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:41:42 by phan              #+#    #+#             */
-/*   Updated: 2023/08/27 15:43:55 by phan             ###   ########.fr       */
+/*   Updated: 2023/08/27 15:45:50 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_atoi(const char *str)
 
 int	check_arg(t_arg arg)
 {
-	return (arg.must_eat <= 0 || arg.time_to_sleep <= 0 ||
+	return (arg.must_eat <= 0 || arg.time_to_sleep <= 0 || \
 		arg.time_to_eat <= 0 || arg.time_to_die <= 0);
 }
 

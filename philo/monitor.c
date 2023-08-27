@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 14:14:55 by phan              #+#    #+#             */
-/*   Updated: 2023/08/27 15:41:50 by phan             ###   ########.fr       */
+/*   Updated: 2023/08/27 15:46:23 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ static void	end_die(t_master *master, int i)
 	pthread_mutex_lock(&master->dead_mutex);
 	printf("%ld %d died\n", \
 		get_msec() - master->start_time, master->philo_arr[i].id);
-	pthread_mutex_unlock(&master->mutex_arr[master->philo_arr[i].near_fork[RIGHT]]);
-	pthread_mutex_unlock(&master->mutex_arr[master->philo_arr[i].near_fork[LEFT]]);
+	pthread_mutex_unlock(&master->mutex_arr[\
+		master->philo_arr[i].near_fork[RIGHT]]);
+	pthread_mutex_unlock(&master->mutex_arr[\
+		master->philo_arr[i].near_fork[LEFT]]);
 	master->is_end = 1;
 	pthread_mutex_unlock(&master->dead_mutex);
 }
