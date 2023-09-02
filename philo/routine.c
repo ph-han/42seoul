@@ -6,7 +6,7 @@
 /*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 17:01:27 by phan              #+#    #+#             */
-/*   Updated: 2023/08/27 15:41:09 by phan             ###   ########.fr       */
+/*   Updated: 2023/08/31 15:52:45 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	picking(t_master *master, t_philo *philo)
 void	eating(t_master *master, t_philo *philo)
 {
 	philo->last_eat_time = get_msec();
-	philo->eat_cnt++;
 	print_msg(philo, "is eating");
 	ft_usleep(philo->master->arg.time_to_eat);
+	philo->eat_cnt++;
 	pthread_mutex_unlock(&master->mutex_arr[philo->near_fork[RIGHT]]);
 	pthread_mutex_unlock(&master->mutex_arr[philo->near_fork[LEFT]]);
 }
