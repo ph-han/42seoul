@@ -1,4 +1,4 @@
-NAME = magaphone
+NAME = megaphone
 
 CPP = c++
 CPPFLAG = -Wall -Wextra -Werror -std=c++98
@@ -6,13 +6,13 @@ CPPFLAG = -Wall -Wextra -Werror -std=c++98
 SRCS = magaphone.cpp
 OBJS = $(SRCS:.cpp=.o)
 
-%.o: %.c
+%.o: %.cpp
 	$(CPP) $(CPPFLAG) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CPP) $(CPPFLAG) -o $(NAME)
+	$(CPP) $(CPPFLAG) $(OBJS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)
