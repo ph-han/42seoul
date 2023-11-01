@@ -3,7 +3,7 @@ NAME = megaphone
 CPP = c++
 CPPFLAG = -Wall -Wextra -Werror -std=c++98
 
-SRCS = magaphone.cpp
+SRCS = megaphone.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 %.o: %.cpp
