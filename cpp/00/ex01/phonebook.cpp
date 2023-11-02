@@ -4,7 +4,16 @@
 
 #include "phonebook.h"
 
-int main(void)
-{
-    return (0);
+PhoneBook::PhoneBook() : _infos{}, _size{0} {
 }
+
+void PhoneBook::add(Contact info) {
+    if (_size >= 7)
+        _size %= 7;
+    _infos[_size++] = info;
+}
+
+void PhoneBook::search() {
+
+}
+
