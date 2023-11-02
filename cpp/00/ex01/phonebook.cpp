@@ -4,8 +4,7 @@
 
 #include "phonebook.h"
 
-PhoneBook::PhoneBook() : _infos{}, _size{0} {
-}
+PhoneBook::PhoneBook() : _infos(), _size(0){}
 
 void PhoneBook::add(Contact info) {
     if (_size >= 7)

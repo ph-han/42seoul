@@ -19,11 +19,11 @@ std::string Contact::get_phone(void) {
     return (_phone);
 }
 
-void Contact::set_first_name(std::string firstname) {
+void Contact::set_firstname(std::string firstname) {
     _firstname = firstname;
 }
 
-void Contact::set_last_name(std::string lastname) {
+void Contact::set_lastname(std::string lastname) {
     _lastname = lastname;
 }
 
