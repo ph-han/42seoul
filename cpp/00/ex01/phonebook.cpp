@@ -12,7 +12,26 @@ void PhoneBook::add(Contact info) {
     _infos[_size++] = info;
 }
 
-void PhoneBook::search() {
-
+bool PhoneBook::search_all() {
+    std::cout.width(10);
+    std::cout << "index | ";
+    std::cout.width(10);
+    std::cout << "firstname | ";
+    std::cout.width(10);
+    std::cout << "lastname | ";
+    std::cout.width(10);
+    std::cout << "phone\n";
+    for (int i = 0; i < _size; i++)
+    {
+        std::cout.width(10);
+        std::cout << i;
+        std::cout.width(10);
+        std::cout << _infos[i].get_firstname();
+        std::cout.width(10);
+        std::cout << _infos[i].get_lastname();
+        std::cout.width(10);
+        std::cout << _infos[i].get_phone() << "\n";
+    }
+    return (false);
 }
 

@@ -44,7 +44,7 @@ int main(void) {
         }
         else if (!cmd.compare("SEARCH"))
         {
-
+            phoneBook.search_all();
         }
         else if (!cmd.compare("EXIT"))
             break;

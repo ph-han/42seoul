@@ -15,7 +15,7 @@ private:
 public:
     PhoneBook ();
     void    add(Contact info);
-    void    search();
+    bool    search_all();
 };
 
 #endif //PHONEBOOK_H
