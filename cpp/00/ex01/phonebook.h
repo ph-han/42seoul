@@ -6,6 +6,8 @@
 #define PHONEBOOK_H
 
 #include <iostream>
+#include <string>
+#include <iomanip>
 #include "contact.h"
 
 class PhoneBook {
@@ -15,7 +17,8 @@ private:
 public:
     PhoneBook ();
     void    add(Contact info);
-    bool    search_all();
+    void    search_all();
+    void    search(int idx);
 };
 
 #endif //PHONEBOOK_H

@@ -19,10 +19,12 @@ public:
     void           set_lastname(std::string lastname);
     void           set_nickname(std::string nickname);
     void           set_phone(std::string phone);
+    void           set_darkest_secret(std::string secret);
     std::string    get_firstname(void);
     std::string    get_lastname(void);
     std::string    get_nickname(void);
     std::string    get_phone(void);
+    std::string    get_darkest_secret(void);
 };
 
 #endif //CONTACT_H

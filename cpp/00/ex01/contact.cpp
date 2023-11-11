@@ -19,6 +19,10 @@ std::string Contact::get_phone(void) {
     return (_phone);
 }
 
+std::string Contact::get_darkest_secret(void) {
+    return (_darkest_secret);
+}
+
 void Contact::set_firstname(std::string firstname) {
     _firstname = firstname;
 }
@@ -33,4 +37,8 @@ void Contact::set_nickname(std::string nickname) {
 
 void Contact::set_phone(std::string phone) {
     _phone = phone;
+}
+
+void Contact::set_darkest_secret(std::string secret) {
+    _darkest_secret = secret;
 }

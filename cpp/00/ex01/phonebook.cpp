@@ -7,31 +7,64 @@
 PhoneBook::PhoneBook() : _infos(), _size(0){}
 
 void PhoneBook::add(Contact info) {
-    if (_size >= 7)
-        _size %= 7;
-    _infos[_size++] = info;
+    _infos[_size++ % 8] = info;
 }
 
-bool PhoneBook::search_all() {
-    std::cout.width(10);
-    std::cout << "index | ";
-    std::cout.width(10);
-    std::cout << "firstname | ";
-    std::cout.width(10);
-    std::cout << "lastname | ";
-    std::cout.width(10);
-    std::cout << "phone\n";
-    for (int i = 0; i < _size; i++)
+void PhoneBook::search_all() {
+    std::cout << std::left << std::setw(10) << "index";
+    std::cout << "|";
+    std::cout << std::left << std::setw(10) << "firstname";
+    std::cout << "|";
+    std::cout << std::left << std::setw(10) <<  "lastname";
+    std::cout << "|";
+    std::cout << std::left << std::setw(10) << "phone";
+    std::cout << "|";
+    std::cout << "\n";
+    std::string skip = "...";
+    std::string tmp;
+
+    for (int idx = 0; idx < 8; idx++)
     {
-        std::cout.width(10);
-        std::cout << i;
-        std::cout.width(10);
-        std::cout << _infos[i].get_firstname();
-        std::cout.width(10);
-        std::cout << _infos[i].get_lastname();
-        std::cout.width(10);
-        std::cout << _infos[i].get_phone() << "\n";
+        if (idx >= _size) continue;
+        std::cout << std::left << std::setw(10) << idx;
+        std::cout << "|";
+
+        tmp = _infos[idx].get_firstname();
+        if (tmp.length() >= 10)
+            std::cout << std::left << std::setw(10) << tmp.replace(7, tmp.length(), skip);
+        else
+            std::cout << std::left << std::setw(10) << tmp;
+        std::cout << "|";
+
+        tmp = _infos[idx].get_lastname();
+        if (tmp.length() >= 10)
+            std::cout << std::left << std::setw(10) << tmp.replace(7, tmp.length(), skip);
+        else
+            std::cout << std::left << std::setw(10) << tmp;
+        std::cout << "|";
+
+        tmp = _infos[idx].get_phone();
+        if (tmp.length() >= 10)
+            std::cout << std::left << std::setw(10) << tmp.replace(7, tmp.length(), skip);
+        else
+            std::cout << std::left << std::setw(10) << tmp;
+        std::cout << "|";
+
+        std::cout << "\n";
     }
-    return (false);
+}
+
+void PhoneBook::search(int idx) {
+    Contact info;
+
+    if (idx >= (_size % 8)) {
+        std::cout << "Wrong idx\n";
+        return;
+    }
+    info = _infos[idx];
+    std::cout << "First name : " << info.get_firstname() << "\n";
+    std::cout << "Last name : " << info.get_lastname() << "\n";
+    std::cout << "Nick name : " << info.get_nickname() << "\n";
+    std::cout << "Phone : " << info.get_phone() << "\n";
 }
 
