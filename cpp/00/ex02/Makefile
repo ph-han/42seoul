@@ -3,7 +3,7 @@ NAME = account
 CPP = c++
 CPPFLAG = -Wall -Wextra -Werror -std=c++98
 
-SRCS = phonebook.cpp main.cpp contact.cpp
+SRCS = Account.cpp tests.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 %.o: %.cpp
