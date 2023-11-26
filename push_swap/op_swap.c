@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phan <phan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: phan <phan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 13:01:10 by phan              #+#    #+#             */
-/*   Updated: 2023/06/22 11:48:58 by phan             ###   ########.fr       */
+/*   Updated: 2023/11/25 18:40:53 by phan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	swap(t_stack *a)
 {
 	int	item1;
-	int	item2;
+	int	item2;	
 
 	if (a->size <= 1)
 		return ;
