@@ -51,7 +51,7 @@ int main(void) {
             std::cout << "-- Input index number : ";
             if (!getline(std::cin, tmp))
                 std::cout << "Input error! exit. \n";
-            phonebook.search(std::stoi(tmp));
+            phonebook.search(tmp);
         } else if (!cmd.compare("EXIT")) {
             break;
         } else {

@@ -18,7 +18,7 @@ public:
     PhoneBook ();
     void    add(Contact info);
     void    search_all();
-    void    search(int idx);
+    void    search(std::string idx);
 };
 
 #endif //PHONEBOOK_H

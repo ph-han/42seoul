@@ -25,26 +25,26 @@ void PhoneBook::search_all() {
 
     for (int idx = 0; idx < 8; idx++)
     {
-        if (idx >= _size) continue;
+        if (idx >= _size) break;
         std::cout << std::left << std::setw(10) << idx;
         std::cout << "|";
 
         tmp = _infos[idx].get_firstname();
-        if (tmp.length() >= 10)
+        if (tmp.length() > 10)
             std::cout << std::left << std::setw(10) << tmp.replace(7, tmp.length(), skip);
         else
             std::cout << std::left << std::setw(10) << tmp;
         std::cout << "|";
 
         tmp = _infos[idx].get_lastname();
-        if (tmp.length() >= 10)
+        if (tmp.length() > 10)
             std::cout << std::left << std::setw(10) << tmp.replace(7, tmp.length(), skip);
         else
             std::cout << std::left << std::setw(10) << tmp;
         std::cout << "|";
 
         tmp = _infos[idx].get_phone();
-        if (tmp.length() >= 10)
+        if (tmp.length() > 10)
             std::cout << std::left << std::setw(10) << tmp.replace(7, tmp.length(), skip);
         else
             std::cout << std::left << std::setw(10) << tmp;
@@ -54,14 +54,22 @@ void PhoneBook::search_all() {
     }
 }
 
-void PhoneBook::search(int idx) {
+void PhoneBook::search(std::string idx) {
     Contact info;
+    int index = 0;
 
-    if (idx >= (_size % 8)) {
+    if (idx.length() >= 2)
+    {
         std::cout << "Wrong idx\n";
         return;
     }
-    info = _infos[idx];
+    index = idx[0] - '0';
+    if (index >= _size || index >= (8))
+    {
+        std::cout << "Wrong idx\n";
+        return;
+    }
+    info = _infos[index];
     std::cout << "First name : " << info.get_firstname() << "\n";
     std::cout << "Last name : " << info.get_lastname() << "\n";
     std::cout << "Nick name : " << info.get_nickname() << "\n";
