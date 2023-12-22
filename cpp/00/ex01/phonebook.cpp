@@ -21,7 +21,8 @@ void PhoneBook::add(Contact info) {
     _infos[_size++ % 8] = info;
 }
 
-void PhoneBook::search_all() {
+bool PhoneBook::search_all() {
+    std::cout << "\n⌈";
     std::cout << std::left << std::setw(10) << "index";
     std::cout << "|";
     std::cout << std::left << std::setw(10) << "firstname";
@@ -29,12 +30,20 @@ void PhoneBook::search_all() {
     std::cout << std::left << std::setw(10) <<  "lastname";
     std::cout << "|";
     std::cout << std::left << std::setw(10) << "nickname";
-    std::cout << "|";
+    std::cout << "⌉";
     std::cout << "\n";
-
+    if (_size == 0)
+    {
+        std::cout << "|";
+        std::cout << "                 " << "No contact";
+        std::cout << "                " << "|";
+        std::cout << "\n";
+        return false;
+    }
     for (int idx = 0; idx < 8; idx++)
     {
         if (idx >= _size) break;
+        std::cout << "|";
         std::cout << std::left << std::setw(10) << idx;
         std::cout << "|";
         printInfo(_infos[idx].getFirstname());
@@ -42,22 +51,26 @@ void PhoneBook::search_all() {
         printInfo(_infos[idx].getNickname());
         std::cout << "\n";
     }
+    return true;
 }
 
-void PhoneBook::search(std::string idx) {
+bool PhoneBook::search(std::string idx) {
     Contact info;
     int index = 0;
 
     index = idx[0] - '0';
     if (idx.length() >= 2 || index >= _size || index >= (8))
     {
-        std::cout << "Wrong idx\n";
-        return;
+        std::cout << "\n ** Wrong index! ** \n";
+        return false;
     }
     info = _infos[index];
+    std::cout << "\n-------------------------------------------\n";
     std::cout << "First name : " << info.getFirstname() << "\n";
     std::cout << "Last name : " << info.getLastname() << "\n";
     std::cout << "Nick name : " << info.getNickname() << "\n";
     std::cout << "Phone : " << info.getPhone() << "\n";
+    std::cout << "-------------------------------------------\n";
+    return true;
 }
 
