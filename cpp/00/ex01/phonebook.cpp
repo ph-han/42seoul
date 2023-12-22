@@ -28,7 +28,7 @@ void PhoneBook::search_all() {
     std::cout << "|";
     std::cout << std::left << std::setw(10) <<  "lastname";
     std::cout << "|";
-    std::cout << std::left << std::setw(10) << "phone";
+    std::cout << std::left << std::setw(10) << "nickname";
     std::cout << "|";
     std::cout << "\n";
 
@@ -39,7 +39,7 @@ void PhoneBook::search_all() {
         std::cout << "|";
         printInfo(_infos[idx].getFirstname());
         printInfo(_infos[idx].getLastname());
-        printInfo(_infos[idx].getPhone());
+        printInfo(_infos[idx].getNickname());
         std::cout << "\n";
     }
 }
