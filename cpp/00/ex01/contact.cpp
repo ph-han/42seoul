@@ -3,42 +3,44 @@
 //
 #include "contact.h"
 
-std::string Contact::get_firstname(void) {
+const std::string& Contact::getFirstname(void) const{
     return (_firstname);
 }
 
-std::string Contact::get_lastname(void) {
+const std::string &Contact::getLastname(void) const
+{
     return (_lastname);
 }
 
-std::string Contact::get_nickname(void) {
+const std::string &Contact::getNickname(void) const
+{
     return (_nickname);
 }
 
-std::string Contact::get_phone(void) {
+const std::string &Contact::getPhone(void) const {
     return (_phone);
 }
 
-std::string Contact::get_darkest_secret(void) {
-    return (_darkest_secret);
+const std::string &Contact::getDarkestSecret(void) const {
+    return (_darkestSecret);
 }
 
-void Contact::set_firstname(std::string firstname) {
+void Contact::setFirstname(std::string firstname) {
     _firstname = firstname;
 }
 
-void Contact::set_lastname(std::string lastname) {
+void Contact::setLastname(std::string lastname) {
     _lastname = lastname;
 }
 
-void Contact::set_nickname(std::string nickname) {
+void Contact::setNickname(std::string nickname) {
     _nickname = nickname;
 }
 
-void Contact::set_phone(std::string phone) {
+void Contact::setPhone(std::string phone) {
     _phone = phone;
 }
 
-void Contact::set_darkest_secret(std::string secret) {
-    _darkest_secret = secret;
+void Contact::setDarkestSecret(std::string secret) {
+    _darkestSecret = secret;
 }

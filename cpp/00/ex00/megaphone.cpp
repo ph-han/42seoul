@@ -1,9 +1,5 @@
 #include <iostream>
 
-void to_upper(char &c) {
-    c = std::toupper(static_cast<unsigned char>(c));
-}
-
 int main(int ac, char **av)
 {
     if (ac == 1)
@@ -14,8 +10,13 @@ int main(int ac, char **av)
     for (int i = 1; i < ac; i++)
     {
         std::string str = av[i];
-        std::for_each(str.begin(), str.end(), to_upper);
-        std::cout << str;
+        for (size_t i = 0; i < str.length(); i++)
+        {
+            if (str[i] >= 'a' && str[i] <= 'z')
+                std::cout << (char)(str[i] - ('a' - 'A'));
+            else
+                std::cout << str[i];
+        } 
     }
     std::cout << '\n';
     return (0);

@@ -3,55 +3,53 @@
 //
 
 #include "phonebook.h"
+#include <cstdio>
+
+
+static std::string inputAndCheck(std::string msg) {
+    const std::string space = " \t\n";
+    std::string input = "";
+
+    std::cin.sync();
+    while (input.length() < 1) {
+        std::cout << msg;
+        while (!getline(std::cin, input)) {
+            std::clearerr(stdin);
+            std::cin.clear();
+            std::cout << "Input error! Retry. \n";
+            std::cout << msg;
+        }
+        input.erase(0, input.find_first_not_of(space));
+        input.erase(input.find_last_not_of(space) + 1);
+    }
+    
+    return input;
+}
 
 int main(void) {
     PhoneBook   phonebook;
     Contact     info;
-    std::string cmd = "";
-    std::string tmp = "";
+    std::string cmd;
+    std::string input = "";
 
     while (1) {
-        std::cout << "Input command : ";
-        if (!getline(std::cin, cmd)) {
-            std::cout << "Input error! exit. \n"; break ;
-        }
+        cmd = inputAndCheck("Input command : ");
         if (!cmd.compare("ADD")) {
-            std::cout << "-- 1. Input first name : ";
-            if (!getline(std::cin, tmp)) {
-                std::cout << "Input error! exit. \n"; break ;
-            }
-            info.set_firstname(tmp);
-            std::cout << "-- 2. Input last name : ";
-            if (!getline(std::cin, tmp)) {
-                std::cout << "Input error! exit. \n";
-                break;
-            }
-            info.set_lastname(tmp);
-            std::cout << "-- 3. Input nickname : ";
-            if (!getline(std::cin, tmp)) {
-                std::cout << "Input error! exit. \n";
-                break;
-            }
-            info.set_nickname(tmp);
-            std::cout << "-- 4. Input phone : ";
-            if (!getline(std::cin, tmp)) {
-                std::cout << "Input error! exit. \n";
-                break;
-            }
-            info.set_phone(tmp);
-            std::cout << "-- 5. Input darkest secret : ";
-            if (!getline(std::cin, tmp)) {
-                std::cout << "Input error! exit. \n";
-                break;
-            }
-            info.set_darkest_secret(tmp);
+            input = inputAndCheck("-- 1. Input first name : ");
+            info.setFirstname(input);
+            input = inputAndCheck("-- 2. Input last name : ");
+            info.setLastname(input);
+            input = inputAndCheck("-- 3. Input nickname : ");
+            info.setNickname(input);
+            input = inputAndCheck("-- 4. Input phone : "); 
+            info.setPhone(input);
+            input = inputAndCheck("-- 5. Input darkest secret : ");
+            info.setDarkestSecret(input);
             phonebook.add(info);
         } else if (!cmd.compare("SEARCH")) {
             phonebook.search_all();
-            std::cout << "-- Input index number : ";
-            if (!getline(std::cin, tmp))
-                std::cout << "Input error! exit. \n";
-            phonebook.search(tmp);
+            input = inputAndCheck("-- Input index number : ");
+            phonebook.search(input);
         } else if (!cmd.compare("EXIT")) {
             break;
         } else {

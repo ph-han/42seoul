@@ -13,18 +13,18 @@ private:
     std::string _lastname;
     std::string _nickname;
     std::string _phone;
-    std::string _darkest_secret;
+    std::string _darkestSecret;
 public:
-    void           set_firstname(std::string firstname);
-    void           set_lastname(std::string lastname);
-    void           set_nickname(std::string nickname);
-    void           set_phone(std::string phone);
-    void           set_darkest_secret(std::string secret);
-    std::string    get_firstname(void);
-    std::string    get_lastname(void);
-    std::string    get_nickname(void);
-    std::string    get_phone(void);
-    std::string    get_darkest_secret(void);
+    void           setFirstname(std::string firstname);
+    void           setLastname(std::string lastname);
+    void           setNickname(std::string nickname);
+    void           setPhone(std::string phone);
+    void           setDarkestSecret(std::string secret);
+    const std::string&    getFirstname(void) const;
+    const std::string&    getLastname(void) const;
+    const std::string&    getNickname(void) const;
+    const std::string&    getPhone(void) const;
+    const std::string&    getDarkestSecret(void) const;
 };
 
 #endif //CONTACT_H

@@ -12,7 +12,7 @@ OBJS = $(SRCS:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CPP) $(CPPFLAG) $(OBJS) -o $(NAME)
+	$(CPP) $(CPPFLAG) $(OBJS) -o $(NAME) -fsanitize=address -g
 
 clean:
 	rm -f $(OBJS)
