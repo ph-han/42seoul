@@ -7,11 +7,11 @@
 PhoneBook::PhoneBook() : _infos(), _size(0){}
 
 void PhoneBook::printInfo(const std::string& contactInfo) {
-    std::string skip = "...";
+    std::string skip = ".";
     std::string tmp = contactInfo;
 
     if (tmp.length() > 10)
-        std::cout << std::right << std::setw(10) << tmp.replace(7, tmp.length(), skip);
+        std::cout << std::right << std::setw(10) << tmp.replace(9, tmp.length(), skip);
     else
         std::cout << std::right << std::setw(10) << tmp;
     std::cout << "|";
@@ -66,10 +66,11 @@ bool PhoneBook::search(std::string idx) {
     }
     info = _infos[index];
     std::cout << "\n-------------------------------------------\n";
-    std::cout << "First name : " << info.getFirstname() << "\n";
-    std::cout << "Last name : " << info.getLastname() << "\n";
-    std::cout << "Nick name : " << info.getNickname() << "\n";
+    std::cout << "Firstname : " << info.getFirstname() << "\n";
+    std::cout << "Lastname : " << info.getLastname() << "\n";
+    std::cout << "Nickname : " << info.getNickname() << "\n";
     std::cout << "Phone : " << info.getPhone() << "\n";
+    std::cout << "Darkest secret : " << info.getDarkestSecret() << "\n";
     std::cout << "-------------------------------------------\n";
     return true;
 }
