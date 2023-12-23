@@ -11,9 +11,9 @@ void PhoneBook::printInfo(const std::string& contactInfo) {
     std::string tmp = contactInfo;
 
     if (tmp.length() > 10)
-        std::cout << std::left << std::setw(10) << tmp.replace(7, tmp.length(), skip);
+        std::cout << std::right << std::setw(10) << tmp.replace(7, tmp.length(), skip);
     else
-        std::cout << std::left << std::setw(10) << tmp;
+        std::cout << std::right << std::setw(10) << tmp;
     std::cout << "|";
 }
 
@@ -23,13 +23,13 @@ void PhoneBook::add(Contact info) {
 
 bool PhoneBook::search_all() {
     std::cout << "\n⌈";
-    std::cout << std::left << std::setw(10) << "index";
+    std::cout << std::right << std::setw(10) << "index";
     std::cout << "|";
-    std::cout << std::left << std::setw(10) << "firstname";
+    std::cout << std::right << std::setw(10) << "firstname";
     std::cout << "|";
-    std::cout << std::left << std::setw(10) <<  "lastname";
+    std::cout << std::right << std::setw(10) <<  "lastname";
     std::cout << "|";
-    std::cout << std::left << std::setw(10) << "nickname";
+    std::cout << std::right << std::setw(10) << "nickname";
     std::cout << "⌉";
     std::cout << "\n";
     if (_size == 0)
@@ -44,7 +44,7 @@ bool PhoneBook::search_all() {
     {
         if (idx >= _size) break;
         std::cout << "|";
-        std::cout << std::left << std::setw(10) << idx;
+        std::cout << std::right << std::setw(10) << idx;
         std::cout << "|";
         printInfo(_infos[idx].getFirstname());
         printInfo(_infos[idx].getLastname());
