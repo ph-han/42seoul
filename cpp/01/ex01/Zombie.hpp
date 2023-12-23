@@ -10,11 +10,11 @@ private:
 	std::string _name;
 
 public:
+	Zombie();
 	Zombie(std::string name);
 	~Zombie();
-	Zombie *newZombie(std::string name);
 	void announce(void);
-	void randomChump(std::string name);
+	Zombie *zombieHorde(int N, std::string name);
 };
 
 #endif

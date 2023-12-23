@@ -2,6 +2,6 @@
 
 void Zombie::randomChump(std::string name)
 {
-	Zombie zombie("hcho2");
+	Zombie zombie(name);
 	zombie.announce();
 }
