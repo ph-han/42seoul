@@ -18,7 +18,8 @@ bool bsp(Point const a, Point const b, Point const c, Point const point) {
 	float apcArea = getTriArea(a, point, c);
 	float bpcArea = getTriArea(point, b, c);
 
-	if (abcArea == apbArea + apcArea + bpcArea)
+	bool isVertexOrEdge = (apbArea == 0 || apcArea == 0 || bpcArea == 0);
+	if (!isVertexOrEdge && abcArea == apbArea + apcArea + bpcArea)
 		return true;
 	else
 		return false;

@@ -29,28 +29,28 @@ Fixed::Fixed(const Fixed &copy) {
 	*this = copy;
 }
 
-bool operator>(const Fixed &obj1, const Fixed &obj2) {
-	return obj1.getRawBits() > obj2.getRawBits();
+bool Fixed::operator>(const Fixed &obj) const{
+	return this->getRawBits() > obj.getRawBits();
 }
 
-bool operator<(const Fixed &obj1, const Fixed &obj2) {
-	return obj1.getRawBits() < obj2.getRawBits();
+bool Fixed::operator<(const Fixed &obj) const{
+	return this->getRawBits() < obj.getRawBits();
 }
 
-bool operator>=(const Fixed &obj1, const Fixed &obj2) {
-	return obj1.getRawBits() >= obj2.getRawBits();
+bool Fixed::operator>=(const Fixed &obj) const{
+	return this->getRawBits() >= obj.getRawBits();
 }
 
-bool operator<=(const Fixed &obj1, const Fixed &obj2) {
-	return obj1.getRawBits() <= obj2.getRawBits();
+bool Fixed::operator<=(const Fixed &obj) const{
+	return this->getRawBits() <= obj.getRawBits();
 }
 
-bool operator==(const Fixed &obj1, const Fixed &obj2) {
-	return obj1.getRawBits() == obj2.getRawBits();
+bool Fixed::operator==(const Fixed &obj) const{
+	return this->getRawBits() == obj.getRawBits();
 }
 
-bool operator!=(const Fixed &obj1, const Fixed &obj2) {
-	return obj1.getRawBits() != obj2.getRawBits();
+bool Fixed::operator!=(const Fixed &obj) const{
+	return this->getRawBits() != obj.getRawBits();
 }
 
 Fixed Fixed::operator+(const Fixed &obj) {
