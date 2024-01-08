@@ -8,17 +8,19 @@ Fixed::~Fixed() {
 	std::cout << "Destructor called\n";
 }
 
-Fixed::Fixed(const Fixed &copy) {
-	std::cout << "Copy constructor called\n";
-	_fixedNumber = copy.getRawBits();
-}
-
-Fixed &Fixed::operator=(const Fixed &obj) {
+Fixed &Fixed::operator=(const Fixed &obj)
+{
 	std::cout << "Copy assignment operator called\n";
 	if (this == &obj)
 		return *this;
 	_fixedNumber = obj.getRawBits();
 	return *this;
+}
+
+Fixed::Fixed(const Fixed &copy)
+{
+	std::cout << "Copy constructor called\n";
+	*this = copy;
 }
 
 int Fixed::getRawBits(void) const {

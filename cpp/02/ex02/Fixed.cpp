@@ -16,17 +16,17 @@ Fixed::~Fixed() {
 	std::cout << "Destructor called\n";
 }
 
-Fixed::Fixed(const Fixed &copy) {
-	std::cout << "Copy constructor called\n";
-	_fixedNumber = copy.getRawBits();
-}
-
 Fixed &Fixed::operator=(const Fixed &obj) {
 	std::cout << "Copy assignment operator called\n";
 	if (this == &obj)
 		return *this;
 	_fixedNumber = obj.getRawBits();
 	return *this;
+}
+
+Fixed::Fixed(const Fixed &copy) {
+	std::cout << "Copy constructor called\n";
+	*this = copy;
 }
 
 bool operator>(const Fixed &obj1, const Fixed &obj2) {
@@ -84,13 +84,13 @@ Fixed &Fixed::operator--() {
 }
 
 Fixed Fixed::operator++(int) {
-	const Fixed tmp(*this);
+	Fixed tmp(*this);
 	_fixedNumber++;
 	return tmp;
 }
 
 Fixed Fixed::operator--(int) {
-	const Fixed tmp(*this);
+	Fixed tmp(*this);
 	_fixedNumber--;
 	return tmp;
 }
@@ -113,14 +113,14 @@ float Fixed::toFloat(void) const {
 	return (((float)_fixedNumber) / (1 << _fractionalBits));
 }
 
-Fixed &Fixed::min(const Fixed &obj1, const Fixed &obj2) {
+const Fixed &Fixed::min(const Fixed &obj1, const Fixed &obj2) {
 	if (obj1 > obj2)
 		return obj2;
 	else
 		return obj1;
 }
 
-Fixed &Fixed::max(const Fixed &obj1, const Fixed &obj2) {
+const Fixed &Fixed::max(const Fixed &obj1, const Fixed &obj2) {
 	if (obj1 > obj2)
 		return obj1;
 	else
