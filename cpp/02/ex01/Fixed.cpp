@@ -30,12 +30,12 @@ Fixed &Fixed::operator=(const Fixed &obj) {
 }
 
 int Fixed::getRawBits(void) const {
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return _fixedNumber;
 }
 
 void Fixed::setRawBits(int const raw) {
-	std::cout << "setRawBits member function called" << std::endl;
+	// std::cout << "setRawBits member function called" << std::endl;
 	_fixedNumber = raw << _fractionalBits;
 }
 

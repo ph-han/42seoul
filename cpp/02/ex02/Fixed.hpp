@@ -32,8 +32,10 @@ class Fixed {
 		float	toFloat(void) const;
 		int		toInt(void) const;
 
-		static Fixed	min(const Fixed& obj1, const Fixed& obj2);
-		static Fixed	max(const Fixed& obj1, const Fixed& obj2);
+		static Fixed	&min(const Fixed& obj1, const Fixed& obj2);
+		static Fixed	&max(const Fixed& obj1, const Fixed& obj2);
+		static Fixed	&min(Fixed& obj1, Fixed& obj2);
+		static Fixed	&max(Fixed& obj1, Fixed& obj2);
 };
 
 bool operator>(const Fixed& obj1, const Fixed& obj2);
