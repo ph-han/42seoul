@@ -16,6 +16,13 @@ class Fixed {
 		Fixed(const int value);
 		Fixed(const float value);
 
+		bool operator>(const Fixed& obj) const;
+		bool operator<(const Fixed& obj) const;
+		bool operator>=(const Fixed& obj) const;
+		bool operator<=(const Fixed& obj) const;
+		bool operator==(const Fixed& obj) const;
+		bool operator!=(const Fixed& obj) const;
+
 		Fixed operator+(const Fixed &obj);
 		Fixed operator-(const Fixed &obj);
 		Fixed operator*(const Fixed &obj);
@@ -34,15 +41,8 @@ class Fixed {
 
 		static const Fixed	&min(const Fixed& obj1, const Fixed& obj2);
 		static const Fixed	&max(const Fixed& obj1, const Fixed& obj2);
-		static Fixed	&min(Fixed& obj1, Fixed& obj2);
-		static Fixed	&max(Fixed& obj1, Fixed& obj2);
+		static Fixed		&min(Fixed& obj1, Fixed& obj2);
+		static Fixed		&max(Fixed& obj1, Fixed& obj2);
 };
-
-bool operator>(const Fixed& obj1, const Fixed& obj2);
-bool operator<(const Fixed& obj1, const Fixed& obj2);
-bool operator>=(const Fixed& obj1, const Fixed& obj2);
-bool operator<=(const Fixed& obj1, const Fixed& obj2);
-bool operator==(const Fixed& obj1, const Fixed& obj2);
-bool operator!=(const Fixed& obj1, const Fixed& obj2);
 
 std::ostream &operator<<(std::ostream &out, const Fixed &obj);
