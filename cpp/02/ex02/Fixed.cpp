@@ -114,33 +114,19 @@ float Fixed::toFloat(void) const {
 }
 
 const Fixed &Fixed::min(const Fixed &obj1, const Fixed &obj2) {
-	if (obj1 > obj2)
-		return obj2;
-	else
-		return obj1;
+	return obj1 > obj2 ? obj2 : obj1;
 }
 
 const Fixed &Fixed::max(const Fixed &obj1, const Fixed &obj2) {
-	if (obj1 > obj2)
-		return obj1;
-	else
-		return obj2;
+	return obj1 > obj2 ? obj1 : obj2;
 }
 
-Fixed &Fixed::min(Fixed &obj1, Fixed &obj2)
-{
-	if (obj1 > obj2)
-		return obj2;
-	else
-		return obj1;
+Fixed &Fixed::min(Fixed &obj1, Fixed &obj2) {
+	return obj1 > obj2 ? obj2 : obj1;
 }
 
-Fixed &Fixed::max(Fixed &obj1, Fixed &obj2)
-{
-	if (obj1 > obj2)
-		return obj1;
-	else
-		return obj2;
+Fixed &Fixed::max(Fixed &obj1, Fixed &obj2) {
+	return obj1 > obj2 ? obj1 : obj2;
 }
 
 std::ostream& operator<<(std::ostream &out, const Fixed &obj)
