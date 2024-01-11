@@ -52,10 +52,10 @@ void ClapTrap::attack(const std::string &target) {
 		return ;
 	}
 	_energyPoint -= 1;
-		std::cout << "ScavTrap " << _name
+	std::cout << "ClapTrap " << _name
 			  << " attacks " << target
 			  << ", causing " << _attackDamage
-			  << " points of damage !" 
+			  << " points of damage !"
 			  << " (Health: " << _hitPoint << ", Energy: " << _energyPoint << ")" << std::endl;
 }
 

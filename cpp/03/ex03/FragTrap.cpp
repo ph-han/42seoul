@@ -50,8 +50,3 @@ void FragTrap::highFivesGuys(void)
 	}
 	std::cout << "high Fives Guys" << std::endl;
 }
-
-void FragTrap::whoAmI(void)
-{
-	std::cout << "My name: " << _name << ", Clap name: " << ClapTrap::_name << std::endl;
-}

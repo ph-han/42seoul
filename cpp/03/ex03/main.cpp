@@ -21,7 +21,7 @@ int main(void) {
 	// c.guardGate();
 	// d.guardGate();
 
-	FragTrap e("e");
+	// FragTrap e("e");
 	// FragTrap f("f");
 	// e.attack("f");
 	// f.takeDamage(e.getAttackDamage());
@@ -40,6 +40,4 @@ int main(void) {
 	g.highFivesGuys();
 	g.guardGate();
 	g.whoAmI();
-	ClapTrap c = g;
-	c.whoAmI();
 }

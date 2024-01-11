@@ -48,8 +48,7 @@ void ScavTrap::guardGate() {
 
 void ScavTrap::attack(const std::string &target)
 {
-	if (_hitPoint <= 0 || _energyPoint <= 0)
-	{
+	if (_hitPoint <= 0 || _energyPoint <= 0) {
 		std::cout << "ScavTrap " << _name << " no enery or died" << std::endl;
 		return;
 	}

@@ -12,6 +12,4 @@ public:
 	FragTrap(std::string name);
 
 	void highFivesGuys(void);
-
-	void whoAmI(void);
 };

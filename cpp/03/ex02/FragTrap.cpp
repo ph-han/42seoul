@@ -43,8 +43,7 @@ FragTrap::FragTrap(const FragTrap &copy)
 	*this = copy;
 }
 
-void FragTrap::highFivesGuys(void)
-{
+void FragTrap::highFivesGuys(void) {
 	if (_hitPoint <= 0) {
 		std::cout << "FragTrap " << _name << ": died" << std::endl;
 	}

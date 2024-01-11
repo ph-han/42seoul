@@ -60,8 +60,3 @@ void ScavTrap::attack(const std::string &target)
 			  << " points of damage !" 
 			  << " (Health: " << _hitPoint << ", Energy: " << _energyPoint << ")" << std::endl;
 }
-
-void ScavTrap::whoAmI(void)
-{
-	std::cout << "My name: " << _name << ", Clap name: " << ClapTrap::_name << std::endl;
-}

@@ -7,7 +7,6 @@ int main(void) {
 	a.attack("b");
 	b.takeDamage(a.getAttackDamage());
 	b.beRepaired(a.getAttackDamage());
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 5; i++)
 		a.attack("b");
-	a.attack("b");
 }

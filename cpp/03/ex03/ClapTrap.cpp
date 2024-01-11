@@ -78,8 +78,3 @@ void ClapTrap::beRepaired(unsigned int amount) {
 	std::cout << "ClapTrap " << _name << " is repaired " << amount 
 				<< " (Health: " << _hitPoint << ", Energy: " << _energyPoint << ")" << std::endl;
 }
-
-void ClapTrap::whoAmI(void)
-{
-	std::cout << "I'm Clap! My name: " << ClapTrap::_name << std::endl;
-}
