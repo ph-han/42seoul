@@ -25,7 +25,3 @@ AAnimal::AAnimal(const AAnimal &copy) {
 const std::string &AAnimal::getType() const {
 	return _type;
 }
-
-void AAnimal::makeSound() const{
-	std::cout << "AAnimal Sound!" << std::endl;
-}
