@@ -1,10 +1,6 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
-// void checkLeaks(void) {
-// 	system("leaks animal");
-// }
-
 int main(void) {
 	// Animal *animalList[6];
 
@@ -24,9 +20,6 @@ int main(void) {
 
 	Dog dog1;
 	Dog dog2(dog1);
-	Dog dog3(dog1);
-	Dog dog4(dog1);
-	// dog2 = dog1;
 	
 	dog2.makeSound();
 	std::cout << &dog1 << std::endl;
