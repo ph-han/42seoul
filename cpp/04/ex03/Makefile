@@ -12,7 +12,7 @@ SRCS = main.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
-%.o: %.cpp
+%.o: %.cpp %.hpp
 	$(CPP) $(CPPFLAG) -c $< -o $@
 
 all: $(NAME)
