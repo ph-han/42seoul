@@ -3,13 +3,13 @@
 #include "Character.hpp"
 #include "MateriaSource.hpp"
 
-// void cheackLeaks(void) {
+// void checkLeaks(void) {
 // 	system("leaks imple");
 // }
 
 int main()
 {
-	// atexit(cheackLeaks);
+	// atexit(checkLeaks);
 	AMateria *floor[100];
 
 	for (int i = 0; i < 100; i++)

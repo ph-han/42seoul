@@ -12,6 +12,7 @@ int main(void) {
 	j->makeSound();
 	meta->makeSound();
 
+	std::cout << "\n== Wrong Case ==" << std::endl;
 	const WrongAnimal *meta2 = new WrongAnimal();
 	const WrongAnimal *i2 = new WrongCat();
 	std::cout << i2->getType() << " " << std::endl;
