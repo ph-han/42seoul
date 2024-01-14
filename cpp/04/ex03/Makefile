@@ -1,7 +1,7 @@
 NAME = imple
 
 CPP = c++
-CPPFLAG = -Wall -Wextra -Werror -std=c++98 -fsanitize=address -g
+CPPFLAG = -Wall -Wextra -Werror -std=c++98 # -fsanitize=address -g
 
 SRCS = main.cpp \
 	AMateria.cpp \
