@@ -6,12 +6,6 @@ RobotomyRequestForm::~RobotomyRequestForm() {}
 
 const RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &copy)
 {
-	if (this != &copy)
-	{
-		this->operator=(copy);
-		_target = copy._target;
-	}
-	return (*this);
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy) : AForm(copy), _target(copy._target) {}
@@ -22,11 +16,7 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
 	if (executor.getGrade() > getRequiredExecuteGrade())
 		throw GradeTooLowException();
-		
-	if (checkSigned() == false)
-		throw NoSignException();
-
-	srand(time(NULL));
+	
 	if (std::rand() % 2)
 		std::cout << _target << " success" << std::endl;
 	else

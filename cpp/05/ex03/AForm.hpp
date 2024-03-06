@@ -28,15 +28,6 @@ class AForm
 
 		virtual void execute(Bureaucrat const & executor) const = 0;
 
-		class NoSignException : public std::exception
-		{
-		public:
-			virtual const char* what() const throw()
-			{
-				return "Not sign.";
-			}
-		};
-
 		class GradeTooHighException : public std::exception
 		{
 		public:
@@ -56,4 +47,4 @@ class AForm
 		};
 };
 
-std::ostream& operator<<(std::ostream& out, const AForm& obj);
+std::ostream& operator<<(std::ostream& out, const Form& obj);

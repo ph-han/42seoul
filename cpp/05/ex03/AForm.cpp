@@ -1,10 +1,10 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 
-Form::Form() : _name("form"), _isSigned(false), _requiredSignGrade(50), _requiredExecuteGrade(100) {}
+AForm::AForm() : _name("phan"), _isSigned(false), _requiredSignGrade(50), _requiredExecuteGrade(100) {}
 
-Form::~Form() {}
+AForm::~AForm() {}
 
-const Form& Form::operator=(const Form& copy)
+const AForm& AForm::operator=(const AForm& copy)
 {
 	if (this != &copy)
 	{
@@ -17,7 +17,7 @@ const Form& Form::operator=(const Form& copy)
 	return *this;
 }
 
-Form::Form(const Form& copy) : _requiredSignGrade(0), _requiredExecuteGrade(0)
+AForm::AForm(const AForm& copy) : _requiredSignGrade(0), _requiredExecuteGrade(0)
 {
 	if (this == &copy)
 		return ;
@@ -28,27 +28,29 @@ Form::Form(const Form& copy) : _requiredSignGrade(0), _requiredExecuteGrade(0)
 	const_cast<int&>(_requiredExecuteGrade) = copy.getRequiredExecuteGrade();
 }
 
-const std::string &Form::getName(void) const
+AForm::AForm(const std::string& name, const int signGrade, const int executeGrade) : _name(name), _isSigned(false), _requiredSignGrade(signGrade), _requiredExecuteGrade(executeGrade) {}
+
+const std::string& AForm::getName(void) const
 {
 	return _name;
 }
 
-bool Form::checkSigned(void) const
+bool AForm::checkSigned(void) const
 {
 	return _isSigned;
 }
 
-int Form::getRequiredSignGrade(void) const
+int AForm::getRequiredSignGrade(void) const
 {
 	return _requiredSignGrade;
 }
 
-int Form::getRequiredExecuteGrade(void) const
+int AForm::getRequiredExecuteGrade(void) const
 {
 	return _requiredExecuteGrade;
 }
 
-void Form::beSigned(Bureaucrat bureaucrat)
+void AForm::beSigned(Bureaucrat bureaucrat)
 {
 	if (bureaucrat.getGrade() > _requiredSignGrade)
 		throw GradeTooLowException();

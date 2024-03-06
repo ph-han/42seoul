@@ -1,25 +1,20 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main(void)
 {
 	try
 	{
-		// Bureaucrat a;
-		// std::cout << a << std::endl;
-		// a.decrement();
-		// std::cout << a << std::endl;
-		// a.increment();
-		// std::cout << a << std::endl;
-		// a.increment();
-		// std::cout << a << std::endl;
-
 		std::string name = "phan";
-		Bureaucrat b(name, 150);
-		std::cout << b << std::endl;
-		b.decrement();
+		Bureaucrat phan(name, 13);
 
-		// Bureaucrat c(name, 160);
-		// Bureaucrat d(name, 0);
+		name = "hyuim";
+		Bureaucrat hyuim(name, 150);
+
+		Form f1;
+
+		phan.signForm(f1);
+		hyuim.signForm(f1);
 	}
 	catch(const std::exception& e)
 	{
