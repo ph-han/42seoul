@@ -8,7 +8,7 @@ const ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCre
 {
 	if (this != &copy)
 	{
-		this->operator=(copy);
+		AForm::operator=(copy);
 		_target = copy._target;
 	}
 	return (*this);

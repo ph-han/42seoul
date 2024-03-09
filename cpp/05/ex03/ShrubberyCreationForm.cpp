@@ -6,7 +6,12 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 const ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& copy)
 {
-	
+	if (this != &copy)
+	{
+		this->operator=(copy);
+		_target = copy._target;
+	}
+	return (*this);
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& copy) : AForm(copy), _target(copy._target) {}
@@ -17,6 +22,10 @@ void ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 {
 	if (executor.getGrade() > getRequiredExecuteGrade())
 		throw GradeTooLowException();
+
+	if (checkSigned() == false)
+		throw NoSignException();
+
 	std::string filename = _target + "_shrubbery";
 	std::ofstream writeFile(filename);
 	if (writeFile.is_open())

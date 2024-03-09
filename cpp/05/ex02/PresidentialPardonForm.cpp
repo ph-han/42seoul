@@ -8,7 +8,7 @@ const PresidentialPardonForm& PresidentialPardonForm::operator=(const Presidenti
 {
 	if (this != &copy)
 	{
-		this->operator=(copy);
+		AForm::operator=(copy);
 		_target = copy._target;
 	}
 	

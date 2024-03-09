@@ -54,3 +54,9 @@ void Form::beSigned(Bureaucrat bureaucrat)
 		throw GradeTooLowException();
 	_isSigned = true;
 }
+
+std::ostream& operator<<(std::ostream &out, const Form& obj)
+{
+	out << obj.getName() << ", form required sign grade " << obj.getRequiredSignGrade() << ", form required execute grade " << obj.getRequiredExecuteGrade() << " [ sign : " << obj.checkSigned() << " ].";
+	return out;
+}

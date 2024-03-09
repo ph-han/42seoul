@@ -22,10 +22,26 @@ int main(void)
 
 		phan.executeForm(shrubbery);
 
+		std::cout << shrubbery << std::endl;
+		std::cout << robotomy << std::endl;
+		std::cout << pres << std::endl;
+
+		std::cout << "\n------------------------\n"
+				  << std::endl;
+
 		phan.signForm(shrubbery);
 		phan.signForm(robotomy);
 		phan.signForm(pres);
+
+		std::cout << "\n------------------------\n"
+				  << std::endl;
+				  
+		std::cout << shrubbery << std::endl;
+		std::cout << robotomy << std::endl;
+		std::cout << pres << std::endl;
+
 		phan.executeForm(shrubbery);
+		phan.executeForm(robotomy);
 
 		std::cout << "\n------------------------\n"
 				  << std::endl;
