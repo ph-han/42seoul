@@ -1,4 +1,4 @@
-NAME = Form
+NAME = AForm
 
 CPP = c++
 CPPFLAG = -Wall -Wextra -Werror -std=c++98 # -fsanitize=address -g
