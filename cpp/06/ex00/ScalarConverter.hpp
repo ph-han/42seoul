@@ -6,7 +6,10 @@
 
 #define INF_OR_NON	0
 #define ERROR		1
-#define SUCCESS		2
+#define CHAR		2
+#define INT			3
+#define FLOAT		4
+#define DOUBLE		5
 
 class ScalarConverter
 {
@@ -17,10 +20,11 @@ class ScalarConverter
 
 		static int isValidInput(std::string& input);
 
-		static void convertChar(double inData, int flag);
-		static void convertInt(double inData, int flag);
-		static void convertFloat(double inData, int flag);
-		static void convertDouble(double inData, int flag);
+		static void convertCharToOther(char inData, int flag);
+		static void convertIntToOther(int inData, int flag);
+		static void convertFloatToOther(float inData, int flag);
+		static void convertDoubleToOther(double inData, int flag);
+		static void convertInfOrNon(double infOrNon);
 
 	public:
 		~ScalarConverter();
