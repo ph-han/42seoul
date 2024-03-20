@@ -31,27 +31,49 @@ void Base::identify(Base* p)
 	C* c = dynamic_cast<C*>(p);
 
 	if (a != NULL)
-		std::cout << "p is A" << std::endl; 
+		std::cout << "I'm A" << std::endl; 
 
 	if (b != NULL)
-		std::cout << "p is B" << std::endl; 
+		std::cout << "I'm B" << std::endl;
 
 	if (c != NULL)
-		std::cout << "p is C" << std::endl; 
+		std::cout << "I'm C" << std::endl; 
 }
 
 void Base::identify(Base &p)
 {
-	A *a = dynamic_cast<A *>(&p);
-	B *b = dynamic_cast<B *>(&p);
-	C *c = dynamic_cast<C *>(&p);
 
-	if (a != NULL)
-		std::cout << "p is A" << std::endl;
+	try
+	{
+		A& a = dynamic_cast<A&>(p);
+		(void)a;
+		std::cout << "I'm A" << std::endl;
+	}
+	catch(std::exception e)
+	{
+		
+	}
 
-	if (b != NULL)
-		std::cout << "p is B" << std::endl;
+	try
+	{
+		B& b = dynamic_cast<B &>(p);
+		(void)b;
+		std::cout << "I'm B" << std::endl;
+	}
+	catch(std::exception e)
+	{
+		
+	}
 
-	if (c != NULL)
-		std::cout << "p is C" << std::endl;
+	try
+	{
+		C& c = dynamic_cast<C &>(p);
+		(void)c;
+		std::cout << "I'm C" << std::endl;
+	}
+	catch(std::exception e)
+	{
+		
+	}
+
 }

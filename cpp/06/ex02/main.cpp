@@ -10,7 +10,7 @@ int main()
 	b.identify(test1);
 
 	usleep(10000);
-
+	
 	Base &test2 = *(b.generate());
 	b.identify(test2);
 
