@@ -8,6 +8,9 @@ int ScalarConverter::isValidInput(std::string& input)
 	bool isDoubleInfOrNan = input == "inf" | input == "+inf" || input == "-inf" || input == "nan";
 	bool isFloatInfOrNan = input == "inff" | input == "+inff" || input == "-inff" || input == "nanf";
 
+	if (input == ".f")
+		return ERROR;
+		
 	if (isDoubleInfOrNan || isFloatInfOrNan)
 		return INF_OR_NON;
 

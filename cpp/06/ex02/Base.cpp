@@ -15,7 +15,6 @@ Base *Base::generate(void)
 {
 	int idx;
 
-	srand(time(NULL));
 	idx = std::rand() % 3;
 	if (idx == 0)
 		return new A();
