@@ -4,6 +4,7 @@ int ScalarConverter::isValidInput(std::string& input)
 {
 	int pointCnt = 0;
 	int charCnt = 0;
+	int signCnt = 0;
 	size_t idx;
 	bool isDoubleInfOrNan = input == "inf" | input == "+inf" || input == "-inf" || input == "nan";
 	bool isFloatInfOrNan = input == "inff" | input == "+inff" || input == "-inff" || input == "nanf";
@@ -24,11 +25,13 @@ int ScalarConverter::isValidInput(std::string& input)
 	{
 		bool notPoint = input[idx] != '.';
 		bool notNumber = input[idx] < '0' || input[idx] > '9';
+		bool notSign = input[idx] != '-' && input[idx] != '+';
 
-		charCnt += (notPoint && notNumber);
+		charCnt += (notPoint && notNumber && notSign);
 		pointCnt += (notPoint == false);
+		signCnt += (notSign == false);
 
-		if (charCnt >= 2 || pointCnt >= 2)
+		if (charCnt >= 2 || pointCnt >= 2 || signCnt >= 2)
 			return ERROR;
 	}
 
@@ -37,7 +40,7 @@ int ScalarConverter::isValidInput(std::string& input)
 	if (notFloatSymbol || (pointCnt == 0 && input[idx - 1] == 'f'))
 		return ERROR;
 
-	if (pointCnt == 1 && input[idx] == 'f')
+	if (pointCnt == 1 && input[idx - 1] == 'f')
 		return FLOAT;
 
 	if (pointCnt == 1)
@@ -120,7 +123,10 @@ void ScalarConverter::convertFloatToOther(float inData, int flag)
 		std::cout << ".0";
 	std::cout << "f" << std::endl;
 
-	std::cout << "double: " << convertDouble;
+	if (flag == INF_OR_NON)
+		std::cout << "double: " << inData;
+	else
+		std::cout << "double: " << convertDouble;
 	if ((convertDouble - convertInt) == 0.0)
 		std::cout << ".0";
 	std::cout << std::endl;
@@ -195,7 +201,7 @@ void ScalarConverter::convert(std::string input)
 	case FLOAT:
 		{
 			float dataFloat = std::strtof(input.c_str(), NULL);
-			if (dataFloat > std::numeric_limits<float>::max() || dataFloat > -std::numeric_limits<float>::max())
+			if (dataFloat > std::numeric_limits<float>::max() || dataFloat < -(std::numeric_limits<float>::max()))
 				flag = INF_OR_NON;
 			convertFloatToOther(dataFloat, flag);
 		}
