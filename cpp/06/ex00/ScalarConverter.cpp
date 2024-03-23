@@ -61,7 +61,7 @@ void ScalarConverter::convertCharToOther(char inData, int flag)
 		return ;
 	}
 
-	if (inData < 32)
+	if (inData < 32 || inData == 127)
 		std::cout << "char: Non displayable" << std::endl;
 	else
 		std::cout << "char: '" << inData << "'" << std::endl;
@@ -86,8 +86,10 @@ void ScalarConverter::convertIntToOther(int inData, int flag)
 		return;
 	}
 
-	if (inData < 32)
+	if (inData < 32 || inData == 127)
 		std::cout << "char: Non displayable" << std::endl;
+	else if(inData > CHAR_MAX || inData < CHAR_MIN)
+		std::cout << "char: impossible" << std::endl;
 	else
 		std::cout << "char: '" << convertChar << "'" << std::endl;
 
@@ -101,14 +103,14 @@ void ScalarConverter::convertFloatToOther(float inData, int flag)
 	int convertInt  = static_cast<int>(inData);
 	double convertDouble = static_cast<double>(inData);
 
-	if (flag == INF_OR_NON)
+	if (flag == INF_OR_NON || inData > CHAR_MAX || inData < CHAR_MIN)
 		std::cout << "char: impossible" << std::endl;
-	else if (inData < 32)
+	else if (inData < 32 || inData == 127)
 		std::cout << "char: Non displayable" << std::endl;
 	else
 		std::cout << "char: '" << convertChar << "'" << std::endl;
 
-	if (flag == INF_OR_NON)
+	if (flag == INF_OR_NON || inData > INT32_MAX || inData < INT32_MIN)
 		std::cout << "int: impossibble" << std::endl;
 	else
 		std::cout << "int: " << convertInt << std::endl;
@@ -132,7 +134,7 @@ void ScalarConverter::convertDoubleToOther(double inData, int flag)
 
 	if (flag == INF_OR_NON || inData > CHAR_MAX || inData < CHAR_MIN)
 		std::cout << "char: impossible" << std::endl;
-	else if (inData < 32)
+	else if (inData < 32 || inData == 127)
 		std::cout << "char: Non displayable" << std::endl;
 	else
 		std::cout << "char: '" << convertChar << "'" << std::endl;
