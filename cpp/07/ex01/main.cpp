@@ -11,7 +11,7 @@ int main()
 	std::cout << "before : ";
 	for (int i = 0; i < 7; i++)
 		std::cout << a[i] << " ";
-	iter(a, 7, increase);
+	iter(a, 7, increase<int>);
 	std::cout << "\nafter : ";
 	for (int i = 0; i < 7; i++)
 		std::cout << a[i] << " ";
@@ -22,7 +22,7 @@ int main()
 	std::cout << "before : ";
 	for (int i = 0; i < 7; i++)
 		std::cout << b[i] << " ";
-	iter(b, 7, increase);
+	iter(b, 7, increase<char>);
 	std::cout << "\nafter : ";
 	for (int i = 0; i < 7; i++)
 		std::cout << b[i] << " ";
@@ -33,7 +33,7 @@ int main()
 	std::cout << "before : ";
 	for (int i = 0; i < 7; i++)
 		std::cout << c[i] << " ";
-	iter(c, 7, increase);
+	iter(c, 7, increase<double>);
 	std::cout << "\nafter : ";
 	for (int i = 0; i < 7; i++)
 		std::cout << c[i] << " ";

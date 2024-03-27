@@ -16,7 +16,8 @@ class Array
 		}
 
 		~Array() {
-			delete [] _elements;
+			if (_elements)
+				delete [] _elements;
 			_elements = NULL;
 		}
 
