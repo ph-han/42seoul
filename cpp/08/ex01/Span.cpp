@@ -39,6 +39,19 @@ void Span::addNumber(int input)
 	_n++;
 }
 
+void Span::addNumber(std::vector<int> input)
+{
+
+	for (size_t i = 0; i < input.size(); i++)
+	{
+		if (_max <= _n)
+			throw std::exception();
+		_dataList.push_back(input[i]);
+		_n++;
+	}
+	std::sort(_dataList.begin(), _dataList.end());
+}
+
 int Span::shortestSpan()
 {
 	if (_n < 2)

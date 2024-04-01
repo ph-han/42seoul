@@ -22,6 +22,7 @@ class Span
 		const Span& operator=(const Span& copy);
 
 		void addNumber(int input);
+		void addNumber(std::vector<int> input);
 
 		int shortestSpan();
 		int longestSpan();
