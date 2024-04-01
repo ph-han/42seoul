@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
+#include <exception>
 
 class Span
 {
@@ -11,8 +12,6 @@ class Span
 		unsigned int _n;
 
 		std::vector<int> _dataList;
-		unsigned int _shortestSpanNum;
-		unsigned int _longestSpanNum;
 
 		Span();
 

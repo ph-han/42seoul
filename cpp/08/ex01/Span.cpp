@@ -1,8 +1,9 @@
 #include "Span.hpp"
+#include <iostream>
 
 Span::~Span() {}
 
-Span::Span(unsigned int n) : _max(n), _n(0), _shortestSpanNum(INT_MAX), _longestSpanNum(0) {}
+Span::Span(unsigned int n) : _max(n), _n(0) {}
 
 Span::Span(const Span &copy)
 {
@@ -12,8 +13,6 @@ Span::Span(const Span &copy)
 		_n = copy._n;
 		for (unsigned int i = 0; i < copy._n; i++)
 			_dataList[i] = copy._dataList[i];
-		_shortestSpanNum = copy._shortestSpanNum;
-		_longestSpanNum = copy._longestSpanNum;
 	}
 }
 
@@ -25,8 +24,6 @@ const Span &Span::operator=(const Span &copy)
 		_n = copy._n;
 		for (unsigned int i = 0; i < copy._n; i++)
 			_dataList[i] = copy._dataList[i];
-		_shortestSpanNum = copy._shortestSpanNum;
-		_longestSpanNum = copy._longestSpanNum;
 	}
 
 	return *this;
@@ -35,38 +32,30 @@ const Span &Span::operator=(const Span &copy)
 void Span::addNumber(int input)
 {
 	if (_max <= _n)
-		throw 1;
+		throw std::exception();
 
 	_dataList.push_back(input);
 	std::sort(_dataList.begin(), _dataList.end());
 	_n++;
-
-	for (unsigned int i = 0; i < _n; i++)
-	{
-		for (unsigned int j = i + 1; j < _n; j++)
-		{
-			unsigned int span = abs(_dataList[i] - _dataList[j]);
-			if (span < _shortestSpanNum)
-				_shortestSpanNum = span;
-			if (span > _longestSpanNum)
-				_longestSpanNum = span;
-		}
-	}
-	
 }
 
 int Span::shortestSpan()
 {
 	if (_n < 2)
-		throw 1;
-
-	return _shortestSpanNum;
+		throw std::exception();
+	unsigned int shortestSpanNum = INT_MAX;
+	for (unsigned int i = 0; i < _n - 1; i++)
+	{
+		unsigned int span = abs(_dataList[i + 1] - _dataList[i]);
+		if (span < shortestSpanNum)
+			shortestSpanNum = span;
+	}
+	return shortestSpanNum;
 }
 
 int Span::longestSpan()
 {
 	if (_n < 2)
-		throw 1;
-
-	return _longestSpanNum;
+		throw std::exception();
+	return abs(_dataList[_n - 1] - _dataList[0]);
 }
