@@ -44,10 +44,10 @@ int main(void)
 
 	std::cout << "=========== mutant stack copy constructor check ===========" << std::endl;
 	MutantStack<int> ccMstack(mstack);
-	MutantStack<int>::iterator it2 = ccMstack.begin();
-	MutantStack<int>::iterator ite2 = ccMstack.end();
-	++it2;
-	--it2;
+	MutantStack<int>::reverse_iterator it2 = ccMstack.rbegin();
+	MutantStack<int>::reverse_iterator ite2 = ccMstack.rend();
+	// ++it2;
+	// --it2;
 	while (it2 != ite2)
 	{
 		std::cout << *it2 << std::endl;

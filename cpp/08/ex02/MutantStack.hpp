@@ -33,6 +33,17 @@ class MutantStack : public std::stack<T>
 			return std::stack<T>::c.end();
 		}
 
+		typename std::stack<T>::container_type::reverse_iterator rbegin(void)
+		{
+			return std::stack<T>::c.rbegin();
+		}
+
+		typename std::stack<T>::container_type::reverse_iterator rend(void)
+		{
+			return std::stack<T>::c.rend();
+		}
+
 		typedef typename std::stack<T>::container_type::iterator iterator;
+		typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
 };
 
