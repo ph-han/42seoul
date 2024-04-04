@@ -5,9 +5,7 @@ RPN::~RPN() {}
 const RPN &RPN::operator=(const RPN &copy)
 {
 	if (this != &copy)
-	{
-
-	}
+        _exp = copy._exp;
 
 	return *this;
 }
@@ -15,8 +13,7 @@ const RPN &RPN::operator=(const RPN &copy)
 RPN::RPN(const RPN &copy)
 {
 	if (this != &copy)
-	{
-	}
+        _exp = copy._exp;
 }
 
 RPN::RPN(char* expression) : _exp(expression) {}
@@ -39,9 +36,8 @@ void RPN::calc(void)
 
 		bool isOperator = ((_exp[i] == '+') || (_exp[i] == '-') || (_exp[i] == '*') || (_exp[i] == '/'));
 		bool isOperand = (_exp[i] >= '0' && _exp[i] <= '9');
-		bool isNotValidInput = (isOperand == false) && (isOperator == false);
 
-		if (isNotValidInput == true)
+		if (isOperand == false && isOperator == false)
 		{
 			errFlag = true;
 			break;
@@ -50,7 +46,10 @@ void RPN::calc(void)
 		if (isOperand)
 			operands.push(char2int(_exp[i]));
 		else if (operands.size() < 2)
-			continue;
+        {
+            errFlag = true;
+            break;
+        }
 		else
 		{
 			int b = operands.top(); operands.pop();
