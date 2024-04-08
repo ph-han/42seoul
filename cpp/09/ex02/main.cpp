@@ -16,7 +16,7 @@ int main(int ac, char** av)
 		return 1;
 	}
 
-	pmergeme.print("Befor:\t", ITEM);
+	// pmergeme.print("Befor:\t", ITEM);
 	pmergeme.mergeInsertionSort();
 	// pmergeme.print("After:\t", ITEM);
 

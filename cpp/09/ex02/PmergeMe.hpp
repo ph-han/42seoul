@@ -8,18 +8,28 @@
 #define ITEM 0
 #define TIME 1
 
+struct Node
+{
+	int data;
+	int depth;
+	std::deque<Node*> pendingElements;
+};
+
 class PmergeMe
 {
 	private:
-		std::deque< int > _mainChain;
-		std::deque< int > _pendingElements;
+		std::deque<Node> _mainChain;
+		std::deque<Node> _remain;
 		bool _errFlag;
 		
 		PmergeMe();
 
-		void swap(std::deque<int>::iterator* a, std::deque<int>::iterator* b, int size);
-		int divide(int pairSize);
-		void conquer();
+		void merge();
+		void insertion();
+
+		int binarySearch(int low, int high, int target);
+		int countSameDepth();
+
 	public:
 		~PmergeMe();
 		const PmergeMe& operator=(const PmergeMe& copy);
