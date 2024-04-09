@@ -97,6 +97,14 @@ void BitcoinExchange::exchange(char* filename)
 	infs.close();
 }
 
+bool BitcoinExchange::isLeapYear(int year) {
+    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 size_t BitcoinExchange::makeHash(const std::string &date)
 {
 	const size_t hashMultiplier = 31;
@@ -111,7 +119,13 @@ size_t BitcoinExchange::makeHash(const std::string &date)
 	if (year < 0 || (month > 12 || month < 1) || (day < 1 || day > 31))
 		return -1;
 
-	if ((month == 2 || month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
+	if (isLeapYear(year) == true && month == 2 && day > 28)
+		return -1;
+
+	if (isLeapYear(year) == false && month == 2 && day > 29)
+		return -1;
+
+	if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
 		return -1;
 
 	hashValue += year * hashMultiplier * hashMultiplier;

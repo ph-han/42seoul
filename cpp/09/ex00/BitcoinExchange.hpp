@@ -17,6 +17,7 @@ class BitcoinExchange
 
 		size_t findClosestDate(size_t date);
 		void trim(std::string& str);
+		bool BitcoinExchange::isLeapYear(int year);
 	public:
 		BitcoinExchange();
 		~BitcoinExchange();
