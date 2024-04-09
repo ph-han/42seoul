@@ -27,13 +27,10 @@ class PmergeMe
 
 		void merge();
 		void insertion();
-
-		int binarySearch(int low, int high, int target);
-		void getSameDepthElements(std::deque<Node>& b);
-
-		int getCurrMaxDepth();
-
 		void makeJacobsthalNumbers();
+		void getSameDepthElements(std::deque<Node>& b);
+		int getCurrMaxDepth();
+		int binarySearch(int low, int high, int target);
 
 	public:
 		~PmergeMe();
@@ -44,4 +41,6 @@ class PmergeMe
 		void print(const char* msg, int flag);
 		void mergeInsertionSort();
 		bool error();
+
+		std::deque<int> test;
 };

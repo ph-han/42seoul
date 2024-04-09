@@ -19,6 +19,6 @@ int main(int ac, char** av)
 	pmergeme.print("Befor:\t", ITEM);
 	pmergeme.mergeInsertionSort();
 	pmergeme.print("After:\t", ITEM);
-
+	std::sort(pmergeme.test.begin(), pmergeme.test.end());
 	return 0;
 }

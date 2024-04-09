@@ -1,12 +1,30 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::~PmergeMe() {}
+PmergeMe::~PmergeMe()
+{
+	for (size_t i = 0; i < _mainChain.size(); i++)
+	{
+		std::deque<Node*>::iterator it = (_mainChain.begin() + i)->pendingElements.begin();
+		size_t pendingElementsSize = (_mainChain.begin() + i)->pendingElements.size();
+		for (size_t j = 0; j < pendingElementsSize; j++)
+			delete *(it + j);
+	}
+	for (size_t i = 0; i < _remain.size(); i++)
+	{
+		std::deque<Node*>::iterator it = (_remain.begin() + i)->pendingElements.begin();
+		size_t pendingElementsSize = (_remain.begin() + i)->pendingElements.size();
+		for (size_t j = 0; j < pendingElementsSize; j++)
+			delete *(it + j);
+	}
+}
 
 const PmergeMe &PmergeMe::operator=(const PmergeMe& copy)
 {
 	if (this != &copy)
 	{
 		_mainChain = copy._mainChain;
+		_remain = copy._remain;
+		_jacobsthalNumList = copy._jacobsthalNumList;
 		_errFlag = copy._errFlag;
 	}
 
@@ -18,6 +36,8 @@ PmergeMe::PmergeMe(const PmergeMe& copy)
 	if (this != &copy)
 	{
 		_mainChain = copy._mainChain;
+		_remain = copy._remain;
+		_jacobsthalNumList = copy._jacobsthalNumList;
 		_errFlag = copy._errFlag;
 	}
 }
@@ -35,6 +55,7 @@ PmergeMe::PmergeMe(int argc, char** argv): _errFlag(false)
 			_errFlag = true;
 			break ;
 		}
+		test.push_back(tmp);
 		Node tmpNode;
 		tmpNode.data = tmp;
 		tmpNode.depth = 0;
@@ -51,7 +72,6 @@ void PmergeMe::print(const char* msg, int flag)
 	std::cout << msg;
 	if (flag == ITEM)
 	{
-		// std::cout << "depth : " << it->depth << std::endl;
 		while (it != ite)
 		{
 			std::cout << it->data << " ";
@@ -104,7 +124,6 @@ void PmergeMe::merge()
 		_mainChain.erase(_mainChain.begin() + idx);
 	}
 
-	// print("merge : ", ITEM);
 	merge();
 }
 
@@ -151,7 +170,6 @@ int PmergeMe::binarySearch(int low, int high, int target)
 
 	if (low >= high)
 	{
-		// std::cout << "low: " << low << "high: " << high << "mid : " << mid << std::endl;
 		if ((beginMain + high)->data < target)
 			return mid + 1;
 		return mid;
@@ -220,10 +238,6 @@ void PmergeMe::makeJacobsthalNumbers()
 			break ;
 		i++;
 	}
-
-	for (int i = 0; i < (int)_jacobsthalNumList.size(); i++)
-		std::cout << *(_jacobsthalNumList.begin() + i) << " ";
-	std::cout << std::endl;
 }
 
 void PmergeMe::mergeInsertionSort()
