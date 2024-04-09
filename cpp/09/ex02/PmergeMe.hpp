@@ -20,15 +20,20 @@ class PmergeMe
 	private:
 		std::deque<Node> _mainChain;
 		std::deque<Node> _remain;
+		std::deque<int> _jacobsthalNumList;
 		bool _errFlag;
-		
+
 		PmergeMe();
 
 		void merge();
 		void insertion();
 
 		int binarySearch(int low, int high, int target);
-		int countSameDepth();
+		void getSameDepthElements(std::deque<Node>& b);
+
+		int getCurrMaxDepth();
+
+		void makeJacobsthalNumbers();
 
 	public:
 		~PmergeMe();
