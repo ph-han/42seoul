@@ -148,12 +148,12 @@ void PmergeMe::insertion()
 
 	std::deque<int>::iterator it = _jacobsthalNumList.begin();
 
-	for (size_t idx = 0; idx < _jacobsthalNumList.size(); idx++)
+	for (size_t idx = 2; idx < _jacobsthalNumList.size(); idx++)
 	{
-		int start = *(it + idx);
+		int start = *(it + idx) - 1;
 		if (start >= static_cast<int>(b.size()))
 			start = b.size() - 1;
-		int end = (idx == 0) ? -1 : *(it + idx - 1);
+		int end = (idx == 2) ? -1 : *(it + idx - 1) - 1;
 		while (start > end)
 		{
 			size_t high = (b.begin() + start)->mainData != -1 ? findIdx((b.begin() + start)->mainData) : _mainChain.size();
@@ -326,12 +326,12 @@ void PmergeMe::list_insertion()
 
 	std::deque<int>::iterator it = _jacobsthalNumList.begin();
 
-	for (size_t idx = 0; idx < _jacobsthalNumList.size(); idx++)
+	for (size_t idx = 2; idx < _jacobsthalNumList.size(); idx++)
 	{
-		int start = *(it + idx);
+		int start = *(it + idx) - 1;
 		if (start >= static_cast<int>(b.size()))
 			start = b.size() - 1;
-		int end = (idx == 0) ? -1 : *(it + idx - 1);
+		int end = (idx == 2) ? -1 : *(it + idx - 1) - 1;
 		while (start > end)
 		{
 			size_t high = (b.begin() + start)->mainData != -1 ? list_findIdx((b.begin() + start)->mainData) : _list_mainChain.size();
