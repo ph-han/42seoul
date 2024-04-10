@@ -162,8 +162,8 @@ size_t BitcoinExchange::findClosestDate(size_t date)
 	size_t closestDate = it->first;
 	while (it != ite)
 	{
-		size_t tmp = it->first > date ? it->first - date : date - it->first;
-		if (shortestSpan > tmp)
+		size_t tmp = date - it->first;
+		if (tmp >= 0 && shortestSpan > tmp)
 		{
 			shortestSpan = tmp;
 			closestDate = it->first;
