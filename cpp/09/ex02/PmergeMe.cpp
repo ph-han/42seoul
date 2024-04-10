@@ -2,20 +2,20 @@
 
 PmergeMe::~PmergeMe()
 {
-	for (size_t i = 0; i < _mainChain.size(); i++)
-	{
-		std::deque<Node*>::iterator it = (_mainChain.begin() + i)->pendingElements.begin();
-		size_t pendingElementsSize = (_mainChain.begin() + i)->pendingElements.size();
-		for (size_t j = 0; j < pendingElementsSize; j++)
-			delete *(it + j);
-	}
-	for (size_t i = 0; i < _remain.size(); i++)
-	{
-		std::deque<Node*>::iterator it = (_remain.begin() + i)->pendingElements.begin();
-		size_t pendingElementsSize = (_remain.begin() + i)->pendingElements.size();
-		for (size_t j = 0; j < pendingElementsSize; j++)
-			delete *(it + j);
-	}
+	// for (size_t i = 0; i < _mainChain.size(); i++)
+	// {
+	// 	std::deque<Node*>::iterator it = (_mainChain.begin() + i)->pendingElements.begin();
+	// 	size_t pendingElementsSize = (_mainChain.begin() + i)->pendingElements.size();
+	// 	for (size_t j = 0; j < pendingElementsSize; j++)
+	// 		delete *(it + j);
+	// }
+	// for (size_t i = 0; i < _remain.size(); i++)
+	// {
+	// 	std::deque<Node*>::iterator it = (_remain.begin() + i)->pendingElements.begin();
+	// 	size_t pendingElementsSize = (_remain.begin() + i)->pendingElements.size();
+	// 	for (size_t j = 0; j < pendingElementsSize; j++)
+	// 		delete *(it + j);
+	// }
 }
 
 const PmergeMe &PmergeMe::operator=(const PmergeMe& copy)
@@ -42,7 +42,9 @@ PmergeMe::PmergeMe(const PmergeMe& copy)
 	}
 }
 
-PmergeMe::PmergeMe(int argc, char** argv): _errFlag(false)
+PmergeMe::PmergeMe(): _errFlag(false) {}
+
+void PmergeMe::setElements(int argc, char** argv)
 {
 	int tmp = -1;
 
@@ -53,44 +55,50 @@ PmergeMe::PmergeMe(int argc, char** argv): _errFlag(false)
 		if (iss.fail() || iss.eof() != true || tmp < 0)
 		{
 			_errFlag = true;
-			break ;
+			break;
 		}
-		test.push_back(tmp);
 		Node tmpNode;
 		tmpNode.data = tmp;
 		tmpNode.depth = 0;
+		tmpNode.mainData = -1;
 		_mainChain.push_back(tmpNode);
+		_list_mainChain.push_back(tmpNode);
 	}
 	makeJacobsthalNumbers();
 }
 
-void PmergeMe::print(const char* msg, int flag)
+void PmergeMe::print(const char* msg)
 {
 	std::deque<Node>::iterator it = _mainChain.begin();
 	std::deque<Node>::iterator ite = _mainChain.end();
 
 	std::cout << msg;
-	if (flag == ITEM)
+	while (it != ite)
 	{
-		while (it != ite)
-		{
-			std::cout << it->data << " ";
-			if (it->pendingElements.size() != 0)
-			{
-				std::cout << " | pending elements : ";
-				for (unsigned int i = 0; i < it->pendingElements.size(); i++)
-					std::cout << "(" << (*(it->pendingElements.begin() + i))->data << ", "
-							<< "depth : " << (*(it->pendingElements.begin() + i))->depth << ") ";
-				std::cout << std::endl;
-			}
-			it++;
-		}
-	}
-	else
-	{
-		std::cout << "62.123123 us";
+		std::cout << it->data << " ";
+		// if (it->pendingElements.size() != 0)
+		// {
+		// 	std::cout << " | pending elements : ";
+		// 	for (unsigned int i = 0; i < it->pendingElements.size(); i++)
+		// 		std::cout << "(" << (*(it->pendingElements.begin() + i))->data << ", "
+		// 				<< "depth : " << (*(it->pendingElements.begin() + i))->depth << ") ";
+		// 	std::cout << std::endl;
+		// }
+		it++;
 	}
 	std::cout << std::endl;
+}
+
+size_t PmergeMe::findIdx(int data)
+{
+	std::deque<Node>::iterator head = _mainChain.begin();
+	size_t idx;
+
+	for (idx = 0; idx < _mainChain.size(); idx++)
+		if (data == (head + idx)->data)
+			break ;
+
+	return idx;   
 }
 
 void PmergeMe::merge()
@@ -105,8 +113,9 @@ void PmergeMe::merge()
 	while (iter < maxLoop)
 	{
 		if (it->data < (it + 1)->data)
-			std::swap(*it, *(it + 1));
+			std::iter_swap(it, (it + 1));
 		Node *pendingElement = new Node(*(it + 1));
+		pendingElement->mainData = it->data;
 		it->pendingElements.push_front(pendingElement);
 		it->depth += 1;
 		it += 2;
@@ -147,7 +156,8 @@ void PmergeMe::insertion()
 		int end = (idx == 0) ? -1 : *(it + idx - 1);
 		while (start > end)
 		{
-			insertIdx = binarySearch(0, _mainChain.size(), (b.begin() + start)->data);
+			size_t high = (b.begin() + start)->mainData != -1 ? findIdx((b.begin() + start)->mainData) : _mainChain.size();
+			insertIdx = binarySearch(0, high, (b.begin() + start)->data);
 			_mainChain.insert(_mainChain.begin() + insertIdx, *(b.begin() + start));
 			--start;
 		}
@@ -246,16 +256,164 @@ void PmergeMe::mergeInsertionSort()
 	insertion();
 }
 
+void PmergeMe::list_mergeInsertionSort()
+{
+	list_merge();
+	list_insertion();
+}
+
+size_t PmergeMe::list_findIdx(int data)
+{
+	std::list<Node>::iterator head = _list_mainChain.begin();
+	std::list<Node>::iterator tail = _list_mainChain.end();
+	size_t idx = 0;
+
+	while (head != tail)
+	{
+		if (data == head->data)
+			break;
+		idx++;
+		head++;
+	}
+
+	return idx;
+}
+
+void PmergeMe::list_merge()
+{
+	if (_list_mainChain.size() == 1)
+		return;
+
+	std::list<Node>::iterator it = _list_mainChain.begin();
+
+	int maxLoop = _list_mainChain.size() / 2;
+	int iter = 0;
+	while (iter < maxLoop)
+	{
+		if (it->data < std::next(it)->data)
+			std::iter_swap(it, std::next(it));
+		Node *pendingElement = new Node(*(std::next(it)));
+		pendingElement->mainData = it->data;
+		it->pendingElements.push_front(pendingElement);
+		it->depth += 1;
+		iter++;
+		it = std::next(it, 2);
+	}
+
+	if (it != _list_mainChain.end())
+	{
+		_list_remain.push_front(*(std::prev(_list_mainChain.end())));
+		_list_mainChain.erase(std::prev(_list_mainChain.end()));
+	}
+
+	it = _list_mainChain.begin();
+	for (unsigned int idx = 1; idx < _list_mainChain.size(); idx++)
+	{
+		_list_mainChain.erase(std::next(it, idx));
+	}
+	list_merge();
+}
+
+void PmergeMe::list_insertion()
+{
+	std::deque<Node> b;
+	int insertIdx = -1;
+
+	if (list_getCurrMaxDepth() == 0)
+		return;
+
+	list_getSameDepthElements(b);
+
+	std::deque<int>::iterator it = _jacobsthalNumList.begin();
+
+	for (size_t idx = 0; idx < _jacobsthalNumList.size(); idx++)
+	{
+		int start = *(it + idx);
+		if (start >= static_cast<int>(b.size()))
+			start = b.size() - 1;
+		int end = (idx == 0) ? -1 : *(it + idx - 1);
+		while (start > end)
+		{
+			size_t high = (b.begin() + start)->mainData != -1 ? list_findIdx((b.begin() + start)->mainData) : _list_mainChain.size();
+			insertIdx = list_binarySearch(0, high, (b.begin() + start)->data);
+			_list_mainChain.insert(std::next(_list_mainChain.begin(), insertIdx), *(b.begin() + start));
+			--start;
+		}
+	}
+	list_insertion();
+}
+
+int PmergeMe::list_binarySearch(int low, int high, int target)
+{
+	int mid = (low + high) / 2;
+	std::list<Node>::iterator beginMain = _list_mainChain.begin();
+
+	if (high < 0)
+		return 0;
+
+	if (low >= static_cast<int>(_list_mainChain.size()))
+		return _list_mainChain.size();
+
+	if (low >= high)
+	{
+		if (std::next(beginMain, high)->data < target)
+			return mid + 1;
+		return mid;
+	}
+
+	if (std::next(beginMain, mid)->data == target)
+		return mid;
+	else if (std::next(beginMain, mid)->data > target)
+		return list_binarySearch(low, mid - 1, target);
+	else
+		return list_binarySearch(mid + 1, high, target);
+}
+
+void PmergeMe::list_getSameDepthElements(std::deque<Node> &b)
+{
+	for (size_t idx = 0; idx < _list_mainChain.size(); idx++)
+	{
+		std::deque<Node *>::iterator it = std::next(_list_mainChain.begin(), idx)->pendingElements.begin();
+		std::deque<Node *>::iterator ite = std::next(_list_mainChain.begin(), idx)->pendingElements.end();
+
+		int maxDepth = list_getCurrMaxDepth();
+
+		while (it != ite)
+		{
+			if (maxDepth - 1 != (*it)->depth)
+				break;
+			b.push_back(*(*it));
+			std::next(_list_mainChain.begin(), idx)->pendingElements.pop_front();
+			it = std::next(_list_mainChain.begin(), idx)->pendingElements.begin();
+		}
+		if (std::next(_list_mainChain.begin(), idx)->depth == maxDepth)
+			std::next(_list_mainChain.begin(), idx)->depth--;
+	}
+
+	if (_list_remain.empty() == false && _list_mainChain.front().depth == _list_remain.front().depth)
+	{
+		b.push_back(_list_remain.front());
+		_list_remain.pop_front();
+	}
+}
+
+int PmergeMe::list_getCurrMaxDepth()
+{
+	int maxDepth = _list_mainChain.front().depth;
+	for (size_t idx = 0; idx < _list_mainChain.size(); idx++)
+	{
+		if (maxDepth < std::next(_list_mainChain.begin(), idx)->depth)
+			maxDepth = std::next(_list_mainChain.begin(), idx)->depth;
+	}
+	return maxDepth;
+}
+
 bool PmergeMe::error()
 {
 	return _errFlag;
 }
 
-/**
- *
- * (19 / 5) (8 / 3) (15 / 4) (30 / 28) (29 / 7) (10 / 2) (31 / 6) (24 / 14) (25 / 1) (17 9) (26 18) (20 12) (27 16) (21 13) (23 22) 11
- * (19 5 / 8 3) (30 28 / 15 4) (29 7 / 10 2) (31 6 / 24 14) (25 1 / 17 9) (26 18 / 20 12) (27 16 / 21 13) (23 22) 11
- * (30 28 15 4 19 5 8 3) (31 6 24 14 29 7 10 2) (26 18 20 12 25 1 17 9) (27 16 21 13) (23 22) 11
- * (31 6 24 14 29 7 10 2  / 30 28 15 4 19 5 8 3) 26 18 20 12 25 1 17 9 27 16 21 13 23 22 11
-
- */
+size_t PmergeMe::getElementsSize()
+{
+	return _mainChain.size();
+}
