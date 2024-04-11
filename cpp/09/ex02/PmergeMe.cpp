@@ -1,36 +1,6 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::~PmergeMe()
-{
-	// for (size_t i = 0; i < _mainChain.size(); i++)
-	// {
-	// 	std::deque<Node*>::iterator it = (_mainChain.begin() + i)->pendingElements.begin();
-	// 	size_t pendingElementsSize = (_mainChain.begin() + i)->pendingElements.size();
-	// 	for (size_t j = 0; j < pendingElementsSize; j++)
-	// 		delete *(it + j);
-	// }
-	// for (size_t i = 0; i < _remain.size(); i++)
-	// {
-	// 	std::deque<Node*>::iterator it = (_remain.begin() + i)->pendingElements.begin();
-	// 	size_t pendingElementsSize = (_remain.begin() + i)->pendingElements.size();
-	// 	for (size_t j = 0; j < pendingElementsSize; j++)
-	// 		delete *(it + j);
-	// }
-	// for (size_t i = 0; i < _list_mainChain.size(); i++)
-	// {
-	// 	std::deque<Node *>::iterator it = std::next(_list_mainChain.begin(), i)->pendingElements.begin();
-	// 	size_t pendingElementsSize = std::next(_list_mainChain.begin(), i)->pendingElements.size();
-	// 	for (size_t j = 0; j < pendingElementsSize; j++)
-	// 		delete *(it + j);
-	// }
-	// for (size_t i = 0; i < _list_remain.size(); i++)
-	// {
-	// 	std::deque<Node *>::iterator it = std::next(_list_remain.begin(), i)->pendingElements.begin();
-	// 	size_t pendingElementsSize = std::next(_list_remain.begin(), i)->pendingElements.size();
-	// 	for (size_t j = 0; j < pendingElementsSize; j++)
-	// 		delete *(it + j);
-	// }
-}
+PmergeMe::~PmergeMe() {}
 
 const PmergeMe &PmergeMe::operator=(const PmergeMe& copy)
 {
@@ -406,8 +376,8 @@ void PmergeMe::list_getSameDepthElements(std::deque<Node> &b)
 {
 	for (size_t idx = 0; idx < _list_mainChain.size(); idx++)
 	{
-		std::deque<Node *>::iterator it = std::next(_list_mainChain.begin(), idx)->pendingElements.begin();
-		std::deque<Node *>::iterator ite = std::next(_list_mainChain.begin(), idx)->pendingElements.end();
+		std::deque<Node *>::iterator it = next(_list_mainChain.begin(), idx)->pendingElements.begin();
+		std::deque<Node *>::iterator ite = next(_list_mainChain.begin(), idx)->pendingElements.end();
 
 		int maxDepth = list_getCurrMaxDepth();
 
