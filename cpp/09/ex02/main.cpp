@@ -1,13 +1,8 @@
 #include "PmergeMe.hpp"
 
-void leak_check()
-{
-	system("leaks PmergeMe");
-}
 
 int main(int ac, char** av)
 {
-	atexit(leak_check);
 	if (ac < 2)
 	{
 		std::cout << "Error: Input arguments" << std::endl;
