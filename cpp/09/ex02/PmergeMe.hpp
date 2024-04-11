@@ -45,6 +45,8 @@ class PmergeMe
 		int list_binarySearch(int low, int high, int target);
 
 		void makeJacobsthalNumbers();
+
+		Node* copyNode(Node& target);
 	public:
 		PmergeMe();
 		~PmergeMe();

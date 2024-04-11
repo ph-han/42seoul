@@ -16,6 +16,20 @@ PmergeMe::~PmergeMe()
 	// 	for (size_t j = 0; j < pendingElementsSize; j++)
 	// 		delete *(it + j);
 	// }
+	// for (size_t i = 0; i < _list_mainChain.size(); i++)
+	// {
+	// 	std::deque<Node *>::iterator it = std::next(_list_mainChain.begin(), i)->pendingElements.begin();
+	// 	size_t pendingElementsSize = std::next(_list_mainChain.begin(), i)->pendingElements.size();
+	// 	for (size_t j = 0; j < pendingElementsSize; j++)
+	// 		delete *(it + j);
+	// }
+	// for (size_t i = 0; i < _list_remain.size(); i++)
+	// {
+	// 	std::deque<Node *>::iterator it = std::next(_list_remain.begin(), i)->pendingElements.begin();
+	// 	size_t pendingElementsSize = std::next(_list_remain.begin(), i)->pendingElements.size();
+	// 	for (size_t j = 0; j < pendingElementsSize; j++)
+	// 		delete *(it + j);
+	// }
 }
 
 const PmergeMe &PmergeMe::operator=(const PmergeMe& copy)
@@ -24,6 +38,8 @@ const PmergeMe &PmergeMe::operator=(const PmergeMe& copy)
 	{
 		_mainChain = copy._mainChain;
 		_remain = copy._remain;
+		_list_mainChain = copy._list_mainChain;
+		_list_remain = copy._list_remain;
 		_jacobsthalNumList = copy._jacobsthalNumList;
 		_errFlag = copy._errFlag;
 	}
@@ -37,6 +53,8 @@ PmergeMe::PmergeMe(const PmergeMe& copy)
 	{
 		_mainChain = copy._mainChain;
 		_remain = copy._remain;
+		_list_mainChain = copy._list_mainChain;
+		_list_remain = copy._list_remain;
 		_jacobsthalNumList = copy._jacobsthalNumList;
 		_errFlag = copy._errFlag;
 	}
@@ -114,7 +132,7 @@ void PmergeMe::merge()
 	{
 		if (it->data < (it + 1)->data)
 			std::iter_swap(it, (it + 1));
-		Node *pendingElement = new Node(*(it + 1));
+		Node* pendingElement = new Node(*(it + 1));
 		pendingElement->mainData = it->data;
 		it->pendingElements.push_front(pendingElement);
 		it->depth += 1;
@@ -207,6 +225,7 @@ void PmergeMe::getSameDepthElements(std::deque<Node>& b)
 			if (maxDepth - 1 != (*it)->depth)
 				break ;
 			b.push_back(*(*it));
+			delete *it;
 			(_mainChain.begin() + idx)->pendingElements.pop_front();
 			it = (_mainChain.begin() + idx)->pendingElements.begin();
 		}
@@ -383,6 +402,7 @@ void PmergeMe::list_getSameDepthElements(std::deque<Node> &b)
 			if (maxDepth - 1 != (*it)->depth)
 				break;
 			b.push_back(*(*it));
+			delete *it;
 			std::next(_list_mainChain.begin(), idx)->pendingElements.pop_front();
 			it = std::next(_list_mainChain.begin(), idx)->pendingElements.begin();
 		}
