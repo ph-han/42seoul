@@ -281,6 +281,20 @@ void PmergeMe::list_mergeInsertionSort()
 	list_insertion();
 }
 
+std::list<Node>::iterator PmergeMe::next(std::list<Node>::iterator it, size_t n)
+{
+	while (n--)
+		++it;
+	return it;
+}
+
+std::list<Node>::iterator PmergeMe::prev(std::list<Node>::iterator it, size_t n)
+{
+	while (n--)
+		--it;
+	return it;
+}
+
 size_t PmergeMe::list_findIdx(int data)
 {
 	std::list<Node>::iterator head = _list_mainChain.begin();
@@ -309,26 +323,26 @@ void PmergeMe::list_merge()
 	int iter = 0;
 	while (iter < maxLoop)
 	{
-		if (it->data < std::next(it)->data)
-			std::iter_swap(it, std::next(it));
-		Node *pendingElement = new Node(*(std::next(it)));
+		if (it->data < next(it, 1)->data)
+			std::iter_swap(it, next(it, 1));
+		Node *pendingElement = new Node(*(next(it, 1)));
 		pendingElement->mainData = it->data;
 		it->pendingElements.push_front(pendingElement);
 		it->depth += 1;
 		iter++;
-		it = std::next(it, 2);
+		it = next(it, 2);
 	}
 
 	if (it != _list_mainChain.end())
 	{
-		_list_remain.push_front(*(std::prev(_list_mainChain.end())));
-		_list_mainChain.erase(std::prev(_list_mainChain.end()));
+		_list_remain.push_front(*(prev(_list_mainChain.end(), 1)));
+		_list_mainChain.erase(prev(_list_mainChain.end(), 1));
 	}
 
 	it = _list_mainChain.begin();
 	for (unsigned int idx = 1; idx < _list_mainChain.size(); idx++)
 	{
-		_list_mainChain.erase(std::next(it, idx));
+		_list_mainChain.erase(next(it, idx));
 	}
 	list_merge();
 }
@@ -355,7 +369,7 @@ void PmergeMe::list_insertion()
 		{
 			size_t high = (b.begin() + start)->mainData != -1 ? list_findIdx((b.begin() + start)->mainData) : _list_mainChain.size();
 			insertIdx = list_binarySearch(0, high, (b.begin() + start)->data);
-			_list_mainChain.insert(std::next(_list_mainChain.begin(), insertIdx), *(b.begin() + start));
+			_list_mainChain.insert(next(_list_mainChain.begin(), insertIdx), *(b.begin() + start));
 			--start;
 		}
 	}
@@ -375,14 +389,14 @@ int PmergeMe::list_binarySearch(int low, int high, int target)
 
 	if (low >= high)
 	{
-		if (std::next(beginMain, high)->data < target)
+		if (next(beginMain, high)->data < target)
 			return mid + 1;
 		return mid;
 	}
 
-	if (std::next(beginMain, mid)->data == target)
+	if (next(beginMain, mid)->data == target)
 		return mid;
-	else if (std::next(beginMain, mid)->data > target)
+	else if (next(beginMain, mid)->data > target)
 		return list_binarySearch(low, mid - 1, target);
 	else
 		return list_binarySearch(mid + 1, high, target);
@@ -403,11 +417,11 @@ void PmergeMe::list_getSameDepthElements(std::deque<Node> &b)
 				break;
 			b.push_back(*(*it));
 			delete *it;
-			std::next(_list_mainChain.begin(), idx)->pendingElements.pop_front();
-			it = std::next(_list_mainChain.begin(), idx)->pendingElements.begin();
+			next(_list_mainChain.begin(), idx)->pendingElements.pop_front();
+			it = next(_list_mainChain.begin(), idx)->pendingElements.begin();
 		}
-		if (std::next(_list_mainChain.begin(), idx)->depth == maxDepth)
-			std::next(_list_mainChain.begin(), idx)->depth--;
+		if (next(_list_mainChain.begin(), idx)->depth == maxDepth)
+			next(_list_mainChain.begin(), idx)->depth--;
 	}
 
 	if (_list_remain.empty() == false && _list_mainChain.front().depth == _list_remain.front().depth)
@@ -422,8 +436,8 @@ int PmergeMe::list_getCurrMaxDepth()
 	int maxDepth = _list_mainChain.front().depth;
 	for (size_t idx = 0; idx < _list_mainChain.size(); idx++)
 	{
-		if (maxDepth < std::next(_list_mainChain.begin(), idx)->depth)
-			maxDepth = std::next(_list_mainChain.begin(), idx)->depth;
+		if (maxDepth < next(_list_mainChain.begin(), idx)->depth)
+			maxDepth = next(_list_mainChain.begin(), idx)->depth;
 	}
 	return maxDepth;
 }

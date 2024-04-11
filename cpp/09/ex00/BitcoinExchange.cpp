@@ -158,11 +158,11 @@ size_t BitcoinExchange::findClosestDate(size_t date)
 {
 	std::map<size_t, float>::iterator it = _datasets.begin();
 	std::map<size_t, float>::iterator ite = _datasets.end();
-	size_t shortestSpan = it->first > date ? it->first - date : date - it->first;
+	int shortestSpan = date - it->first;
 	size_t closestDate = it->first;
 	while (it != ite)
 	{
-		size_t tmp = date - it->first;
+		int tmp = date - it->first;
 		if (tmp >= 0 && shortestSpan > tmp)
 		{
 			shortestSpan = tmp;

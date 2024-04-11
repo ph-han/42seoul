@@ -46,7 +46,8 @@ class PmergeMe
 
 		void makeJacobsthalNumbers();
 
-		Node* copyNode(Node& target);
+		std::list<Node>::iterator next(std::list<Node>::iterator it, size_t n);
+		std::list<Node>::iterator prev(std::list<Node>::iterator it, size_t n);
 	public:
 		PmergeMe();
 		~PmergeMe();
