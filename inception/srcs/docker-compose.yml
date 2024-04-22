@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  nginx: # web
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "443:443"
+    restart: always
+    depends_on:
+      - wordpress
+    networks:
+      - inception
+
+  wordpress: # was
+    env_file:
+      - .env
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    restart: always
+    expose:
+      - 9000
+    depends_on:
+      - mariadb
+    networks:
+      - inception
+
+  mariadb: # db
+    env_file:
+      - .env
+    build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+    restart: always
+    expose:
+      - 3306
+    networks:
+      - inception
+
+networks:
+  inception:
+    driver: bridge
