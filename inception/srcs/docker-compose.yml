@@ -1,15 +1,24 @@
 version: '3'
 
 services:
-  nginx: # web
+  mariadb: # db
+    env_file:
+      - .env
     build:
-      context: ./requirements/nginx
+      context: ./requirements/mariadb
       dockerfile: Dockerfile
-    ports:
-      - "443:443"
+    volumes:
+      - db_volume:/var/lib
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     restart: always
-    depends_on:
-      - wordpress
+    # stdin_open: true
+    # tty: true
+    expose:
+      - 3306
     networks:
       - inception
 
@@ -19,6 +28,14 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
+    volumes:
+      - web_volume:/var/www
+    environment:
+      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+      - WORDPRESS_TABLE_PREFIX=wp_
     restart: always
     expose:
       - 9000
@@ -27,17 +44,35 @@ services:
     networks:
       - inception
 
-  mariadb: # db
+  nginx: # web
     env_file:
       - .env
     build:
-      context: ./requirements/mariadb
+      context: ./requirements/nginx
       dockerfile: Dockerfile
+    volumes:
+      - web_volume:/var/www
+    ports:
+      - "443:443"
     restart: always
-    expose:
-      - 3306
+    depends_on:
+      - wordpress
     networks:
       - inception
+
+volumes:
+  web_volume:
+    driver: "local"
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/hanpilho/Desktop/study/docker/wordpress
+  db_volume:
+    driver: "local"
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/hanpilho/Desktop/study/docker/db
 
 networks:
   inception:
