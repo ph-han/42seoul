@@ -25,7 +25,7 @@ define( 'DB_NAME', "wordpress" );
 
 /** Database username */
 // define( 'DB_USER', $_ENV["WORDPRESS_DB_USER"] );
-define( 'DB_USER', "root" );
+define( 'DB_USER', "phan" );
 
 /** Database password */
 define( 'DB_PASSWORD', "1234" );

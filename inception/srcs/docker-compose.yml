@@ -1,4 +1,4 @@
-version: '3'
+version: '3.1'
 
 services:
   mariadb: # db
@@ -66,13 +66,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /Users/hanpilho/Desktop/study/docker/wordpress
+      device: "/home/phan/docker/wordpress"
   db_volume:
     driver: "local"
     driver_opts:
       type: none
       o: bind
-      device: /Users/hanpilho/Desktop/study/docker/db
+      device: "/home/phan/docker/db"
 
 networks:
   inception:
