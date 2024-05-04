@@ -1,9 +1,10 @@
 #!/bin/sh
 
-if [ ! -e /var/www/wordpress/wp-config.php ]; then
-	wp core download --path=/var/www/wordpress --locale=ko_KR
+if [ ! -f /var/www/wordpress/index.php ]; then
+	cd /var/www/wordpress
+	wp core download  --locale=ko_KR
 	echo "Download ok"
-	wp config create --path=/var/www/wordpress --dbname=$WORDPRESS_DB_NAME --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASSWORD --dbhost=$WORDPRESS_DB_HOST
+	wp config create  --dbname=$WORDPRESS_DB_NAME --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASSWORD --dbhost=$WORDPRESS_DB_HOST
 	echo "config ok"
 	wp db create
 	echo "db created"
@@ -13,5 +14,6 @@ if [ ! -e /var/www/wordpress/wp-config.php ]; then
 else
 	echo "Wordpress is already download."
 fi
+
 
 exec /usr/sbin/php-fpm7 -F

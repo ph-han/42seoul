@@ -8,7 +8,7 @@ LABEL description="my mariadb image"
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.13/community" >> /etc/apk/repositories
 RUN apk update
 
-RUN apk add curl php7 \
+RUN apk add fcgi curl php7 \
         php7-fpm \
         php7-opcache \
         php7-gd \

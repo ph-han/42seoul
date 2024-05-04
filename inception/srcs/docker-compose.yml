@@ -31,7 +31,7 @@ services:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
     volumes:
-      - web_volume:/var/www
+      - web_volume:/var/www/wordpress
     # stdin_open: true
     # tty: true
     environment:
@@ -56,7 +56,7 @@ services:
       context: ./requirements/nginx
       dockerfile: Dockerfile
     volumes:
-      - web_volume:/var/www
+      - web_volume:/var/www/wordpress
     ports:
       - "443:443"
     restart: always
