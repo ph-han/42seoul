@@ -2,6 +2,7 @@ version: '3.1'
 
 services:
   mariadb: # db
+    container_name: inception-mariadb
     env_file:
       - .env
     build:
@@ -23,6 +24,7 @@ services:
       - inception
 
   wordpress: # was
+    container_name: inception-wordpress
     env_file:
       - .env
     build:
@@ -30,6 +32,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - web_volume:/var/www
+    # stdin_open: true
+    # tty: true
     environment:
       - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
       - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
@@ -45,6 +49,7 @@ services:
       - inception
 
   nginx: # web
+    container_name: inception-nginx
     env_file:
       - .env
     build:
@@ -66,13 +71,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: "/home/phan/docker/wordpress"
+      device: "$HOME/docker/wordpress"
   db_volume:
     driver: "local"
     driver_opts:
       type: none
       o: bind
-      device: "/home/phan/docker/db"
+      device: "$HOME/docker/db"
 
 networks:
   inception:

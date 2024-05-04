@@ -10,27 +10,16 @@ fi
 if [ ! -d "/var/lib/mysql/mysql" ]; then
 	echo "Create database..."
 	mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
- #   echo "mysql db installing..."
-# done
 
-# start mariadb
-#	echo "Create database - start mariadb..."
-# /usr/bin/mariadbd-safe --nowatch
+    echo "Create database - configure root user & phan user ..."
 
-    # check if mariadb is running
-# if pgrep -x /usr/bin/mariadbd > /dev/null
-#then
-    # create root user with remote access
-    echo "Create database - configure root user..."
-
- #   sleep 1
 
     mysqld --user=mysql --bootstrap <<-EOF
 			USE mysql;
-			
+
 			FLUSH PRIVILEGES;
 			DELETE FROM mysql.user WHERE user='';
-			
+
 			CREATE DATABASE IF NOT EXISTS wordpress;
 			CREATE USER IF NOT EXISTS 'phan'@'%' IDENTIFIED BY '1234';
 			GRANT ALL PRIVILEGES ON wordpress.* TO 'phan'@'%';
@@ -44,12 +33,9 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 
     echo "Create database - OK"
 else
-	echo "already exist database"
+	echo "database already exist"
 fi
-echo "maria on."
 
 mysqld_safe --user=mysql
 
-#else
-#    echo "Create database - FAILED"
-#fi
+echo "mariadb on."
