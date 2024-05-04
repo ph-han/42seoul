@@ -8,6 +8,9 @@ services:
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
+        #  tags:
+        #- mariadb:1.0
+    image: mariadb-inception:latest
     volumes:
       - db_volume:/var/lib
     environment:
@@ -30,10 +33,11 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
+        #  tags:
+        #- wordpress:1.0
+    image: wordpress-inception:latest
     volumes:
       - web_volume:/var/www/wordpress
-    # stdin_open: true
-    # tty: true
     environment:
       - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
       - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
@@ -55,6 +59,9 @@ services:
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile
+        # tags: 
+        # - nginx:1.0
+    image: nginx-inception:latest
     volumes:
       - web_volume:/var/www/wordpress
     ports:
