@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# check if wordpress exists
 while [ ! -d "/var/www/wordpress" ]
 do
     echo "wait wordpress downloads...\n"

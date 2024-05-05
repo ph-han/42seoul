@@ -1,5 +1,5 @@
 DOCKER_COMPOSE_PATH = /home/phan/inception/srcs/docker-compose.yml
-IMAGES_LS = nginx-inception wordpress-inception mariadb-inception
+IMAGES_LS = phan/nginx phan/wordpress phan/mariadb
 VOLUME_LS = srcs_db_volume srcs_web_volume
 
 all: up

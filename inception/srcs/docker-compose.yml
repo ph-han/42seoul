@@ -10,7 +10,7 @@ services:
       dockerfile: Dockerfile
         #  tags:
         #- mariadb:1.0
-    image: mariadb-inception:latest
+    image: phan/mariadb:latest
     volumes:
       - db_volume:/var/lib
     environment:
@@ -35,7 +35,7 @@ services:
       dockerfile: Dockerfile
         #  tags:
         #- wordpress:1.0
-    image: wordpress-inception:latest
+    image: phan/wordpress:latest
     volumes:
       - web_volume:/var/www/wordpress
     environment:
@@ -61,7 +61,7 @@ services:
       dockerfile: Dockerfile
         # tags: 
         # - nginx:1.0
-    image: nginx-inception:latest
+    image: phan/nginx:latest
     volumes:
       - web_volume:/var/www/wordpress
     ports:
