@@ -5,10 +5,10 @@ LABEL version="0.0.1"
 LABEL description="my mariadb image"
 
 RUN apk update
-RUN apk add mariadb mariadb-client --no-cache
+RUN apk add dumb-init mariadb mariadb-client --no-cache
 
 COPY ./tools/setup.sh /tmp/
 COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
 RUN chmod +x /tmp/setup.sh
-ENTRYPOINT [ "/tmp/setup.sh" ]
+ENTRYPOINT [ "/usr/bin/dumb-init", "--", "/tmp/setup.sh" ]

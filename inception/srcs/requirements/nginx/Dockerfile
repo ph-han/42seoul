@@ -5,7 +5,7 @@ LABEL version="0.0.1"
 LABEL description="my nginx image"
 
 RUN apk update
-RUN apk add nginx openssl tzdata
+RUN apk add dumb-init nginx openssl tzdata
 
 # RUN cp /usr/share/zoneinfo/$TZ /etc/localtime
 # RUN echo $TZ > /etc/timezone
@@ -21,9 +21,7 @@ RUN openssl req \
 	-x509 -days 365 -out cert.crt \
 	-subj "/C=KR/ST=Seoul/L=Gangnam/O=42/OU=phan/CN=phan.42.fr"
 
-COPY ./tools/set.sh /tmp/set.sh
-RUN chmod +x /tmp/set.sh
-RUN sh /tmp/set.sh
+COPY ./tools/setup.sh /tmp/setup.sh
+RUN chmod +x /tmp/setup.sh
 
-
-ENTRYPOINT [ "/usr/sbin/nginx", "-g", "daemon off;" ]
+ENTRYPOINT [ "/usr/bin/dumb-init", "--", "/tmp/setup.sh" ]

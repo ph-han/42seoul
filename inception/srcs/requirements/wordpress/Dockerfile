@@ -8,7 +8,7 @@ LABEL description="my mariadb image"
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.13/community" >> /etc/apk/repositories
 RUN apk update
 
-RUN apk add fcgi curl php7 \
+RUN apk add dumb-init fcgi curl php7 \
         php7-fpm \
         php7-opcache \
         php7-gd \
@@ -29,7 +29,7 @@ COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
 COPY ./tools/setup.sh /tmp/
 RUN chmod +x /tmp/setup.sh
 
-ENTRYPOINT [ "/tmp/setup.sh" ]
+ENTRYPOINT [ "/usr/bin/dumb-init", "--", "/tmp/setup.sh" ]
 # ENTRYPOINT [ "/bin/sh" ]
 
 

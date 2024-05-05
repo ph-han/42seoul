@@ -11,3 +11,4 @@ then
 	echo "change user:group root->nginx !!"
 fi
 
+exec /usr/sbin/nginx -g "daemon off;" 
