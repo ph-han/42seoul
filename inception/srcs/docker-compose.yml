@@ -78,13 +78,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: "$HOME/docker/wordpress"
+      device: "/home/phan/data/wordpress"
   db_volume:
     driver: "local"
     driver_opts:
       type: none
       o: bind
-      device: "$HOME/docker/db"
+      device: "/home/phan/data/db"
 
 networks:
   inception:
