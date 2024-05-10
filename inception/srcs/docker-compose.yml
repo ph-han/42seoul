@@ -11,11 +11,11 @@ services:
     image: mariadb:phan
     volumes:
       - db_volume:/var/lib
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    # environment:
+    #   - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    #   - MYSQL_USER=${MYSQL_USER}
+    #   - MYSQL_DATABASE=${MYSQL_DATABASE}
+    #   - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     restart: always
     expose:
       - 3306
@@ -32,12 +32,12 @@ services:
     image: wordpress:phan
     volumes:
       - web_volume:/var/www/wordpress
-    environment:
-      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
-      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
-      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
-      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
-      - WORDPRESS_TABLE_PREFIX=wp_
+    # environment:
+    #   - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+    #   - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+    #   - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+    #   - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+    #   - WORDPRESS_TABLE_PREFIX=wp_
     restart: always
     expose:
       - 9000
