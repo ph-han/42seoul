@@ -8,9 +8,7 @@ services:
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
-        #  tags:
-        #- mariadb:1.0
-    image: phan/mariadb:latest
+    image: mariadb:phan
     volumes:
       - db_volume:/var/lib
     environment:
@@ -19,8 +17,6 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     restart: always
-    # stdin_open: true
-    # tty: true
     expose:
       - 3306
     networks:
@@ -33,9 +29,7 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
-        #  tags:
-        #- wordpress:1.0
-    image: phan/wordpress:latest
+    image: wordpress:phan
     volumes:
       - web_volume:/var/www/wordpress
     environment:
@@ -59,9 +53,7 @@ services:
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile
-        # tags: 
-        # - nginx:1.0
-    image: phan/nginx:latest
+    image: nginx:phan
     volumes:
       - web_volume:/var/www/wordpress
     ports:

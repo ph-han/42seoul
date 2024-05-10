@@ -1,5 +1,5 @@
-DOCKER_COMPOSE_PATH = /home/phan/inception/srcs/docker-compose.yml
-IMAGES_LS = phan/nginx phan/wordpress phan/mariadb
+DOCKER_COMPOSE_PATH = ./srcs/docker-compose.yml
+IMAGES_LS = nginx:phan wordpress:phan mariadb:phan
 VOLUME_LS = srcs_db_volume srcs_web_volume
 
 all: up
@@ -23,4 +23,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean up down flcean up
+.PHONY: all clean up down flcean up re
