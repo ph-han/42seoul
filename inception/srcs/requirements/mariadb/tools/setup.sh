@@ -21,8 +21,8 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 			DELETE FROM mysql.user WHERE user='';
 
 			CREATE DATABASE IF NOT EXISTS wordpress;
-			CREATE USER IF NOT EXISTS 'phan'@'%' IDENTIFIED BY '1234';
-			GRANT ALL PRIVILEGES ON wordpress.* TO 'phan'@'%';
+			CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
+			GRANT ALL PRIVILEGES ON wordpress.* TO '$MYSQL_USER'@'%';
 
 			# create user root with access from any host
 			CREATE USER 'root'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
